@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>957</width>
+    <height>682</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QSplitter" name="splitter">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>11</y>
+      <width>761</width>
+      <height>571</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+    <widget class="QTableView" name="tableView">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>150</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>150</height>
+      </size>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 254);</string>
+     </property>
+    </widget>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <property name="tabsClosable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Page</string>
+      </attribute>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>957</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#4682b4;
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="movable">
+    <bool>true</bool>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>40</width>
+     <height>36</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="separator"/>
+   <addaction name="act_login"/>
+   <addaction name="separator"/>
+   <addaction name="act_signin"/>
+   <addaction name="separator"/>
+   <addaction name="act_logout"/>
+   <addaction name="separator"/>
+   <addaction name="act_manager"/>
+   <addaction name="separator"/>
+   <addaction name="act_quit"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar_2">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::TabFocus</enum>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar_2</string>
+   </property>
+   <property name="windowIcon">
+    <iconset resource="qss.qrc">
+     <normaloff>:/qss/psblack/checkbox_parcial.png</normaloff>:/qss/psblack/checkbox_parcial.png</iconset>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#B4CDCD;
+QToolBar{spacing:160px;}</string>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::AllToolBarAreas</set>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>90</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
+   </property>
+   <property name="floatable">
+    <bool>true</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>LeftToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="act_import_data"/>
+   <addaction name="separator"/>
+   <addaction name="act_show"/>
+   <addaction name="separator"/>
+   <addaction name="actiongraph"/>
+   <addaction name="separator"/>
+  </widget>
+  <action name="act_import_data">
+   <property name="icon">
+    <iconset resource="main.qrc">
+     <normaloff>:/image/main_help.png</normaloff>:/image/main_help.png</iconset>
+   </property>
+   <property name="text">
+    <string>数据导入</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;导入数据&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="act_signin">
+   <property name="icon">
+    <iconset resource="main.qrc">
+     <normaloff>:/image/main_about.png</normaloff>:/image/main_about.png</iconset>
+   </property>
+   <property name="text">
+    <string>用户注册</string>
+   </property>
+   <property name="toolTip">
+    <string>用户注册</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="act_manager">
+   <property name="icon">
+    <iconset resource="main.qrc">
+     <normaloff>:/image/main_person.png</normaloff>:/image/main_person.png</iconset>
+   </property>
+   <property name="text">
+    <string>用户管理</string>
+   </property>
+   <property name="toolTip">
+    <string>用户管理</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="act_quit">
+   <property name="icon">
+    <iconset resource="main.qrc">
+     <normaloff>:/image/main_company.png</normaloff>:/image/main_company.png</iconset>
+   </property>
+   <property name="text">
+    <string>退出系统</string>
+   </property>
+   <property name="toolTip">
+    <string>退出系统</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="act_login">
+   <property name="icon">
+    <iconset resource="main.qrc">
+     <normaloff>:/image/main_main.png</normaloff>:/image/main_main.png</iconset>
+   </property>
+   <property name="text">
+    <string>用户登录</string>
+   </property>
+   <property name="toolTip">
+    <string>用户登录</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="act_logout">
+   <property name="icon">
+    <iconset resource="main.qrc">
+     <normaloff>:/image/main_exit.png</normaloff>:/image/main_exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>用户退出</string>
+   </property>
+   <property name="toolTip">
+    <string>用户退出</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="act_show">
+   <property name="icon">
+    <iconset resource="main.qrc">
+     <normaloff>:/image/main_data.png</normaloff>:/image/main_data.png</iconset>
+   </property>
+   <property name="text">
+    <string>数据可视化</string>
+   </property>
+   <property name="toolTip">
+    <string>数据可视化</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="actiongraph">
+   <property name="icon">
+    <iconset resource="main.qrc">
+     <normaloff>:/image/main_config.png</normaloff>:/image/main_config.png</iconset>
+   </property>
+   <property name="text">
+    <string>参数设置</string>
+   </property>
+   <property name="iconText">
+    <string>参数设置</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="main.qrc"/>
+  <include location="qss.qrc"/>
+ </resources>
+ <connections/>
+</ui>

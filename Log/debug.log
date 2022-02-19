@@ -1,0 +1,5 @@
+2021-11-04 21:46:37,109 - WARNING - MainThread - 118 - No section: 'DB_CONNECTION'
+2021-11-04 21:50:21,944 - WARNING - MainThread - 136 - 连接参数有误，现有参数4，需要5
+2021-11-04 21:51:53,198 - WARNING - MainThread - 138 - 连接参数有误，现有参数4，需要5
+2021-11-04 22:20:59,100 - WARNING - MainThread - 152 - 无法获得数据
+2021-11-04 22:21:03,262 - WARNING - MainThread - 152 - 无法获得数据
