@@ -30,7 +30,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
         connection.begin()
         index = 0  # 记录索引 判断是哪一行出错 提示用户！！！
         # recode1 = ["北工大充电站", str(1111.121212), str(1221.122121)]
-
+#  ...
         ################导入充电站名称与经纬度#######################
         try:
             record = data_df.values[0]
