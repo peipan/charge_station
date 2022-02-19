@@ -50,7 +50,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
             record[6] = str(record[6])  # 充电桩生产厂家
             record[12] = str(record[12])  # 运营商
 
-            record[29] = str(record[29])  # 温度
+
             record[30] = str(record[30])  # 相对湿度  40可能不用str转换
             record[32] = str(record[32])  # 充电站表累计电量
             record[33] = str(record[33])  # 充电桩损耗数据
@@ -89,7 +89,8 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
             #record_end_time = ""  # 本次测量终止时间
             pid_count = 0  # 记录充电桩的数量
             period_count = 1  # 记录时间段的数量
-
+            s_zhiliu_num = 0  # 直流充电桩数量
+            s_jiaoliu_num = 0  # 交流充电桩数量
             tmp_pid = 0
             for record in list(data_df.values):
                 time.sleep(0.05)  # 休眠时间 可调 -> 意思就是该线程放出cpu的时间，越小导入的数据的时长就越短！！！
@@ -98,56 +99,52 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
                 data = cursor.fetchall()
                 sid = data[0][0]
 
-                start_time = str(record[0])  # 测量开始时间
-                end_time = str(record[1])  # 测量结束时间
-
-                if record[6] != 'nan':
+                if type(record[6]) == str:
                     pid_count = pid_count + 1
+                    period_count = 1
                     manufacturer = str(record[6])  # 生产厂家
                     factory_num = str(record[5])  # 出厂编号
                     model_type = str(record[4])  # 型号
                     nomial_level = str(record[28])  # 标称等级
                     install_time_span = str(record[14])  # 安装时长
+                    charge_pile_type = str(record[16])  # 充电桩种类
+                    if charge_pile_type.split("充")[0] == "直流":
+                        s_zhiliu_num = s_zhiliu_num + 1
+                    else:
+                        s_jiaoliu_num = s_jiaoliu_num + 1
                     carrieroperator = str(record[12])  # 运营商
                     start_time = str(record[0])  # 开始时间
                     sql = "insert into table_charge_pile (sid, pid, model_type, factory_num, nomial_level, install_time_span, carrieroperator, manufacturer, start_time) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                    cursor.execute(sql, list([sid, model_type, factory_num, nomial_level, install_time_span, carrieroperator, manufacturer, start_time]))
+                    cursor.execute(sql, list([sid, pid_count, model_type, factory_num, nomial_level, install_time_span, carrieroperator, manufacturer, start_time]))
                 else:
                     period_count = period_count + 1
 
-                sql = "insert into table_pile_period () values (%s, %s, %s)"
 
-                if str(record[3]) != 'nan':  # 将充电站在某时间段的总电能数据传至充电站表
-                    sql = "insert into table_station_period (sid, start_time, end_time, total_energy) values (%s, %s, %s, %s)"
-                    list_station = [sid, record[5], record[6], str(record[3])]
-                    cursor.execute(sql, list(list_station))
-                if str(record[15]) != 'NaT' and str(record[16]) != 'NaT':  # 应该是excel表格为空的时候 就是‘NaT’
-                    record_begin_time = str(record[15])
-                    record_end_time = str(record[16])
-                if tmp_pid != record[4]:
-                    tmp_pid = record[4]
-                    sql = "insert into table_pile_display_info (sid, pid, begin_time, end_time) values (%s, %s, %s, %s)"
-                    list_pile = [sid, tmp_pid, record_begin_time, record_end_time]
-                    cursor.execute(sql, list(list_pile))
-                record[8] = str(record[8])  # 运营商
-                record[9] = str(record[9])  # 生产厂及
-                record[11] = str(record[11])  # 环境温度
-                record[13] = str(record[13])  # 损耗能量
-                record[14] = str(record[14])  # 能耗
-                record = list(record[4:15]) #注意这个范围！！！
-                record.append(sid)  # 这个位置需要加载的是充电站的sid
-                sql = "insert into table_charge_pile (pid, start_time, end_time, install_time_span, carrieroperator," \
-                      "manufacturer, use_freq, env_temper, maintain_freq, loss_energy, energy, sid) " \
-                      "values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"  # 全写%s，不然还会报错
-                cursor.execute(sql, record)
-                index = index + 1  # 算是标记位 记录索引
+                start_time = str(record[0])  # 测量开始时间
+                end_time = str(record[1])  # 测量结束时间
+                use_freq = str(record[46]) # 使用频率
+
+                energy = str(record[35]) # 能量
+                sql = "insert into table_pile_period (sid, pid, start_time, end_time, use_freq, energy) values (%s, %s, %s, %s, %s, %s)"
+                cursor.execute(sql, list([sid, pid_count, start_time, end_time, use_freq, energy]))
+
+                if pid_count == 1:
+                    env_temper = str(record[29])  # 温度
+                    env_shidu = str(record[30])  # 相对湿度
+                    loss_energy = str(record[33])
+                    total_energy = str(record[32])  # 总能量
+                    sql = "insert into table_station_period (sid, start_time, end_time, env_temper, env_shidu, loss_energy, total_energy) values (%s, %s, %s, %s, %s, %s, %s)"
+                    cursor.execute(sql, list([sid, start_time, end_time, env_temper, env_shidu, loss_energy, total_energy]))
+            #todo: 将得到的pid_count，s_jiaoliu_num，s_zhiliu_num以update的方式插入到表table_charge_station
+            sql = "update table_charge_station set s_num = %s, s_zhiliu_num = %s, s_jiaoliu_num = %s  where sid = %s"
+            cursor.execute(sql, list([pid_count, s_zhiliu_num, s_jiaoliu_num, sid]))
 
             #数据插入完 才将table_charge_station表中的s_flag至为1，其余时间都为0
-            sql = "update table_charge_station set s_flag = 1 where sid = %s"
-            cursor.execute(sql, sid)
+            #sql = "update table_charge_station set s_flag = 1 where sid = %s"
+            #cursor.execute(sql, sid)
 
             connection.commit()
-            #self.send_info(0)  # 发射信号
+            self.send_info(0)  # 发射信号,这个信号就代表数据插入成功！
 
         except Exception as e:
             print("这是一个：" + str(e) + "的错误，请认真查看！")
@@ -158,6 +155,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
 
         ##################################插入计算的计量误差与风险等级######################################
         # todo:加载数据之后开始计算测量误差和风险等级(尚未做)等参数并插入至数据库
+        '''
         connection.begin()
         try:
             dataProcess = DataProcess()
@@ -182,6 +180,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
         finally:
             # 关闭数据库连接和钩子
             close_db(connection, cursor)
+            '''
 
     def send_info(self, info):
         show_info = ShowInfo(info)

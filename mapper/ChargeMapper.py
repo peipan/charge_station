@@ -29,7 +29,7 @@ class ChargeMapper():
             all_sid.append(data[i][0])
         return all_sid
 
-    #通过充电站名称查找充电站序列sid
+    #通过充电站名称查找充电站序列sid  updated
     def find_sid_by_charge_name(self, charge_name: str) -> int:
         sql = "select sid from table_charge_station where station_name = %s"
         data = []
@@ -118,46 +118,42 @@ class ChargeMapper():
 
     ###########################################矩阵计算##############################################
     #根据根据数据库sid,begin_time,end_time查找“北工大充电桩”的pid的总数  待完善 ->已完善
+    '''
     def find_count_pid_by_sid_and_period(self, sid: int, begin_time: str, end_time: str) -> int:
         sql = "select count(1) FROM (SELECT DISTINCT pid FROM table_pile_display_info WHERE sid = %s and begin_time = %s and end_time = %s) AS p;"
         data = []
         *_, data = execute_inquiry(sql, [sid, begin_time, end_time], connection=self.connection, cursor=self.cursor)
         return data[0][0]
+    '''
+    # 根据根据数据库sid,begin_time,end_time查找“北工大充电桩”的pid的总数  待完善 ->已完善  updated
+    def find_count_pid_by_sid_and_period(self, sid: int) -> int:
+        sql = "select s_num from table_charge_station where sid = %s"
+        data = []
+        *_, data = execute_inquiry(sql, sid, connection=self.connection, cursor=self.cursor)
+        return data[0][0]
 
     #查找充电桩表中的每个充电桩在一个时间段内的能量数据  充电桩 在时段 的电能计量数据  但是现在是取出所有  有dataProcess类去处理形成二维矩阵
-    #按照时间顺序 以及pid序号的顺序返回
-    def find_station_all_energy_by_sid_and_period(self, sid: int, begin_time: str, end_time: str):
-        sql = """
-                SELECT
-                    energy    
-                FROM
-                    (SELECT
-                        energy, start_time, pid
-                    FROM
-                        table_charge_pile
-                    WHERE
-                        sid = %s and start_time >= %s and end_time <= %s
-                    ORDER BY
-                    pid) AS a
-                ORDER BY
-                    start_time, pid;
-            """
+    #按照时间顺序 以及pid序号的顺序返回  updated
+    def find_station_all_energy_by_sid_and_period(self, sid: int, begin_time: str, limit_num: int):
+        sql = "SELECT energy FROM table_pile_period WHERE sid = %s AND start_time >= %s ORDER BY start_time, pid LIMIT %s"
         list_energy = []
-        *_, list_energy = execute_inquiry(sql, [sid, begin_time, end_time], connection=self.connection, cursor=self.cursor)
+        *_, list_energy = execute_inquiry(sql, [sid, begin_time, limit_num], connection=self.connection, cursor=self.cursor)
         return list_energy
 
-    #根据sid查找table_station_period表中的total_energy返回一个数组 按照时段排序  E1,E2…Et为充电站所有充电桩不同时段 的总电能数据
-    def find_total_energy_by_sid_and_period(self, sid, begin_time, end_time):
-        sql = "select total_energy from table_station_period where sid = %s and start_time >= %s and end_time <= %s order by start_time"
+    #根据sid查找table_station_period表中的total_energy返回一个数组 按照时段排序  E1,E2…Et为充电站所有充电桩不同时段 的总电能数据 updated
+    def find_total_energy_by_sid_and_period(self, sid, begin_time, limit_period):
+        sql = "select total_energy from table_station_period where sid = %s and start_time >= %s order by start_time limit %s"
         data = []
-        *_, data = execute_inquiry(sql, [sid, begin_time, end_time], connection=self.connection, cursor=self.cursor)
+        *_, data = execute_inquiry(sql, [sid, begin_time, limit_period], connection=self.connection, cursor=self.cursor)
         return data
 
     #根据sid查找充电桩的损耗能量数据，返回一个数组  再从table_charge_pile表中查找充电桩损耗能量E0应该是代表该时段所有充电桩的的损耗数据总和（求E0）  暂时这么理解
-    def find_loss_energy_by_sid_and_period(self, sid, begin_time, end_time):
-        sql = "SELECT SUM(loss_energy) FROM table_charge_pile WHERE sid = %s and start_time >= %s and end_time <= %s GROUP BY start_time"
+    #根据sid查找table_station_period表中的loss_energy返回一个数组 按照时段排序 updated
+    def find_loss_energy_by_sid_and_period(self, sid, begin_time, limit_period):
+        #sql = "SELECT SUM(loss_energy) FROM table_charge_pile WHERE sid = %s and start_time >= %s GROUP BY start_time"
+        sql = "select loss_energy from table_station_period where sid = %s and start_time >= %s order by start_time limit %s"
         data = []
-        *_, data = execute_inquiry(sql, [sid, begin_time, end_time], connection=self.connection, cursor=self.cursor)
+        *_, data = execute_inquiry(sql, [sid, begin_time, limit_period], connection=self.connection, cursor=self.cursor)
         return data
     ###########################################矩阵计算##############################################
 

@@ -35,8 +35,8 @@ class DataProcess():
 
         return self.data
 
-    # 根据一整段时间（需要在这个总时间段内，计算误差）至数据库取出某个充电站中所有充电桩电能计量数据#  测试ok，2021/11/29 21:42
-    def compute_energy_matrix(self, station_name, begin_time, end_time):
+    # 根据充电桩名称、测量起始时间、时间段数量  至数据库取出某个充电站中所有充电桩电能计量数据#  测试ok，2021/11/29 21:42   updated 2022/2/19
+    def compute_energy_matrix(self, station_name, begin_time, limit_period):
         '''
         # 根据一整段时间（需要在这个总时间段内，计算误差）至数据库取出某个充电站中所有充电桩电能计量数据#
         :param charge_station: 字符串类型，充电站名称
@@ -59,11 +59,11 @@ class DataProcess():
         #根据充电站名称查询sid
         sid = self.chargeMapper.find_sid_by_charge_name(station_name)
         #sid 需要根据数据库查找“北工大充电桩”的pid的总数  待完善 ->已完善
-        count_pid = self.chargeMapper.find_count_pid_by_sid_and_period(sid, begin_time, end_time)
+        count_pid = self.chargeMapper.find_count_pid_by_sid_and_period(sid)
 
-        list_energy = self.chargeMapper.find_station_all_energy_by_sid_and_period(sid, begin_time, end_time)
+        list_energy = self.chargeMapper.find_station_all_energy_by_sid_and_period(sid, begin_time, limit_period * count_pid)
         #二维数组纵坐标
-        line = int(len(list_energy) / count_pid)
+        line = limit_period
         list_A = list([])
         #将data数组数据换成二维数组，根据pid的数量#
         for i in range(0, line):
@@ -78,9 +78,9 @@ class DataProcess():
         ######################求list_B############################
         #list_B = [[E1 - E0 - (E11 + E12 + E13 +....)], [E2 - E0 - (E21 + E22 + E23 + ....)], ...]
         #首先从充电站时间段数据表 table_station_period表中取出充电站总的能量消耗数据、按时间排序(求E1)
-        tot_en = self.chargeMapper.find_total_energy_by_sid_and_period(sid, begin_time, end_time)
+        tot_en = self.chargeMapper.find_total_energy_by_sid_and_period(sid, begin_time, limit_period)
         #再从table_charge_pile表中查找充电桩损耗能量E0应该是代表该时段所有充电桩的的损耗数据总和（求E0）  暂时这么理解
-        loss_en = self.chargeMapper.find_loss_energy_by_sid_and_period(sid, begin_time, end_time)
+        loss_en = self.chargeMapper.find_loss_energy_by_sid_and_period(sid, begin_time, limit_period)
         result_B = list([])
         #最后根据已经获得的矩阵result_A计算(E11 + E12 + E13 + ....)
         tot_period_en = list([])
@@ -125,15 +125,16 @@ class DataProcess():
 
 if __name__ == "__main__":
     dataProcess = DataProcess()
-    list_A, list_B = dataProcess.compute_energy_matrix("北工大充电站", "2021-10-01 11:02:16", "2021-10-14 11:02:16")
-    result = dataProcess.compute_matrix(list_A, list_B)
-    print(result)
+    list_A, list_B = dataProcess.compute_energy_matrix("星星充电", "2021-10-02 09:02:16", 12)
+    list_V = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    #result = dataProcess.compute_matrix(list_A, list_V)
+    #print(result)
 
 
     list_A = [[4, 3], [-5, 9]]
     list_B = [20, 26]
-    #result = dataProcess.compute_matrix(list_A, list_B)
-    #print(result)
+    result = dataProcess.compute_matrix(list_A, list_B)
+    print(result)
     #print(sum(list_B))
 
 
