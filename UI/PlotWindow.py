@@ -62,128 +62,88 @@ class Ui_PlotWindow(object):
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.verticalLayout.addWidget(self.label_2)
-        self.factoryCheckBox = QtWidgets.QCheckBox(self.frame)
-        self.factoryCheckBox.setEnabled(True)
-        font = QtGui.QFont()
-        font.setFamily("Adobe Arabic")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.factoryCheckBox.setFont(font)
-        self.factoryCheckBox.setMouseTracking(True)
-        self.factoryCheckBox.setStyleSheet("")
-        self.factoryCheckBox.setIconSize(QtCore.QSize(20, 20))
-        self.factoryCheckBox.setChecked(False)
-        self.factoryCheckBox.setObjectName("factoryCheckBox")
-        self.verticalLayout.addWidget(self.factoryCheckBox)
-        self.useCheckBox = QtWidgets.QCheckBox(self.frame)
-        self.useCheckBox.setEnabled(True)
-        font = QtGui.QFont()
-        font.setFamily("Adobe Arabic")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.useCheckBox.setFont(font)
-        self.useCheckBox.setMouseTracking(True)
-        self.useCheckBox.setStyleSheet("")
-        self.useCheckBox.setIconSize(QtCore.QSize(20, 20))
-        self.useCheckBox.setChecked(False)
-        self.useCheckBox.setObjectName("useCheckBox")
-        self.verticalLayout.addWidget(self.useCheckBox)
-        self.tempCheckBox = QtWidgets.QCheckBox(self.frame)
-        self.tempCheckBox.setEnabled(True)
-        font = QtGui.QFont()
-        font.setFamily("Adobe Arabic")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.tempCheckBox.setFont(font)
-        self.tempCheckBox.setMouseTracking(True)
-        self.tempCheckBox.setStyleSheet("")
-        self.tempCheckBox.setIconSize(QtCore.QSize(20, 20))
-        self.tempCheckBox.setChecked(False)
-        self.tempCheckBox.setObjectName("tempCheckBox")
-        self.verticalLayout.addWidget(self.tempCheckBox)
-        self.businessCheckBox = QtWidgets.QCheckBox(self.frame)
-        self.businessCheckBox.setEnabled(True)
-        font = QtGui.QFont()
-        font.setFamily("Adobe Arabic")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.businessCheckBox.setFont(font)
-        self.businessCheckBox.setMouseTracking(True)
-        self.businessCheckBox.setStyleSheet("")
-        self.businessCheckBox.setIconSize(QtCore.QSize(20, 20))
-        self.businessCheckBox.setChecked(False)
-        self.businessCheckBox.setObjectName("businessCheckBox")
-        self.verticalLayout.addWidget(self.businessCheckBox)
-        self.exCheckBox = QtWidgets.QCheckBox(self.frame)
-        self.exCheckBox.setEnabled(True)
-        font = QtGui.QFont()
-        font.setFamily("Adobe Arabic")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.exCheckBox.setFont(font)
-        self.exCheckBox.setMouseTracking(True)
-        self.exCheckBox.setStyleSheet("")
-        self.exCheckBox.setIconSize(QtCore.QSize(20, 20))
-        self.exCheckBox.setChecked(False)
-        self.exCheckBox.setObjectName("exCheckBox")
-        self.verticalLayout.addWidget(self.exCheckBox)
-        self.timeCheckBox = QtWidgets.QCheckBox(self.frame)
-        self.timeCheckBox.setEnabled(True)
-        font = QtGui.QFont()
-        font.setFamily("Adobe Arabic")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.timeCheckBox.setFont(font)
-        self.timeCheckBox.setMouseTracking(True)
-        self.timeCheckBox.setStyleSheet("")
-        self.timeCheckBox.setIconSize(QtCore.QSize(20, 20))
-        self.timeCheckBox.setChecked(False)
-        self.timeCheckBox.setObjectName("timeCheckBox")
-        self.verticalLayout.addWidget(self.timeCheckBox)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem)
+        self.btn_factory = QtWidgets.QPushButton(self.frame)
+        self.btn_factory.setMinimumSize(QtCore.QSize(0, 32))
+        self.btn_factory.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.btn_factory.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"border-style:none;\n"
+"border:1px solid #3f3f3f; \n"
+"\n"
+"padding:5px;\n"
+"min-height:20px;\n"
+"border-radius:15px;")
+        self.btn_factory.setObjectName("btn_factory")
+        self.verticalLayout.addWidget(self.btn_factory)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout.addItem(spacerItem1)
+        self.btn_frequency = QtWidgets.QPushButton(self.frame)
+        self.btn_frequency.setMinimumSize(QtCore.QSize(0, 32))
+        self.btn_frequency.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"border-style:none;\n"
+"border:1px solid #3f3f3f; \n"
+"\n"
+"padding:5px;\n"
+"min-height:20px;\n"
+"border-radius:15px;")
+        self.btn_frequency.setObjectName("btn_frequency")
+        self.verticalLayout.addWidget(self.btn_frequency)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        self.verticalLayout.addItem(spacerItem2)
+        self.btn_tem = QtWidgets.QPushButton(self.frame)
+        self.btn_tem.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"border-style:none;\n"
+"border:1px solid #3f3f3f; \n"
+"\n"
+"padding:5px;\n"
+"min-height:20px;\n"
+"border-radius:15px;")
+        self.btn_tem.setObjectName("btn_tem")
+        self.verticalLayout.addWidget(self.btn_tem)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        self.verticalLayout.addItem(spacerItem3)
+        self.btn_temp = QtWidgets.QPushButton(self.frame)
+        self.btn_temp.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"border-style:none;\n"
+"border:1px solid #3f3f3f; \n"
+"\n"
+"padding:5px;\n"
+"min-height:20px;\n"
+"border-radius:15px;")
+        self.btn_temp.setObjectName("btn_temp")
+        self.verticalLayout.addWidget(self.btn_temp)
+        spacerItem4 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        self.verticalLayout.addItem(spacerItem4)
+        self.btn_time = QtWidgets.QPushButton(self.frame)
+        self.btn_time.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"border-style:none;\n"
+"border:1px solid #3f3f3f; \n"
+"\n"
+"padding:5px;\n"
+"min-height:20px;\n"
+"border-radius:15px;")
+        self.btn_time.setObjectName("btn_time")
+        self.verticalLayout.addWidget(self.btn_time)
+        spacerItem5 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        self.verticalLayout.addItem(spacerItem5)
+        self.btn_other = QtWidgets.QPushButton(self.frame)
+        self.btn_other.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"border-style:none;\n"
+"border:1px solid #3f3f3f; \n"
+"\n"
+"padding:5px;\n"
+"min-height:20px;\n"
+"border-radius:15px;")
+        self.btn_other.setObjectName("btn_other")
+        self.verticalLayout.addWidget(self.btn_other)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.btn_yes = QtWidgets.QPushButton(self.frame)
-        self.btn_yes.setMinimumSize(QtCore.QSize(0, 32))
-        self.btn_yes.setMaximumSize(QtCore.QSize(16777215, 25))
-        self.btn_yes.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
-"border-style:none;\n"
-"border:1px solid #3f3f3f; \n"
-"\n"
-"padding:5px;\n"
-"min-height:20px;\n"
-"border-radius:15px;")
-        self.btn_yes.setObjectName("btn_yes")
-        self.horizontalLayout.addWidget(self.btn_yes)
-        self.btn_no = QtWidgets.QPushButton(self.frame)
-        self.btn_no.setMinimumSize(QtCore.QSize(0, 32))
-        self.btn_no.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
-"border-style:none;\n"
-"border:1px solid #3f3f3f; \n"
-"\n"
-"padding:5px;\n"
-"min-height:20px;\n"
-"border-radius:15px;")
-        self.btn_no.setObjectName("btn_no")
-        self.horizontalLayout.addWidget(self.btn_no)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem1)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem6)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout.addItem(spacerItem2)
+        spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout.addItem(spacerItem7)
         self.label_3 = QtWidgets.QLabel(self.frame)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -242,14 +202,12 @@ class Ui_PlotWindow(object):
         _translate = QtCore.QCoreApplication.translate
         PlotWindow.setWindowTitle(_translate("PlotWindow", "MainWindow"))
         self.label_2.setText(_translate("PlotWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; font-weight:600; font-style:italic; color:#145b7d;\">-------------参量待选状态---------------</span></p></body></html>"))
-        self.factoryCheckBox.setText(_translate("PlotWindow", "   生产厂家"))
-        self.useCheckBox.setText(_translate("PlotWindow", "   使用频率"))
-        self.tempCheckBox.setText(_translate("PlotWindow", "   环境温度"))
-        self.businessCheckBox.setText(_translate("PlotWindow", "    运营商"))
-        self.exCheckBox.setText(_translate("PlotWindow", "   其他因素"))
-        self.timeCheckBox.setText(_translate("PlotWindow", "   安装时长"))
-        self.btn_yes.setText(_translate("PlotWindow", "确定"))
-        self.btn_no.setText(_translate("PlotWindow", "取消"))
+        self.btn_factory.setText(_translate("PlotWindow", "生产厂家"))
+        self.btn_frequency.setText(_translate("PlotWindow", "使用频率"))
+        self.btn_tem.setText(_translate("PlotWindow", "环境温度"))
+        self.btn_temp.setText(_translate("PlotWindow", "运营商"))
+        self.btn_time.setText(_translate("PlotWindow", "安装时长"))
+        self.btn_other.setText(_translate("PlotWindow", "其他因素"))
         self.label_3.setText(_translate("PlotWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; font-weight:600; font-style:italic; color:#145b7d;\">----------------------------------------------</span></p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("PlotWindow", "Tab 1"))
 
