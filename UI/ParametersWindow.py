@@ -252,13 +252,3 @@ class Ui_ParametersWindow(object):
         self.label_12.setText(_translate("ParametersWindow", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600; color:#3e94c9;\">----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span></p></body></html>"))
         self.label_13.setText(_translate("ParametersWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#2684cb;\">注：所有权重相加不得超过一！</span></p></body></html>"))
 import main_rc
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    ParametersWindow = QtWidgets.QDialog()
-    ui = Ui_ParametersWindow()
-    ui.setupUi(ParametersWindow)
-    ParametersWindow.show()
-    sys.exit(app.exec_())
-

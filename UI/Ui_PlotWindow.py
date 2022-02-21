@@ -220,7 +220,6 @@ class Ui_PlotWindow(object):
 import main_rc
 import qss_rc
 
-
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

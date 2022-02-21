@@ -14,5 +14,6 @@
         <file>image/login.jpg</file>
         <file>image/main.jpg</file>
         <file>image/main_title.jpg</file>
+        <file>image/edge.png</file>
     </qresource>
 </RCC>

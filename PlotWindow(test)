@@ -3,7 +3,7 @@ from Common import get_plot_type, get_db_connection, close_db, get_logger, show_
 
 from matplotlib.backends.backend_qt5 import NavigationToolbar2QT as NavigationToolbar
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QGridLayout, QHeaderView
+from PyQt5.QtWidgets import QMainWindow, QApplication, QGridLayout, QHeaderView, QFileDialog
 
 from PyQt5.QtGui import QStandardItem, QStandardItemModel
 
@@ -98,11 +98,12 @@ class PlotWindow(QMainWindow):
         self.UI.comboBox_type_time.clear()
         self.UI.comboBox_type_time.addItems(period_type)
 
-    # 下载导出高风险等级充电桩的数据文件 txt(huang)
+    # 下载导出高风险等级充电桩的数据文件 .txt (huang)
     @pyqtSlot()
     def on_btn_load_clicked(self):
+        file_path = QFileDialog.getSaveFileName(self, "save file", "E:/", "Txt files(*.txt)")  # 这里的file_name是tuple型
         lists = [[1, 2, 3, 4], [45, 23, 456, 23, 54, 23], [12, 23, 23, 345, 23, 12]]
-        self.Save_list(lists, 'E:/PyCharm Community Edition 2021.1.3/charge_station(V3)/charge_station(V3)/high_risk')
+        self.Save_list(lists, file_path[0])  # 取tuple第一个元素即为地址
         print('high_risk')
 
     # 地图风险等级展示按钮
@@ -117,6 +118,7 @@ class PlotWindow(QMainWindow):
         pid_and_risk_level_dict = self.chargeMapper.find_pid_risk_level_by_sid(sid)
         '''
         # todo:外弹框 显示地图就ok，我需要把经纬度数据填入
+
         add = [[39.873079, 116.481913], [39.913904, 116.39728], [39.885987, 116.480132]]
         level = [[10, 30, 50, 70, 90], [10, 10, 10, 10, 10], [90, 90, 90, 90, 90]]
         data = visual_all(add, *level)
@@ -270,7 +272,8 @@ class PlotWindow(QMainWindow):
 
     # 保存列表到文件中
     def Save_list(self, list1, filename):
-        file2 = open(filename + '.txt', 'w')
+        #file2 = open(filename + '.txt', 'w')
+        file2 = open(filename, 'w')  # 在保存对话框中选择保存在.txt格式
         for i in range(len(list1)):
             for j in range(len(list1[i])):
                 file2.write(str(list1[i][j]))  # write函数不能写int类型的参数，所以使用str()转化
