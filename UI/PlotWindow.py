@@ -145,6 +145,9 @@ class Ui_PlotWindow(object):
         spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem6)
         self.verticalLayout.addLayout(self.horizontalLayout)
+        self.btn_load = QtWidgets.QPushButton(self.frame)
+        self.btn_load.setObjectName("btn_load")
+        self.verticalLayout.addWidget(self.btn_load)
         spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem7)
         self.label_3 = QtWidgets.QLabel(self.frame)
@@ -211,6 +214,7 @@ class Ui_PlotWindow(object):
         self.btn_temp.setText(_translate("PlotWindow", "运营商"))
         self.btn_time.setText(_translate("PlotWindow", "安装时长"))
         self.btn_other.setText(_translate("PlotWindow", "其他因素"))
+        self.btn_load.setText(_translate("PlotWindow", "下载数据"))
         self.label_3.setText(_translate("PlotWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; font-weight:600; font-style:italic; color:#145b7d;\">----------------------------------------------</span></p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("PlotWindow", "Tab 1"))
 import main_rc

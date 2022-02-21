@@ -14,12 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(957, 691)
+        MainWindow.resize(1192, 810)
         MainWindow.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout_2.setObjectName("gridLayout_2")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(10, 10, 761, 581))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -39,19 +40,27 @@ class Ui_MainWindow(object):
 "")
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 0, 0, 1, 1)
-        self.label = QtWidgets.QLabel(self.tab)
-        self.label.setText("")
-        self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 1, 1, 1, 1)
         self.tableView = QtWidgets.QTableView(self.tab)
-        self.tableView.setMaximumSize(QtCore.QSize(280, 16777215))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.tableView.sizePolicy().hasHeightForWidth())
+        self.tableView.setSizePolicy(sizePolicy)
+        self.tableView.setMinimumSize(QtCore.QSize(420, 0))
+        self.tableView.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.tableView.setStyleSheet("")
         self.tableView.setObjectName("tableView")
         self.gridLayout.addWidget(self.tableView, 1, 0, 1, 1)
+        self.frame = QtWidgets.QFrame(self.tab)
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.gridLayout.addWidget(self.frame, 0, 1, 3, 1)
         self.tabWidget.addTab(self.tab, "")
+        self.gridLayout_2.addWidget(self.tabWidget, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 957, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1192, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -205,7 +214,6 @@ class Ui_MainWindow(object):
         self.actiongraph.setIconText(_translate("MainWindow", "参数设置"))
 import main_rc
 import qss_rc
-
 
 if __name__ == "__main__":
     import sys

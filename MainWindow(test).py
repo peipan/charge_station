@@ -5,7 +5,7 @@ from Util.Grade import Grade
 
 from Common import show_information_message, show_error_message, init_tableview, get_row_model, get_logger, get_db_connection, execute_inquiry
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QHeaderView
+from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QHeaderView, QGridLayout
 
 from PyQt5.QtGui import QPainter, QPaintEvent, QPixmap, QStandardItem, QStandardItemModel
 
@@ -79,7 +79,7 @@ class MainWindow(QMainWindow):
 
         ##################################hyd  加tableView功能  huang######################
         self.init_model = None
-        init_tableview(self.UI.tableView, hor_size=25, ver_size=25)
+        init_tableview(self.UI.tableView, hor_size=50, ver_size=50)
         self.get_initial_model()
         data_model = self.init_model
         selection_model = QItemSelectionModel(data_model)
@@ -90,15 +90,15 @@ class MainWindow(QMainWindow):
         self.UI.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # 所有列自动拉伸，充满界面
         self.UI.tableView.selectionModel().currentRowChanged.connect(self.do_cur_row_change)
         ###########################huangdiandian##########################################
-        #设置饼状图
+        # 设置主页面的饼状图显示
 
+        self.fig_line = None
+        self.fig_pie = None
+        self.plot_type = None
+        self.init_plot_frame()
         x = ['a', 'b', 'c']
         values = [20, 30, 50]
-
-        self.plotsubwindow = PlotSubWindow()
-        window = QPixmap(self.plotsubwindow.plot_pie(x, values, 'type_label', False)).scaled(self.UI.label.width(), self.UI.label.height())
-        self.UI.label.setPixmap(window)
-
+        self.plot_pie(x, values, '各区域充电桩数据及比例显示')
         #############################################################
         # 启用登录窗口
         self.on_act_login_triggered()
@@ -302,21 +302,23 @@ class MainWindow(QMainWindow):
 
     # 获取最初的数据模型  huang
     def get_initial_model(self):
-        head = list(['充电站名称', '充电桩数量', '交流充电桩数量', '直流充电桩数量'])
-        model = get_row_model(4, header=head)
+        head = list(['充电站数量', '交流充电桩数量', '交流充电桩占比', '直流充电桩数量', '直流充电桩占比'])
+        model = get_row_model(5, header=head)
         # all_name, all_pid = self.chargeMapper.find_chargeName_and_pidCount()
-        all_name = list(['a', 'b', 'c', 'd'])
-        all_pid = list([10, 20, 30, 40])
-        all_pid_j = list([3, 10, 15, 20])
-        all_pid_z = list([7, 10, 15, 20])
+        all_pid = list([50, 60, 70, 30])
+        all_pid_j = list([10, 20, 35, 15])
+        all_pid_j_per = list(['25%', '30%', '50%', '50%'])
+        all_pid_z = list([40, 40, 35, 15])
+        all_pid_z_per = list(['75%', '70%', '50%', '50%'])
 
-        data = [list([]) for x in range(len(all_name))]  # 预设进去多少行数据
+        data = [list([]) for x in range(len(all_pid))]  # 预设进去多少行数据
 
         for i in range(0, len(data)):
-            data[i].append(all_name[i])
             data[i].append(all_pid[i])
             data[i].append(all_pid_j[i])
+            data[i].append(all_pid_j_per[i])
             data[i].append(all_pid_z[i])
+            data[i].append(all_pid_z_per[i])
 
         self.init_model = self.add_data(model, data)
 
@@ -329,6 +331,15 @@ class MainWindow(QMainWindow):
                 row.append(item)
             model.appendRow(row)
         return model
+
+    # 初始化画图区域 没直接用plotsubwindow的是因为这里是frame 那个是frame_5 改了会影响数据可视化页面
+    def init_plot_frame(self):
+        self.fig_line = Myplot2D()
+        tool = NavigationToolbar(self.fig_line, self.UI.frame)
+        layout = QGridLayout()
+        layout.addWidget(self.fig_line)
+        layout.addWidget(tool)
+        self.UI.frame.setLayout(layout)
 
     # 绘制饼状图
     def plot_pie(self, x: list, values: list, type: str, grid=False):
@@ -343,7 +354,6 @@ class MainWindow(QMainWindow):
             self.fig_line.axes.grid(True)
         self.fig_line.axes.legend()
         self.fig_line.draw()
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
