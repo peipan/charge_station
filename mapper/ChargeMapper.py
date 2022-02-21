@@ -166,3 +166,30 @@ class ChargeMapper():
         return data[0]
 
 
+    ##########################################图形展示页面与数据库交互的代码 2022/02/21 peipan##################################################
+    #安装时长与风险等级指数的关系，返回x轴参数、最低指数、平均指数、最高指数
+    def find_install_span_and_risk_index(self, sid: int):
+        sql = "select install_time_span, min(risk_level), avg(risk_level), max(risk_level) from table_charge_pile where sid = %s group by install_time_span"
+        data = []
+        *_, data = execute_inquiry(sql, sid, connection=self.connection, cursor=self.cursor)
+        return data[0], data[1], data[2], data[3]
+
+    #运营商与风险等级指数的关系，返回x轴参数、最低指数、平均指数、最高指数
+    def find_carrieroperator_and_risk_index(self, sid: int):
+        sql = "select carrieroperator, min(risk_level), avg(risk_level), max(risk_level) from table_charge_pile where sid = %s group by carrieroperator"
+        data = []
+        *_, data = execute_inquiry(sql, sid, connection=self.connection, cursor=self.cursor)
+        return data[0], data[1], data[2], data[3]
+
+    #生产厂家与风险等级指数的关系，返回x轴参数、最低指数、平均指数、最高指数
+    def find_manufacturer_and_risk_index(self, sid: int):
+        sql = "select manufacturer, min(risk_level), avg(risk_level), max(risk_level) from table_charge_pile where sid = %s group by manufacturer"
+        data = []
+        *_, data = execute_inquiry(sql, sid, connection=self.connection, cursor=self.cursor)
+        return data[0], data[1], data[2], data[3]
+
+    #使用频率与风险等级指数的关系，返回x轴参数、最低指数、平均指数、最高指数
+    def find_use_freq_and_risk_index(self, sid: int):
+        sql = ""
+
+    ####################################################################################################################

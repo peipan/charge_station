@@ -1,15 +1,10 @@
 
-from UI.Ui_PlotSubWindow import Ui_PlotSubWindow
-
+from PyQt5.QtWidgets import QMainWindow, QApplication, QGridLayout
 from matplotlib.backends.backend_qt5 import NavigationToolbar2QT as NavigationToolbar
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QGridLayout
-
-from PyQt5.QtCore import pyqtSlot
-
+from UI.Ui_PlotSubWindow import Ui_PlotSubWindow
 from Util.Plot import Myplot2D
 
-from PyQt5.QtCore import Qt, pyqtSignal
 
 #这块需要信号的方式传递横纵坐标，还有折线图与饼状图的选择#
 

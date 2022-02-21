@@ -108,7 +108,7 @@ class DataProcess():
         A = np.array(list_A, dtype='float')
         B = np.array(list_B, dtype='float')
 
-        #list = np.linalg.inv(self.A).dot(self.B)
+        #list = np.linalg.inv(A).dot(B)
         #最小二乘法能解决 2021/11/28 22:20
         list = la.solve(A.T.dot(A), A.T.dot(B))
         return list
@@ -125,9 +125,9 @@ class DataProcess():
 
 if __name__ == "__main__":
     dataProcess = DataProcess()
-    list_A, list_B = dataProcess.compute_energy_matrix("星星充电", "2021-10-02 09:02:16", 12)
-    list_V = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    #result = dataProcess.compute_matrix(list_A, list_V)
+    list_A, list_B = dataProcess.compute_energy_matrix("星星充电", "2021-10-02 09:02:16", 7)
+    #list_V = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    #result = dataProcess.compute_matrix(list_A, list_B)
     #print(result)
 
 

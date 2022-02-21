@@ -99,6 +99,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
                 data = cursor.fetchall()
                 sid = data[0][0]
 
+
                 if type(record[6]) == str:
                     pid_count = pid_count + 1
                     period_count = 1
@@ -110,8 +111,11 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
                     charge_pile_type = str(record[16])  # 充电桩种类
                     if charge_pile_type.split("充")[0] == "直流":
                         s_zhiliu_num = s_zhiliu_num + 1
+
                     else:
                         s_jiaoliu_num = s_jiaoliu_num + 1
+
+
                     carrieroperator = str(record[12])  # 运营商
                     start_time = str(record[0])  # 开始时间
                     sql = "insert into table_charge_pile (sid, pid, model_type, factory_num, nomial_level, install_time_span, carrieroperator, manufacturer, start_time) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -124,14 +128,20 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
                 end_time = str(record[1])  # 测量结束时间
                 use_freq = str(record[46]) # 使用频率
 
-                energy = str(record[35]) # 能量
+                energy = None
+                if str(record[35]) != 'nan':
+                    energy = str(record[35])
+                else:
+                    energy = str(record[36])
+
+
                 sql = "insert into table_pile_period (sid, pid, start_time, end_time, use_freq, energy) values (%s, %s, %s, %s, %s, %s)"
                 cursor.execute(sql, list([sid, pid_count, start_time, end_time, use_freq, energy]))
 
                 if pid_count == 1:
                     env_temper = str(record[29])  # 温度
                     env_shidu = str(record[30])  # 相对湿度
-                    loss_energy = str(record[33])
+                    loss_energy = str(record[33])  # 损耗能量
                     total_energy = str(record[32])  # 总能量
                     sql = "insert into table_station_period (sid, start_time, end_time, env_temper, env_shidu, loss_energy, total_energy) values (%s, %s, %s, %s, %s, %s, %s)"
                     cursor.execute(sql, list([sid, start_time, end_time, env_temper, env_shidu, loss_energy, total_energy]))

@@ -3,7 +3,7 @@ from Common import get_plot_type, get_db_connection, close_db, get_logger, show_
 
 from matplotlib.backends.backend_qt5 import NavigationToolbar2QT as NavigationToolbar
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QGridLayout, QHeaderView
+from PyQt5.QtWidgets import QMainWindow, QApplication, QGridLayout, QHeaderView, QFileDialog
 
 from PyQt5.QtGui import QStandardItem, QStandardItemModel
 
@@ -86,6 +86,7 @@ class PlotWindow(QMainWindow):
     def do_cur_row_change(self, cur: QModelIndex, pre: QModelIndex):
         self.cur_row = cur.row()
 
+    '''
     #add
     def setValue(self):
         self.sense_station_change.emit(str(self.UI.comboBox_type_station.currentText()))
@@ -103,8 +104,125 @@ class PlotWindow(QMainWindow):
         # 先清空 在add
         self.UI.comboBox_type_time.clear()
         self.UI.comboBox_type_time.addItems(period_type)
-
+    '''
     #
+    # 生产厂家展示按钮
+    @pyqtSlot()
+    def on_btn_factory_clicked(self):
+        # todo: 从数据库取出生产厂家与风险等级标量的关系
+        # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
+        plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
+        window = None
+        if row is None:
+            window = PlotSubWindow()
+            curindex = self.UI.tabWidget.addTab(window, "没有数据404")
+        else:
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
+            curindex = self.UI.tabWidget.addTab(window, type_label)
+        window.setAttribute(Qt.WA_DeleteOnClose)
+
+        self.UI.tabWidget.setCurrentIndex(curindex)
+        self.UI.tabWidget.setVisible(True)
+
+    #使用频率展示按钮
+    @pyqtSlot()
+    def on_btn_frequency_clicked(self):
+        #todo: 从数据库取出生产厂家与风险等级标量的关系
+        #按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
+        plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
+        window = None
+        if row is None:
+            window = PlotSubWindow()
+            curindex = self.UI.tabWidget.addTab(window, "没有数据404")
+        else:
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
+            curindex = self.UI.tabWidget.addTab(window, type_label)
+        window.setAttribute(Qt.WA_DeleteOnClose)
+
+        self.UI.tabWidget.setCurrentIndex(curindex)
+        self.UI.tabWidget.setVisible(True)
+
+    # 环境温度展示按钮
+    @pyqtSlot()
+    def on_btn_tem_clicked(self):
+        # todo: 从数据库取出生产厂家与风险等级标量的关系
+        # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
+        plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
+        window = None
+        if row is None:
+            window = PlotSubWindow()
+            curindex = self.UI.tabWidget.addTab(window, "没有数据404")
+        else:
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
+            curindex = self.UI.tabWidget.addTab(window, type_label)
+        window.setAttribute(Qt.WA_DeleteOnClose)
+
+        self.UI.tabWidget.setCurrentIndex(curindex)
+        self.UI.tabWidget.setVisible(True)
+
+    # 运营商展示按钮
+    @pyqtSlot()
+    def on_btn_temp_clicked(self):
+        # todo: 从数据库取出生产厂家与风险等级标量的关系
+        # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
+        plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
+        window = None
+        if row is None:
+            window = PlotSubWindow()
+            curindex = self.UI.tabWidget.addTab(window, "没有数据404")
+        else:
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
+            curindex = self.UI.tabWidget.addTab(window, type_label)
+        window.setAttribute(Qt.WA_DeleteOnClose)
+
+        self.UI.tabWidget.setCurrentIndex(curindex)
+        self.UI.tabWidget.setVisible(True)
+
+    # 安装时长展示按钮
+    @pyqtSlot()
+    def on_btn_time_clicked(self):
+        # todo: 从数据库取出生产厂家与风险等级标量的关系
+        # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
+        plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
+        window = None
+        if row is None:
+            window = PlotSubWindow()
+            curindex = self.UI.tabWidget.addTab(window, "没有数据404")
+        else:
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
+            curindex = self.UI.tabWidget.addTab(window, type_label)
+        window.setAttribute(Qt.WA_DeleteOnClose)
+
+        self.UI.tabWidget.setCurrentIndex(curindex)
+        self.UI.tabWidget.setVisible(True)
+
+    # 其他因素展示按钮
+    @pyqtSlot()
+    def on_btn_other_clicked(self):
+        # todo: 从数据库取出生产厂家与风险等级标量的关系
+        # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
+        plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
+        window = None
+        if row is None:
+            window = PlotSubWindow()
+            curindex = self.UI.tabWidget.addTab(window, "没有数据404")
+        else:
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
+            curindex = self.UI.tabWidget.addTab(window, type_label)
+        window.setAttribute(Qt.WA_DeleteOnClose)
+
+        self.UI.tabWidget.setCurrentIndex(curindex)
+        self.UI.tabWidget.setVisible(True)
+
+    # 下载导出高风险等级充电桩的数据文件 .txt (huang)
+    @pyqtSlot()
+    def on_btn_load_clicked(self):
+        file_path = QFileDialog.getSaveFileName(self, "save file", "E:/", "Txt files(*.txt)")  # 这里的file_name是tuple型
+        #todo: 也就是从数据库取出相应的数据，然后保存至txt文件中
+
+        lists = [[1, 2, 3, 4], [45, 23, 456, 23, 54, 23], [12, 23, 23, 345, 23, 12]]
+        self.Save_list(lists, file_path[0])  # 取tuple第一个元素即为地址
+        print('high_risk')
 
     # 地图风险等级展示按钮
     @pyqtSlot()
@@ -176,6 +294,7 @@ class PlotWindow(QMainWindow):
 
 
     # 获取数据可视化的对象：充电站与充电桩 返回sid 和 pid
+    '''
     def get_plot_sid_and_pid_and_period(self):
         station_name = self.UI.comboBox_type_station.currentText()
         if station_name == '':
@@ -187,7 +306,7 @@ class PlotWindow(QMainWindow):
         begin_time = period.split('~')[0]
         end_time = period.split('~')[1]
         return sid, pid, begin_time, end_time
-
+    '''
 
     # 获取数据
     def get_data(self, sql, arg = None):
@@ -270,6 +389,17 @@ class PlotWindow(QMainWindow):
                 row.append(item)
             model.appendRow(row)
         return model
+
+    # 保存列表到文件中
+    def Save_list(self, list1, filename):
+        # file2 = open(filename + '.txt', 'w')
+        file2 = open(filename, 'w')  # 在保存对话框中选择保存在.txt格式
+        for i in range(len(list1)):
+            for j in range(len(list1[i])):
+                file2.write(str(list1[i][j]))  # write函数不能写int类型的参数，所以使用str()转化
+                file2.write('\t')  # 相当于Tab一下，换一个单元格
+            file2.write('\n')  # 写完一行立马换行
+        file2.close()
 
 
 
