@@ -2,11 +2,11 @@
 ##   ========================== 导入区 ==========================#
 import sys
 
-from PyQt5.QtWidgets import (QDialog, QApplication, QMessageBox)
+from PyQt5.QtWidgets import (QDialog, QApplication, QMessageBox, QLabel)
 
 from PyQt5.QtCore import (Qt, pyqtSlot, pyqtSignal, QRegExp)
 
-from PyQt5.QtGui import QRegExpValidator
+from PyQt5.QtGui import QPixmap
 
 from UI.Ui_LogInWindow import Ui_LogInWindow
 
@@ -33,11 +33,13 @@ class LoginWindow(QDialog):
         self.__UI.setupUi(self)
         self.logger = get_logger("LogIn")
 
-        ##  ===================== 设置输入限制 =============================== #
-        validator = get_validator('[a-zA-z0-9]+$')
+         ##################################################
 
+         #  ===================== 设置输入限制 =============================== #
+        validator = get_validator('[a-zA-z0-9]+$')
+        #
         self.__UI.user_name_lineEdit.setValidator(validator) #设置用户名限制器
-        ##  ================================================================ #
+        #  ================================================================ #
 
         self.setAutoFillBackground(True)    #设置自动填充背景
         self.setWindowFlags(Qt.MSWindowsFixedSizeDialogHint)    #设置固定窗口大小
