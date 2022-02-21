@@ -67,7 +67,7 @@ class MainWindow(QMainWindow):
         ###########################################################
 
         # add 利用信号的方式 （tableView的设置）
-        self.sense_station_change.connect(self.getValue)
+        #self.sense_station_change.connect(self.getValue)
 
         self.mapDisplay = MapDisplay(
             self)  # 为什么放在这，这就是解决点击按钮  弹框一下就关了的bug......... https://blog.csdn.net/veloi/article/details/115027549这里面的方法二
@@ -283,6 +283,7 @@ class MainWindow(QMainWindow):
         self.cur_row = cur.row()
 
     # add
+    '''
     def setValue(self):
         self.sense_station_change.emit(str(self.UI.comboBox_type_station.currentText()))
 
@@ -299,7 +300,7 @@ class MainWindow(QMainWindow):
         # 先清空 在add
         self.UI.comboBox_type_time.clear()
         self.UI.comboBox_type_time.addItems(period_type)
-
+    '''
     # 获取最初的数据模型  huang
     def get_initial_model(self):
         head = list(['充电站数量', '交流充电桩数量', '交流充电桩占比', '直流充电桩数量', '直流充电桩占比'])

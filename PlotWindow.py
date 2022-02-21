@@ -44,10 +44,13 @@ class PlotWindow(QMainWindow):
 
         ###########################################################
 
+        '''
         #add 利用信号的方式
         self.UI.comboBox_type_station.currentTextChanged.connect(self.setValue)
         self.sense_station_change.connect(self.getValue)
         #
+        '''
+
         self.mapDisplay = MapDisplay(self)  #为什么放在这，这就是解决点击按钮  弹框一下就关了的bug......... https://blog.csdn.net/veloi/article/details/115027549这里面的方法二
         self.mapDisplay.close()
 
@@ -58,8 +61,9 @@ class PlotWindow(QMainWindow):
         self.logger = get_logger("plot")
 
         # 初始化左边表格栏参数
-        self.init_plot_type()
+        #self.init_plot_type()
 
+        '''
         ##################################加tableView功能######################
         self.init_model = None
         init_tableview(self.UI.tableView, hor_size=25, ver_size=25)
@@ -73,6 +77,7 @@ class PlotWindow(QMainWindow):
         self.UI.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # 所有列自动拉伸，充满界面
         self.UI.tableView.selectionModel().currentRowChanged.connect(self.do_cur_row_change)
         #####################################################################
+        '''
 
         self.connection, self.cursor = get_db_connection()
 
@@ -214,6 +219,7 @@ class PlotWindow(QMainWindow):
 
 
     # 初始化画图参数
+    '''
     def init_plot_type(self):
         type_dict = get_plot_type()
         self.plot_type = [(key.split('_')[0] if '_' in key else key, type_dict.get(key))
@@ -228,6 +234,7 @@ class PlotWindow(QMainWindow):
         if len(station_type) == 0:
             return
         self.UI.comboBox_type_station.addItems(station_type)
+    '''
 
     # 关闭分页请求函数
     @pyqtSlot(int)
