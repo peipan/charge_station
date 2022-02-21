@@ -20,20 +20,54 @@ class Ui_LogInWindow(object):
         LogInWindow.setStyleSheet("background-color: rgb(255, 255, 255)")
         self.gridLayout = QtWidgets.QGridLayout(LogInWindow)
         self.gridLayout.setObjectName("gridLayout")
-        self.label_8 = QtWidgets.QLabel(LogInWindow)
-        self.label_8.setMinimumSize(QtCore.QSize(779, 100))
-        self.label_8.setStyleSheet("border-image: url(:/image/edge.png);")
-        self.label_8.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_8.setObjectName("label_8")
-        self.gridLayout.addWidget(self.label_8, 0, 0, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(20, 35, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
-        self.gridLayout.addItem(spacerItem, 1, 0, 1, 1)
+        self.label = QtWidgets.QLabel(LogInWindow)
+        self.label.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.label.setObjectName("label")
+        self.label.setPixmap(QtGui.QPixmap("UI/image/edge.png"))
+        self.gridLayout.addWidget(self.label, 2, 0, 1, 1)
+        spacerItem = QtWidgets.QSpacerItem(18, 31, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        self.gridLayout.addItem(spacerItem, 5, 0, 1, 1)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.btn_confirm = QtWidgets.QPushButton(LogInWindow)
+        self.btn_confirm.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"border-style:none;\n"
+"border:1px solid #3f3f3f; \n"
+"\n"
+"padding:5px;\n"
+"min-height:20px;\n"
+"border-radius:15px;")
+        self.btn_confirm.setObjectName("btn_confirm")
+        self.horizontalLayout.addWidget(self.btn_confirm)
+        self.btn_register = QtWidgets.QPushButton(LogInWindow)
+        self.btn_register.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"border-style:none;\n"
+"border:1px solid #3f3f3f; \n"
+"\n"
+"padding:5px;\n"
+"min-height:20px;\n"
+"border-radius:15px;")
+        self.btn_register.setObjectName("btn_register")
+        self.horizontalLayout.addWidget(self.btn_register)
+        self.btn_cancel = QtWidgets.QPushButton(LogInWindow)
+        self.btn_cancel.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"border-style:none;\n"
+"border:1px solid #3f3f3f; \n"
+"\n"
+"padding:5px;\n"
+"min-height:20px;\n"
+"border-radius:15px;")
+        self.btn_cancel.setObjectName("btn_cancel")
+        self.horizontalLayout.addWidget(self.btn_cancel)
+        self.gridLayout.addLayout(self.horizontalLayout, 6, 0, 1, 1)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.label_9 = QtWidgets.QLabel(LogInWindow)
         self.label_9.setMinimumSize(QtCore.QSize(75, 75))
         self.label_9.setMaximumSize(QtCore.QSize(75, 75))
-        self.label_9.setStyleSheet("image: url(:/image/main_title.jpg);")
+        self.label_9.setStyleSheet("")
+        self.label_9.setText("")
+        self.label_9.setPixmap(QtGui.QPixmap("UI/image/main_title.jpg"))
         self.label_9.setObjectName("label_9")
         self.horizontalLayout_4.addWidget(self.label_9)
         self.verticalLayout = QtWidgets.QVBoxLayout()
@@ -76,42 +110,9 @@ class Ui_LogInWindow(object):
         self.horizontalLayout_4.addLayout(self.verticalLayout)
         spacerItem1 = QtWidgets.QSpacerItem(60, 20, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem1)
-        self.gridLayout.addLayout(self.horizontalLayout_4, 2, 0, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(18, 31, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        self.gridLayout.addLayout(self.horizontalLayout_4, 4, 0, 1, 1)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 35, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.gridLayout.addItem(spacerItem2, 3, 0, 1, 1)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.btn_confirm = QtWidgets.QPushButton(LogInWindow)
-        self.btn_confirm.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
-"border-style:none;\n"
-"border:1px solid #3f3f3f; \n"
-"\n"
-"padding:5px;\n"
-"min-height:20px;\n"
-"border-radius:15px;")
-        self.btn_confirm.setObjectName("btn_confirm")
-        self.horizontalLayout.addWidget(self.btn_confirm)
-        self.btn_register = QtWidgets.QPushButton(LogInWindow)
-        self.btn_register.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
-"border-style:none;\n"
-"border:1px solid #3f3f3f; \n"
-"\n"
-"padding:5px;\n"
-"min-height:20px;\n"
-"border-radius:15px;")
-        self.btn_register.setObjectName("btn_register")
-        self.horizontalLayout.addWidget(self.btn_register)
-        self.btn_cancel = QtWidgets.QPushButton(LogInWindow)
-        self.btn_cancel.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
-"border-style:none;\n"
-"border:1px solid #3f3f3f; \n"
-"\n"
-"padding:5px;\n"
-"min-height:20px;\n"
-"border-radius:15px;")
-        self.btn_cancel.setObjectName("btn_cancel")
-        self.horizontalLayout.addWidget(self.btn_cancel)
-        self.gridLayout.addLayout(self.horizontalLayout, 4, 0, 1, 1)
 
         self.retranslateUi(LogInWindow)
         QtCore.QMetaObject.connectSlotsByName(LogInWindow)
@@ -119,14 +120,13 @@ class Ui_LogInWindow(object):
     def retranslateUi(self, LogInWindow):
         _translate = QtCore.QCoreApplication.translate
         LogInWindow.setWindowTitle(_translate("LogInWindow", "登录"))
-        self.label_8.setText(_translate("LogInWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; font-weight:600; color:#ffffff;\">北京市计量检测科学研究院--用户登录</span></p></body></html>"))
-        self.label_9.setText(_translate("LogInWindow", "<html><head/><body><p><br/></p></body></html>"))
+        # self.label.setText(_translate("LogInWindow", "<html><head/><body><p><img src=\":/image/edge(login).png\"/></p></body></html>"))
+        self.btn_confirm.setText(_translate("LogInWindow", "确认"))
+        self.btn_register.setText(_translate("LogInWindow", "注册用户"))
+        self.btn_cancel.setText(_translate("LogInWindow", "取消"))
         self.label_2.setText(_translate("LogInWindow", "用户名："))
         self.user_name_lineEdit.setPlaceholderText(_translate("LogInWindow", "请输入用户名"))
         self.label_3.setText(_translate("LogInWindow", "密码："))
         self.user_password_lineEdit.setPlaceholderText(_translate("LogInWindow", "请输入密码"))
-        self.btn_confirm.setText(_translate("LogInWindow", "确认"))
-        self.btn_register.setText(_translate("LogInWindow", "注册用户"))
-        self.btn_cancel.setText(_translate("LogInWindow", "取消"))
 import main_rc
 import qss_rc

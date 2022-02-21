@@ -14,14 +14,13 @@ from Util.Plot import Myplot2D
 from PyQt5.QtCore import Qt, pyqtSignal
 
 class ParamsSetWindow(QDialog):
-
     def __init__(self):
         super(ParamsSetWindow, self).__init__()
         self.__UI = Ui_ParametersWindow()
         self.__UI.setupUi(self)
 
         ##  ================================================================ #
-        self.setAutoFillBackground(True)  # 设置自动填充背景
+        #self.setAutoFillBackground(True)  # 设置自动填充背景
         #self.setWindowFlags(Qt.MSWindowsFixedSizeDialogHint)  # 设置固定窗口大小
         #self.setAttribute(Qt.WA_DeleteOnClose)  # 关闭时删除对象
 
