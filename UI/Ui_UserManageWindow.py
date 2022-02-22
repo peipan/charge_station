@@ -76,14 +76,14 @@ class Ui_ManageWindow(object):
         self.horizontalLayout.addWidget(self.btn_quit)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.tableView = QtWidgets.QTableView(self.layoutWidget)
-        self.tableView.setStyleSheet("background-image: url(:/image/back.jpg);")
+        #self.tableView.setStyleSheet("background-image: url(:/image/back.jpg);")
         self.tableView.setObjectName("tableView")
         self.verticalLayout.addWidget(self.tableView)
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.SpanningRole, self.splitter)
         self.label_8 = QtWidgets.QLabel(self.centralwidget)
         self.label_8.setMinimumSize(QtCore.QSize(0, 85))
-        self.label_8.setMaximumSize(QtCore.QSize(16777215, 85))
-        self.label_8.setStyleSheet("background-image: url(:/image/edge.jpeg);")
+        self.label_8.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.label_8.setPixmap(QtGui.QPixmap("UI/image/edge(user).png"))
         self.label_8.setAlignment(QtCore.Qt.AlignCenter)
         self.label_8.setObjectName("label_8")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.label_8)
@@ -102,7 +102,7 @@ class Ui_ManageWindow(object):
         self.btn_delete.setText(_translate("ManageWindow", "删除"))
         self.btn_reset.setText(_translate("ManageWindow", "重置"))
         self.btn_quit.setText(_translate("ManageWindow", "退出"))
-        self.label_8.setText(_translate("ManageWindow", "<html><head/><body><p><span style=\" font-size:40px; font-weight:600; color:#ffffff; background-color:transparent;\">北京市计量检测科学研究院用户管理</span></p></body></html>"))
+        #self.label_8.setText(_translate("ManageWindow", "<html><head/><body><p><span style=\" font-size:40px; font-weight:600; color:#ffffff; background-color:transparent;\">北京市计量检测科学研究院用户管理</span></p></body></html>"))
 import main_rc
 
 if __name__ == "__main__":
