@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_PlotWindow(object):
     def setupUi(self, PlotWindow):
         PlotWindow.setObjectName("PlotWindow")
-        PlotWindow.resize(1135, 906)
+        PlotWindow.resize(1219, 906)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -28,14 +28,14 @@ class Ui_PlotWindow(object):
         self.gridLayout.setObjectName("gridLayout")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.label.setText("")
+        #self.label.setText("")
         self.label.setScaledContents(True)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.label.setPixmap(QtGui.QPixmap("UI/image/edge(plot).png"))
         self.gridLayout.addWidget(self.label, 0, 0, 1, 2)
         self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setMaximumSize(QtCore.QSize(300, 500))
+        self.frame.setMaximumSize(QtCore.QSize(300, 16777215))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -178,13 +178,12 @@ class Ui_PlotWindow(object):
         sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
         self.tabWidget.setSizePolicy(sizePolicy)
         self.tabWidget.setMinimumSize(QtCore.QSize(0, 0))
-        self.tabWidget.setStyleSheet("background-color: rgb(170, 255, 127);")
+        self.tabWidget.setStyleSheet("")
         self.tabWidget.setObjectName("tabWidget")
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
-        self.tabWidget.addTab(self.tab, "")
-        self.gridLayout.addWidget(self.tabWidget, 1, 1, 1, 1)
-        self.tableView = QtWidgets.QTableView(self.centralwidget)
+        self.tableView = QtWidgets.QTableView(self.tab)
+        self.tableView.setGeometry(QtCore.QRect(10, 510, 821, 291))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -194,7 +193,13 @@ class Ui_PlotWindow(object):
         self.tableView.setMaximumSize(QtCore.QSize(16777215, 1677215))
         self.tableView.setStyleSheet("background-color: rgb(170, 255, 255);")
         self.tableView.setObjectName("tableView")
-        self.gridLayout.addWidget(self.tableView, 2, 0, 1, 2)
+        self.frame_2 = QtWidgets.QFrame(self.tab)
+        self.frame_2.setGeometry(QtCore.QRect(10, 10, 821, 491))
+        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.tabWidget.addTab(self.tab, "")
+        self.gridLayout.addWidget(self.tabWidget, 1, 1, 1, 1)
         PlotWindow.setCentralWidget(self.centralwidget)
         self.statusBar = QtWidgets.QStatusBar(PlotWindow)
         self.statusBar.setObjectName("statusBar")
@@ -219,6 +224,7 @@ class Ui_PlotWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("PlotWindow", "Tab 1"))
 import main_rc
 import qss_rc
+
 
 if __name__ == "__main__":
     import sys
