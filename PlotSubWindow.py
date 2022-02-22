@@ -54,12 +54,27 @@ class PlotSubWindow(QMainWindow):
             #self.plot_pie(row, line, type_label)
             self.plot_line(row, line, type_label)
 
-    # 绘制折线图
+    # 绘制折线图，三根线 有最高、平均、最低，折线图 比较简单，容易理解
     def plot_line(self, x: list, values: list, type: str, grid=True):
+        #高
         self.fig_line.axes.plot(x,
                                 values,
                                 '-',
                                 color='r',
+                                marker='h',
+                                label=type + "折线图")
+        #平均
+        self.fig_line.axes.plot(x,
+                                values,
+                                '-',
+                                color='b',
+                                marker='h',
+                                label=type + "折线图")
+        #低
+        self.fig_line.axes.plot(x,
+                                values,
+                                '-',
+                                color='green',
                                 marker='h',
                                 label=type + "折线图")
 
@@ -79,12 +94,11 @@ class PlotSubWindow(QMainWindow):
         self.fig_line.axes.legend(loc='best', ncol=1)
         self.fig_line.draw()
 
-    # 绘制柱状图
+    # 绘制柱状图，柱状图该怎么画出那种高、中、低效果，待研究2022/2/22 23:56
     def plot_colums(self, x: list, values: list, type: str, color: str, grid=False):
         self.fig_line.axes.bar(x=x,
                                height=values,
                                align='center',
-                               #tick_label='a',
                                label='asdadssadasd',
                                color=color)
         self.fig_line.axes.set_title(type + "柱状图")

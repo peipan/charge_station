@@ -88,7 +88,6 @@ class DataProcess():
             tot_period_en.append(sum(result_A[i]))
             result_B.append(tot_en[i][0] - loss_en[i][0] - tot_period_en[i])
         ##########################################################
-        #result_B[11] =decimal.Decimal(15.204)  #测试使用，因为调试的时候发现最后一个竟然是负数 这样肯定解不出来
         return result_A, result_B
 
     #根据矩阵，求解
@@ -125,16 +124,16 @@ class DataProcess():
 
 if __name__ == "__main__":
     dataProcess = DataProcess()
-    list_A, list_B = dataProcess.compute_energy_matrix("星星充电", "2021-10-02 09:02:16", 7)
+    list_A, list_B = dataProcess.compute_energy_matrix("星星充电", "2021-10-02 09:02:02", 7)
     #list_V = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    #result = dataProcess.compute_matrix(list_A, list_B)
-    #print(result)
-
-
-    list_A = [[4, 3], [-5, 9]]
-    list_B = [20, 26]
     result = dataProcess.compute_matrix(list_A, list_B)
     print(result)
+
+
+    #list_A = [[4, 3], [-5, 9]]
+    #list_B = [20, 26]
+    #result = dataProcess.compute_matrix(list_A, list_B)
+    #print(result)
     #print(sum(list_B))
 
 
