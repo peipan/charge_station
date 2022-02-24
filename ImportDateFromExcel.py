@@ -15,19 +15,20 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
     def __init__(self, data_df):
         super().__init__()
         self.data_df = data_df
+        self.connection, self.cursor = get_db_connection()
 
     def run(self):
         self.import_data_from_excel(self.data_df)
 
     def import_data_from_excel(self, data_df):
-        connection, cursor = get_db_connection()
+        #connection, cursor = get_db_connection()
         data = []
         station_name = ''
         begin_time = '' #本次测量开始时间
         end_time = '' #本次测量结束时间
         i = 0
         # 开启事务
-        connection.begin()
+        self.connection.begin()
         index = 0  # 记录索引 判断是哪一行出错 提示用户！！！
         # recode1 = ["北工大充电站", str(1111.121212), str(1221.122121)]
 #  ...
@@ -59,14 +60,14 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
             # todo：直接按照充电站名称、开始时间、查询是否已经有一致数据 用于判断重复！！！
             # 直接查询该充电站的sid
             sql = "select sid from table_charge_station where station_name = %s"
-            cursor.execute(sql, record[7])
-            data = cursor.fetchall()
+            self.cursor.execute(sql, record[7])
+            data = self.cursor.fetchall()
             sid = 0
             if len(data) != 0:
                 sid = data[0][0]
                 sql = "select sid from table_station_period where sid = %s and start_time = %s"
-                cursor.execute(sql, [sid, record[0]])
-                data = cursor.fetchall()
+                self.cursor.execute(sql, [sid, record[0]])
+                data = self.cursor.fetchall()
                 if len(data) != 0:
                     self.send_info(-1)  # 发射信号
                     return
@@ -74,16 +75,16 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
                 # 插入一些直接能从excel表中直接获取的（名称，地址，经纬度，起始时间，），需要统计出来的（充电转中充电桩数量、交流充电桩数量、直流充电桩数量）等，就后面统计完再update进去表中
                 sql = "insert into table_charge_station (station_name, station_addr, longitude, latitude, s_local, start_time) values (%s, %s, %s, %s, %s, %s)"
                 list_station_fixed = [record[7], record[9], record[10], record[11], record[8], record[0]]
-                cursor.execute(sql, list(list_station_fixed))
-            connection.commit()
+                self.cursor.execute(sql, list(list_station_fixed))
+            self.connection.commit()
         except Exception as e:
             print("##########" + str(e) + "###########")
             self.send_info(1)  # 发射信号
-            connection.rollback()
+            self.connection.rollback()
             return
 
         ##################################插入其余的数据######################################
-        connection.begin()
+        self.connection.begin()
         try:
             record_begin_time = ""  # 本次测量起始时间
             #record_end_time = ""  # 本次测量终止时间
@@ -95,8 +96,8 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
             for record in list(data_df.values):
                 time.sleep(0.05)  # 休眠时间 可调 -> 意思就是该线程放出cpu的时间，越小导入的数据的时长就越短！！！
                 sql = "select sid from table_charge_station where station_name = %s"
-                cursor.execute(sql, station_name)
-                data = cursor.fetchall()
+                self.cursor.execute(sql, station_name)
+                data = self.cursor.fetchall()
                 sid = data[0][0]
 
 
@@ -119,7 +120,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
                     carrieroperator = str(record[12])  # 运营商
                     start_time = str(record[0])  # 开始时间
                     sql = "insert into table_charge_pile (sid, pid, model_type, factory_num, nomial_level, install_time_span, carrieroperator, manufacturer, start_time) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                    cursor.execute(sql, list([sid, pid_count, model_type, factory_num, nomial_level, install_time_span, carrieroperator, manufacturer, start_time]))
+                    self.cursor.execute(sql, list([sid, pid_count, model_type, factory_num, nomial_level, install_time_span, carrieroperator, manufacturer, start_time]))
                 else:
                     period_count = period_count + 1
 
@@ -136,7 +137,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
 
 
                 sql = "insert into table_pile_period (sid, pid, start_time, end_time, use_freq, energy) values (%s, %s, %s, %s, %s, %s)"
-                cursor.execute(sql, list([sid, pid_count, start_time, end_time, use_freq, energy]))
+                self.cursor.execute(sql, list([sid, pid_count, start_time, end_time, use_freq, energy]))
 
                 if pid_count == 1:
                     env_temper = str(record[29])  # 温度
@@ -144,53 +145,55 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
                     loss_energy = str(record[33])  # 损耗能量
                     total_energy = str(record[32])  # 总能量
                     sql = "insert into table_station_period (sid, start_time, end_time, env_temper, env_shidu, loss_energy, total_energy) values (%s, %s, %s, %s, %s, %s, %s)"
-                    cursor.execute(sql, list([sid, start_time, end_time, env_temper, env_shidu, loss_energy, total_energy]))
+                    self.cursor.execute(sql, list([sid, start_time, end_time, env_temper, env_shidu, loss_energy, total_energy]))
             #todo: 将得到的pid_count，s_jiaoliu_num，s_zhiliu_num以update的方式插入到表table_charge_station
             sql = "update table_charge_station set s_num = %s, s_zhiliu_num = %s, s_jiaoliu_num = %s  where sid = %s"
-            cursor.execute(sql, list([pid_count, s_zhiliu_num, s_jiaoliu_num, sid]))
+            self.cursor.execute(sql, list([pid_count, s_zhiliu_num, s_jiaoliu_num, sid]))
 
             #数据插入完 才将table_charge_station表中的s_flag至为1，其余时间都为0
             #sql = "update table_charge_station set s_flag = 1 where sid = %s"
             #cursor.execute(sql, sid)
 
-            connection.commit()
+            self.connection.commit()
             self.send_info(0)  # 发射信号,这个信号就代表数据插入成功！
 
         except Exception as e:
             print("这是一个：" + str(e) + "的错误，请认真查看！")
             message = "第" + str(index + 2) + "行数据插入失败！请检查，然后重新导入"
             self.send_info(index + 2)  # 发射信号
-            connection.rollback()
+            self.connection.rollback()
             return
 
         ##################################插入计算的计量误差与风险等级######################################
         # todo:加载数据之后开始计算测量误差和风险等级(尚未做)等参数并插入至数据库
-        '''
-        connection.begin()
+        self.update_risk_level(station_name, record_begin_time, period_count)
+
+
+    def update_risk_level(self, station_name, record_begin_time, period_count):
+        dataProcess = DataProcess()
+        list_A, list_B, sid = dataProcess.compute_energy_matrix(station_name, record_begin_time, period_count)
+        result, isOnlyJie = dataProcess.compute_matrix(list_A, list_B)  # 充电桩计量误差数据，该数据需要被插入至 数据库table_pile_display_info表中  result为列表类型, isOnlyJie代表矩阵是否唯一解
+        if not isOnlyJie:
+            self.send_info(-2)  # 代表矩阵不是唯一解 发送给主页展示
+            return
         try:
-            dataProcess = DataProcess()
-            print("======================================================================")
-            list_A, list_B = dataProcess.compute_energy_matrix(station_name, record_begin_time, record_end_time)
-            print(list_A)
-            result = dataProcess.compute_matrix(list_A, list_B) #充电桩计量误差数据，该数据需要被插入至 数据库table_pile_display_info表中  result为列表类型
-            print(result)
-            pid0 = 0
-            for num in list(result):
-                num_str = str(round(num, 2))
-                pid0 += 1
-                print(pid0)
-                #insert不能插入一个属性， 必须插入多个属性， 用update语句更新一个属性的值 代表插入
-                sql = "update table_pile_display_info set measurement_error = %s where begin_time = %s and end_time = %s and pid = %s"
-                cursor.execute(sql, [num_str, record_begin_time, record_end_time, pid0])
-            connection.commit()
-            self.send_info(0)  # 发射信号
+            self.connection.begin()
+            #todo: 根据测量误差，计算出风险等级指数，然后一起推送至数据库
+            pid = 0 # 给每个充电桩推送测量误差，
+            for measure_error in list(result):
+                measure_error_str = str(round(measure_error, 2))  # 只保留两位小数
+                # insert不能插入一个属性， 必须插入多个属性， 用update语句更新一个属性的值 代表插入
+                sql = "update table_charge_pile set measurement_error = %s where begin_time = %s and sid = %s and pid = %s"
+                self.cursor.execute(sql, [measure_error_str, record_begin_time, sid, pid])
+            self.connection.commit()
         except Exception as e:
-            connection.rollback()
+            self.connection.rollback()
             print("这是一个" + e + "错误!")
         finally:
             # 关闭数据库连接和钩子
-            close_db(connection, cursor)
-            '''
+            close_db(self.connection, self.cursor)
+
+
 
     def send_info(self, info):
         show_info = ShowInfo(info)

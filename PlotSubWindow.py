@@ -55,30 +55,30 @@ class PlotSubWindow(QMainWindow):
             self.plot_line(row, line, type_label)
 
     # 绘制折线图，三根线 有最高、平均、最低，折线图 比较简单，容易理解
-    def plot_line(self, x: list, values: list, type: str, grid=True):
+    def plot_line(self, x: list, values: list, type_label: str, grid=True):
         #高
         self.fig_line.axes.plot(x,
                                 values,
                                 '-',
                                 color='r',
                                 marker='h',
-                                label=type + "折线图")
+                                label=type_label + "折线图")
         #平均
         self.fig_line.axes.plot(x,
                                 values,
                                 '-',
                                 color='b',
                                 marker='h',
-                                label=type + "折线图")
+                                label=type_label + "折线图")
         #低
         self.fig_line.axes.plot(x,
                                 values,
                                 '-',
                                 color='green',
                                 marker='h',
-                                label=type + "折线图")
+                                label=type_label + "折线图")
 
-        self.fig_line.axes.set_title(type + "折线图")
+        self.fig_line.axes.set_title(type_label + "折线图")
         self.fig_line.axes.set_xticks(x, minor=True)
 
         if type == '安装时长':

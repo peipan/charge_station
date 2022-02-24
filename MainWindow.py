@@ -53,9 +53,6 @@ class MainWindow(QMainWindow):
         self.backgroundPix = QPixmap("Icon/000.png")
         self.pb = None #进度条窗口
 
-
-
-
         # 启用登录窗口
         self.on_act_login_triggered()
 
@@ -161,6 +158,9 @@ class MainWindow(QMainWindow):
             show_information_message(self, message)
         elif showInfo.info == 0:
             message = "全部插入成功!!!"
+            show_information_message(self, message)
+        elif showInfo.info == -2:
+            message = "数据无效（无法计算出唯一解），请重新插入！！！"
             show_information_message(self, message)
         else:
             message = str(showInfo.info) + "行数据插入失败！请检查，然后重新导入"
