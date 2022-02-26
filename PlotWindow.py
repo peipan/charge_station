@@ -1,5 +1,5 @@
-
-from Common import get_plot_type, get_db_connection, close_db, get_logger, show_information_message, execute_inquiry, get_row_model, init_tableview
+from Common import get_plot_type, get_db_connection, close_db, get_logger, show_information_message, execute_inquiry, \
+    get_row_model, init_tableview
 
 from matplotlib.backends.backend_qt5 import NavigationToolbar2QT as NavigationToolbar
 
@@ -25,8 +25,9 @@ from graphyWindow import visual_all
 
 from PyQt5.QtCore import Qt, pyqtSignal
 
+
 class PlotWindow(QMainWindow):
-    sense_station_change = pyqtSignal(str) #定义一个信号槽 用于感知充电站的变化  充电桩的列表野随着变化
+    sense_station_change = pyqtSignal(str)  # 定义一个信号槽 用于感知充电站的变化  充电桩的列表野随着变化
 
     def __init__(self, parent=None):
         super(PlotWindow, self).__init__(parent)
@@ -41,7 +42,6 @@ class PlotWindow(QMainWindow):
         self.UI.tabWidget.setTabsClosable(True)  # Page有关闭按钮
         self.UI.tabWidget.setDocumentMode(True)  # 设置文档模式
 
-
         ###########################################################
 
         '''
@@ -51,17 +51,15 @@ class PlotWindow(QMainWindow):
         #
         '''
 
-        self.mapDisplay = MapDisplay(self)  #为什么放在这，这就是解决点击按钮  弹框一下就关了的bug......... https://blog.csdn.net/veloi/article/details/115027549这里面的方法二
+        self.mapDisplay = MapDisplay(self)  # 为什么放在这，这就是解决点击按钮  弹框一下就关了的bug......... https://blog.csdn.net/veloi/article/details/115027549这里面的方法二
         self.mapDisplay.close()
 
-        self.chargeMapper = ChargeMapper() #注入操作数据库类
-
-
+        self.chargeMapper = ChargeMapper()  # 注入操作数据库类
 
         self.logger = get_logger("plot")
 
         # 初始化左边表格栏参数
-        #self.init_plot_type()
+        # self.init_plot_type()
 
         '''
         ##################################加tableView功能######################
@@ -105,13 +103,21 @@ class PlotWindow(QMainWindow):
         self.UI.comboBox_type_time.clear()
         self.UI.comboBox_type_time.addItems(period_type)
     '''
+
     #
     # 生产厂家展示按钮
     @pyqtSlot()
     def on_btn_factory_clicked(self):
+        new_sid = 0  #todo： 这个得取出来，也就是先取最新的sid数据，还得判断s刚插入的sid是否矩阵运算有唯一值，如果没有唯一值 就显示不了呀，或者就显示前一次的数据，这种直接在表中加一个标记位就可以
         # todo: 从数据库取出生产厂家与风险等级标量的关系
+        row, line1, line2, line3 = self.chargeMapper.find_manufacturer_and_risk_index(sid = new_sid)  # row：表示横坐标，line1-2-3：列坐标，分别表示高中低
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
-        plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
+        line = list([])
+        line.append(line1)
+        line.append(line2)
+        line.append(line3)
+        plot_type = 0  # 0代表是折线图 1代表柱状图
+        type_label = "生产厂家"
         window = None
         if row is None:
             window = PlotSubWindow()
@@ -120,15 +126,15 @@ class PlotWindow(QMainWindow):
             window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
             curindex = self.UI.tabWidget.addTab(window, type_label)
         window.setAttribute(Qt.WA_DeleteOnClose)
-
         self.UI.tabWidget.setCurrentIndex(curindex)
         self.UI.tabWidget.setVisible(True)
 
-    #使用频率展示按钮
+    # 使用频率展示按钮
     @pyqtSlot()
     def on_btn_frequency_clicked(self):
-        #todo: 从数据库取出生产厂家与风险等级标量的关系
-        #按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
+        # todo: 从数据库取出使用频率与风险等级标量的关系
+
+        # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
         plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
         window = None
         if row is None:
@@ -146,6 +152,7 @@ class PlotWindow(QMainWindow):
     @pyqtSlot()
     def on_btn_tem_clicked(self):
         # todo: 从数据库取出生产厂家与风险等级标量的关系
+
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
         plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
         window = None
@@ -218,7 +225,7 @@ class PlotWindow(QMainWindow):
     @pyqtSlot()
     def on_btn_load_clicked(self):
         file_path = QFileDialog.getSaveFileName(self, "save file", "E:/", "Txt files(*.txt)")  # 这里的file_name是tuple型
-        #todo: 也就是从数据库取出相应的数据，然后保存至txt文件中
+        # todo: 也就是从数据库取出相应的数据，然后保存至txt文件中
 
         lists = [[1, 2, 3, 4], [45, 23, 456, 23, 54, 23], [12, 23, 23, 345, 23, 12]]
         self.Save_list(lists, file_path[0])  # 取tuple第一个元素即为地址
@@ -235,16 +242,16 @@ class PlotWindow(QMainWindow):
         #获取该充电站下的pid以及对应的风险等级数据，返回一个字典类型
         pid_and_risk_level_dict = self.chargeMapper.find_pid_risk_level_by_sid(sid)
         '''
-        #todo:外弹框 显示地图就ok，我需要把经纬度数据填入
+        # todo:外弹框 显示地图就ok，我需要把经纬度数据填入
         add = [[39.873079, 116.481913], [39.913904, 116.39728], [39.885987, 116.480132]]
         level = [[10, 30, 50, 70, 90], [10, 10, 10, 10, 10], [90, 90, 90, 90, 90]]
         data = visual_all(add, *level)
 
-        #mapDisplay = MapDisplay(data)
+        # mapDisplay = MapDisplay(data)
         self.mapDisplay.trans_data(data)
-        #self.mapDisplay.setAttribute(Qt.WA_DeleteOnClose)  # 设置关闭删除实例  应该是这句话一直出现了bug
+        # self.mapDisplay.setAttribute(Qt.WA_DeleteOnClose)  # 设置关闭删除实例  应该是这句话一直出现了bug
         self.mapDisplay.setWindowFlag(Qt.Window, True)  # 指示该窗口是一个独立的窗口
-        #mapDisplay.exec()  #Qwidths没有模态窗口选项
+        # mapDisplay.exec()  #Qwidths没有模态窗口选项
         self.mapDisplay.show()
 
     @pyqtSlot(str)
@@ -265,11 +272,11 @@ class PlotWindow(QMainWindow):
     # 获得画图的类型 是否是折线图或者是饼状图
     def get_plot_line_or_pie(self):
         if self.UI.pieCheckBox.isChecked() is True or self.UI.lineCheckBox_2.isChecked() is False:
-            return 1  #代表说折线图
+            return 1  # 代表说折线图
         elif self.UI.pieCheckBox.isChecked() is False or self.UI.lineCheckBox_2.isChecked() is True:
-            return 0  #代表是饼状图
+            return 0  # 代表是饼状图
         else:
-            #todo: 提示只能选择一项
+            # todo: 提示只能选择一项
             pass
 
     # 获取横纵坐标值返回list类型
@@ -286,12 +293,15 @@ class PlotWindow(QMainWindow):
         map = {'安装时长': 'use_freq', '风险等级': 'risk_level', '环境温度': 'Measurement_error'}
         table_line_attr = map[type_label]
         if table_line_attr == 'use_freq':
-            x, values = self.chargeMapper.find_plot_attr_by_sid_and_pid_and_period(table_line_attr=table_line_attr, sid=sid, pid=pid, begin_time=begin_time, end_time=end_time)
+            x, values = self.chargeMapper.find_plot_attr_by_sid_and_pid_and_period(table_line_attr=table_line_attr,
+                                                                                   sid=sid, pid=pid,
+                                                                                   begin_time=begin_time,
+                                                                                   end_time=end_time)
         elif table_line_attr == 'Measurement_error':
-            x, values = self.chargeMapper.find_error_by_sid_and_pid_and_period(table_line_attr=table_line_attr, sid=sid, pid=pid)
+            x, values = self.chargeMapper.find_error_by_sid_and_pid_and_period(table_line_attr=table_line_attr, sid=sid,
+                                                                               pid=pid)
 
         return type_label, x, values
-
 
     # 获取数据可视化的对象：充电站与充电桩 返回sid 和 pid
     '''
@@ -309,7 +319,7 @@ class PlotWindow(QMainWindow):
     '''
 
     # 获取数据
-    def get_data(self, sql, arg = None):
+    def get_data(self, sql, arg=None):
         connection, cursor = get_db_connection()
         data = execute_inquiry(sql, arg, connection=connection, cursor=cursor)
         if data == -1:
@@ -318,11 +328,10 @@ class PlotWindow(QMainWindow):
 
         return data
 
-
     # 单击画图按钮
     @pyqtSlot()
     def on_btn_plot_clicked(self):
-        #todo: 获取此时的列表数据，有plot_type: int, row: list, line: list, type_label: str,
+        # todo: 获取此时的列表数据，有plot_type: int, row: list, line: list, type_label: str,
         plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
         window = None
         if row is None:
@@ -335,7 +344,6 @@ class PlotWindow(QMainWindow):
 
         self.UI.tabWidget.setCurrentIndex(curindex)
         self.UI.tabWidget.setVisible(True)
-
 
     # 初始化画图参数
     '''
@@ -369,7 +377,7 @@ class PlotWindow(QMainWindow):
     # 获取最初的数据模型
     def get_initial_model(self):
         head = list(['充电站名称', '充电桩数量'])
-        model = get_row_model(2, header = head)
+        model = get_row_model(2, header=head)
         all_name, all_pid = self.chargeMapper.find_chargeName_and_pidCount()
         row = list([])
         line = list([])
@@ -402,9 +410,9 @@ class PlotWindow(QMainWindow):
         file2.close()
 
 
-
 if __name__ == "__main__":
     import sys
+
     app = QApplication(sys.argv)
     win = PlotWindow()
     win.show()
