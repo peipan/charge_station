@@ -190,6 +190,34 @@ class ChargeMapper():
 
     #使用频率与风险等级指数的关系，返回x轴参数、最低指数、平均指数、最高指数
     def find_use_freq_and_risk_index(self, sid: int):
-        sql = ""
+        # 联表查询，已验证，语句正确无误
+        sql = """SELECT
+                    table_use_freq.freq,
+                    MIN(table_charge_pile.`risk_level`),
+                    AVG(table_charge_pile.`risk_level`),
+                    MAX(table_charge_pile.`risk_level`)
+                FROM
+                    table_charge_pile,
+                    (SELECT 
+                        sid, pid, AVG(use_freq) AS freq
+                    FROM 
+                        table_pile_period
+                    WHERE 
+                        sid = 6
+                    GROUP BY
+                        pid) table_use_freq   
+                WHERE 
+                    table_charge_pile.sid = table_use_freq.sid
+                    AND
+                    table_charge_pile.pid = table_use_freq.pid
+                GROUP BY
+                    table_use_freq.freq;
+                """
+        data = []
+        *_, data = execute_inquiry(sql, sid, connection=self.connection, cursor=self.cursor)
+        return data[0], data[1], data[2], data[3]
 
+    # 环境温度与风险等级指数的关系，返回x轴参数、最低指数、平均指数、最高指数
+    def find_env_temper_and_risk_index(self, sid: int):
+        pass
     ####################################################################################################################

@@ -27,11 +27,10 @@ class PlotSubWindow(QMainWindow):
 
         self.plot_line_or_pie(plot_type, row, line, type_label)
 
-
     # 初始化画图区域
     def init_plot_frame(self):
         self.fig_line = Myplot2D()
-        tool = NavigationToolbar(self.fig_line, self.UI.frame_5)
+        tool = NavigationToolbar(self.fig_line, self.UI.frame_2)
         layout = QGridLayout()
         layout.addWidget(self.fig_line)
         layout.addWidget(tool)
@@ -58,21 +57,21 @@ class PlotSubWindow(QMainWindow):
     def plot_line(self, x: list, values: list, type_label: str, grid=True):
         #高
         self.fig_line.axes.plot(x,
-                                values,
+                                values[0],
                                 '-',
                                 color='r',
                                 marker='h',
                                 label=type_label + "折线图")
         #平均
         self.fig_line.axes.plot(x,
-                                values,
+                                values[1],
                                 '-',
                                 color='b',
                                 marker='h',
                                 label=type_label + "折线图")
         #低
         self.fig_line.axes.plot(x,
-                                values,
+                                values[2],
                                 '-',
                                 color='green',
                                 marker='h',
