@@ -42,12 +42,30 @@ border:1px solid #3f3f3f;
 
 padding:5px;
 min-height:20px;
-border-radius:15px;</string>
+border-radius:15px;
+
+font: 75 12pt &quot;微软雅黑&quot;;</string>
             </property>
             <property name="text">
              <string>保存</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>60</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item>
            <widget class="QPushButton" name="btn_delete">
@@ -64,7 +82,8 @@ border:1px solid #3f3f3f;
 
 padding:5px;
 min-height:20px;
-border-radius:15px;</string>
+border-radius:15px;
+font: 75 12pt &quot;微软雅黑&quot;;</string>
             </property>
             <property name="text">
              <string>删除</string>
@@ -72,26 +91,20 @@ border-radius:15px;</string>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="btn_reset">
-            <property name="minimumSize">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
              <size>
-              <width>0</width>
-              <height>32</height>
+              <width>60</width>
+              <height>20</height>
              </size>
             </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));
-border-style:none;
-border:1px solid #3f3f3f; 
-
-padding:5px;
-min-height:20px;
-border-radius:15px;</string>
-            </property>
-            <property name="text">
-             <string>重置</string>
-            </property>
-           </widget>
+           </spacer>
           </item>
           <item>
            <widget class="QPushButton" name="btn_quit">
@@ -108,7 +121,8 @@ border:1px solid #3f3f3f;
 
 padding:5px;
 min-height:20px;
-border-radius:15px;</string>
+border-radius:15px;
+font: 75 12pt &quot;微软雅黑&quot;;</string>
             </property>
             <property name="text">
              <string>退出</string>

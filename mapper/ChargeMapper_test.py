@@ -1,7 +1,8 @@
 #该文件主要用与与充电站表（table_charge_station）进行数据交互作用
 from Common import get_db_connection, execute_inquiry, show_information_message
+import xlrd
 
-class ChargeMapper():
+class ChargeMapper_test():
     def __init__(self):
         self.connection, self.cursor = get_db_connection()
 
@@ -80,23 +81,23 @@ class ChargeMapper():
             x.append(str(i))
         return x, values
 
-    # 根据sid查询table_charge_pile中的数据，通过分组sid求不同区域的充电桩总和，处理成横纵坐标  hyd
+    #根据sid查询table_charge_pile中的数据，通过分组sid求不同区域的充电桩总和，处理成横纵坐标  hyd
     def find_plot_attr_by_sid_and_main_data(self):
         data = []
-        # [sid, pile_all_num] = []
-        # sql = "select sid, count(*) as pile_all_num from table_charge_pile group by sid"  # 验证过了可以正常按照充电站名称分组并计算其下充电桩总数值
-        sql = " select table_charge_station.s_local, count(*) as pile_all_num from table_charge_pile, table_charge_station" \
-              " where table_charge_pile.sid = table_charge_station.sid group by s_local"
+        #[sid, pile_all_num] = []
+        #sql = "select sid, count(*) as pile_all_num from table_charge_pile group by sid"  # 验证过了可以正常按照充电站名称分组并计算其下充电桩总数值
+        sql = " select s_local, s_num from table_charge_station where 1=1"
         *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
         if data is None:
-            return None, None
-        # 数据处理，直接返回，横轴坐标，统一在这边处理
+            show_information_message(self, "查询结果为空")
+            return
+        #数据处理，直接返回，横轴坐标，统一在这边处理
         values = list([])  # 纵轴
         x = list([])  # 横轴
         for i in range(0, len(data)):
             x.append(data[i][0])
-            # x.append(str(data[i][1]) + "-" + str(data[i][2])) #这样写法 横坐标填满了，不好看
-            # x.append(str(i))  # 需要把x变成充电区域名称
+            #x.append(str(data[i][1]) + "-" + str(data[i][2])) #这样写法 横坐标填满了，不好看
+            #x.append(str(i))  # 需要把x变成充电区域名称
             values.append(data[i][1])
 
         return x, values

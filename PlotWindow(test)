@@ -274,6 +274,7 @@ class PlotWindow(QMainWindow):
     def Save_list(self, list1, filename):
         #file2 = open(filename + '.txt', 'w')
         file2 = open(filename, 'w')  # 在保存对话框中选择保存在.txt格式
+        ################# 在写入列表元素 ################
         for i in range(len(list1)):
             for j in range(len(list1[i])):
                 file2.write(str(list1[i][j]))  # write函数不能写int类型的参数，所以使用str()转化

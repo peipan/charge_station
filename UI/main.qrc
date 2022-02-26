@@ -18,5 +18,7 @@
         <file>image/edge(login).png</file>
         <file>image/edge(params).png</file>
         <file>image/edge(plot).png</file>
+        <file>image/数据导出.png</file>
+        <file>image/地图.png</file>
     </qresource>
 </RCC>
