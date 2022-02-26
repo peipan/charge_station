@@ -210,11 +210,15 @@ QToolBar{spacing:160px;}</string>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actiongraph"/>
+   <addaction name="separator"/>
    <addaction name="act_import_data"/>
    <addaction name="separator"/>
    <addaction name="act_show"/>
    <addaction name="separator"/>
-   <addaction name="actiongraph"/>
+   <addaction name="act_map"/>
+   <addaction name="separator"/>
+   <addaction name="act_output"/>
    <addaction name="separator"/>
   </widget>
   <action name="act_import_data">
@@ -349,6 +353,43 @@ QToolBar{spacing:160px;}</string>
    </property>
    <property name="iconText">
     <string>参数设置</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="act_output">
+   <property name="icon">
+    <iconset theme="act_output" resource="main.qrc">
+     <normaloff>:/image/数据导出.png</normaloff>:/image/数据导出.png</iconset>
+   </property>
+   <property name="text">
+    <string>数据导出</string>
+   </property>
+   <property name="iconText">
+    <string>数据导出</string>
+   </property>
+   <property name="toolTip">
+    <string>数据导出</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="act_map">
+   <property name="icon">
+    <iconset resource="main.qrc">
+     <normaloff>:/image/地图.png</normaloff>:/image/地图.png</iconset>
+   </property>
+   <property name="text">
+    <string>地图展示</string>
+   </property>
+   <property name="toolTip">
+    <string>地图展示</string>
    </property>
    <property name="font">
     <font>

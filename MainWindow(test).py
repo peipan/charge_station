@@ -1,9 +1,9 @@
-
 from PyQt5.QtCore import pyqtSlot, Qt, QItemSelectionModel, QModelIndex, pyqtSignal
 
 from Util.Grade import Grade
 
-from Common import show_information_message, show_error_message, init_tableview, get_row_model, get_logger, get_db_connection, execute_inquiry
+from Common import show_information_message, show_error_message, init_tableview, get_row_model, get_logger, \
+    get_db_connection, execute_inquiry
 
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QHeaderView, QGridLayout
 
@@ -23,6 +23,8 @@ from ParamsSetWindow import ParamsSetWindow
 
 from UserManageWindow import ManageWindow
 
+from graphyWindow import visual_all
+
 from MapDisplay import MapDisplay
 
 from mapper.ChargeMapper import ChargeMapper
@@ -33,17 +35,21 @@ from call_mainbar import ProgressBar
 
 from mapper.ChargeMapper import ChargeMapper
 
+from mapper.ChargeMapper_test import ChargeMapper_test
+
 from matplotlib.backends.backend_qt5 import NavigationToolbar2QT as NavigationToolbar
 
 from Util.Plot import Myplot2D
 
 import sys
 
-#Administrator_grade = 1
+
+# Administrator_grade = 1
 
 
 class MainWindow(QMainWindow):
     sense_station_change = pyqtSignal(str)
+
     def __init__(self):
         super(MainWindow, self).__init__()
         self.UI = Ui_MainWindow()
@@ -53,7 +59,7 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(self.UI.tabWidget)  # 将tabwidget设为中心控件
         self.UI.tabWidget.setVisible(True)  # 线隐藏tabwidget控件
-        #self.UI.tabWidget.clear()  # 清除所有的页
+        # self.UI.tabWidget.clear()  # 清除所有的页
         self.UI.tabWidget.setTabsClosable(True)  # Page有关闭按钮
         self.UI.tabWidget.setDocumentMode(True)  # 设置文档模式
 
@@ -62,19 +68,19 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(1680, 1000)
 
         self.backgroundPix = QPixmap("Icon/000.png")
-        self.pb = None #进度条窗口
+        self.pb = None  # 进度条窗口
 
         ###########################################################
 
         # add 利用信号的方式 （tableView的设置）
-        #self.sense_station_change.connect(self.getValue)
+        # self.sense_station_change.connect(self.getValue)
 
         self.mapDisplay = MapDisplay(
             self)  # 为什么放在这，这就是解决点击按钮  弹框一下就关了的bug......... https://blog.csdn.net/veloi/article/details/115027549这里面的方法二
         self.mapDisplay.close()
 
         self.chargeMapper = ChargeMapper()  # 注入操作数据库类
-
+        self.chargeMapper_test = ChargeMapper_test()  # 注入操作数据库类
         self.logger = get_logger("plot")
 
         ##################################hyd  加tableView功能  huang######################
@@ -96,9 +102,10 @@ class MainWindow(QMainWindow):
         self.fig_pie = None
         self.plot_type = None
         self.init_plot_frame()
-        x = ['a', 'b', 'c']
-        values = [20, 30, 50]
-        self.plot_pie(x, values, '各区域充电桩数据及比例显示')
+        # x = ['a', 'b', 'c']
+        # values = [20, 30, 50]
+        #x, values = self.get_plot_pie_row_and_line()
+        #self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
         #############################################################
         # 启用登录窗口
         self.on_act_login_triggered()
@@ -110,26 +117,26 @@ class MainWindow(QMainWindow):
         self.change_enabled([1, 2, 3, 4, 5, 6],
                             True)  # 发现的xiao bug 从页面中点击登录后，这块还得判断用户管理权限....... 也就是5不能乱开  待解决！！！2021/12/04  完美解决 如下，调整了顺序就可以 好好理解下信号传递 2021/12/06
         self.change_enabled([0], False)
-        login_window.userSignal.connect(self.receive_user) #这个就是信号传递的函数，连接了自动会去执行receive_user()函数
+        login_window.userSignal.connect(self.receive_user)  # 这个就是信号传递的函数，连接了自动会去执行receive_user()函数
         res_code = login_window.exec()  # 以模态的方式打开登录窗口
         if res_code == 0:
             self.change_enabled([1, 2, 3, 4, 5],
-                            False)
+                                False)
             self.change_enabled([0], True)
-        
+
     # 单击【登出】按钮
     @pyqtSlot()
     def on_act_logout_triggered(self):
         self.user = None
         self.change_enabled([0], on=True)
         self.change_enabled([1, 2, 3, 5], on=False)
-        self.UI.tabWidget.setVisible(False) #关闭打开的子页面
+        self.UI.tabWidget.setVisible(False)  # 关闭打开的子页面
 
     # 点击【导入数据】按钮
-    #可能存在一个隐患 就是一次数据插入错误（不按标准格式），会导致后面的算法计算导致出错，如何设置一次插入失败全部回滚的操作？？？待解决 ：https://blog.csdn.net/weixin_29649815/article/details/114394636
-    #已经解决 回滚问题 2021/12/26， 但是如果数据有问题  是否还得检查数据类型 以及数据范围的问题 判断是否回滚和接收？？？
-    #解决导入数据重复问题 2021/12/26
-    #解决数据导入与进度条问题，采用多线程的编写方式，以完美解决！！！2021/12/30
+    # 可能存在一个隐患 就是一次数据插入错误（不按标准格式），会导致后面的算法计算导致出错，如何设置一次插入失败全部回滚的操作？？？待解决 ：https://blog.csdn.net/weixin_29649815/article/details/114394636
+    # 已经解决 回滚问题 2021/12/26， 但是如果数据有问题  是否还得检查数据类型 以及数据范围的问题 判断是否回滚和接收？？？
+    # 解决导入数据重复问题 2021/12/26
+    # 解决数据导入与进度条问题，采用多线程的编写方式，以完美解决！！！2021/12/30
     @pyqtSlot()
     def on_act_import_data_triggered(self):
         file_path, *_ = QFileDialog.getOpenFileName(self, "选取文件", "", "excel Files (*.xlsx)")
@@ -140,12 +147,12 @@ class MainWindow(QMainWindow):
 
         thread = Thread_import_data_from_excel(data_df)
         thread.show_info_signal.connect(self.receive_showInfo)
-        thread.start() #开始线程
+        thread.start()  # 开始线程
         # 调用进度条窗口
         self.pb = ProgressBar()
         self.pb.show()
 
-        thread.exec() #保护子线程，否则主线程调用函数结束的时候子线程也被迫退出 一定得添加 不然就会报错，调试都调不出来的错误
+        thread.exec()  # 保护子线程，否则主线程调用函数结束的时候子线程也被迫退出 一定得添加 不然就会报错，调试都调不出来的错误
 
 
     # 单击【数据可视化】按钮
@@ -157,17 +164,50 @@ class MainWindow(QMainWindow):
         self.UI.tabWidget.setCurrentIndex(curindex)
         self.UI.tabWidget.setVisible(True)
 
-
     #  单击【参数设置】按钮
     @pyqtSlot()
     def on_actiongraph_triggered(self):
         window = ParamsSetWindow()
         window.setAttribute(Qt.WA_DeleteOnClose)
-        #window.setWindowFlag(Qt.Window, True)  # 指示该窗口是一个独立的窗口
+        # window.setWindowFlag(Qt.Window, True)  # 指示该窗口是一个独立的窗口
         curindex = self.UI.tabWidget.addTab(window, "参数设置")
         self.UI.tabWidget.setCurrentIndex(curindex)
         self.UI.tabWidget.setVisible(True)
 
+    # 下载导出高风险等级充电桩的数据文件 .txt (huang)
+    @pyqtSlot()
+    def on_act_output_triggered(self):
+        file_path = []
+        file_path = QFileDialog.getSaveFileName(self, "保存文件", "E:/", '', "Txt files(*.txt)")  # 这里的file_name是tuple型
+        lists = [[1, 2, 3, 4], [45, 23, 456, 23, 54, 23], [12, 23, 23, 345, 23, 12]]
+        if file_path[0] == "":
+             pass
+        else:
+            self.Save_list(lists, file_path[0])# 取tuple第一个元素即为地址
+
+    # 地图风险等级展示按钮
+    @pyqtSlot()
+    def on_act_map_triggered(self):
+        '''
+        charge_name = self.UI.comboBox_type_station.currentText()
+        sid = self.chargeMapper.find_sid_by_charge_name(charge_name)
+        # 先获得经纬度数据,是一个数组类型，可能需要将数据强转float
+        longitude_and_latitude = self.chargeMapper.find_longitude_and_latitude_by_charge_name(sid)
+        #获取该充电站下的pid以及对应的风险等级数据，返回一个字典类型
+        pid_and_risk_level_dict = self.chargeMapper.find_pid_risk_level_by_sid(sid)
+        '''
+        # todo:外弹框 显示地图就ok，我需要把经纬度数据填入
+
+        add = [[39.873079, 116.481913], [39.913904, 116.39728], [39.885987, 116.480132]]
+        level = [[10, 30, 50, 70, 90], [10, 10, 10, 10, 10], [90, 90, 90, 90, 90]]
+        data = visual_all(add, *level)
+
+        # mapDisplay = MapDisplay(data)
+        self.mapDisplay.trans_data(data)
+        # self.mapDisplay.setAttribute(Qt.WA_DeleteOnClose)  # 设置关闭删除实例  应该是这句话一直出现了bug
+        self.mapDisplay.setWindowFlag(Qt.Window, True)  # 指示该窗口是一个独立的窗口
+        # mapDisplay.exec()  #Qwidths没有模态窗口选项
+        self.mapDisplay.show()
 
     # 单击【用户管理】按钮
     @pyqtSlot()
@@ -206,10 +246,18 @@ class MainWindow(QMainWindow):
         elif showInfo.info == 0:
             message = "全部插入成功!!!"
             show_information_message(self, message)
+
+            x, values = self.get_plot_pie_row_and_line()
+            self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
         else:
             message = str(showInfo.info) + "行数据插入失败！请检查，然后重新导入"
             show_information_message(self, message)
-        self.pb.close() #数据不管导入成功与否，进度条页面都得关闭
+
+            x, values = self.get_plot_pie_row_and_line()
+            if x is None:
+                return
+            self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
+        self.pb.close()  # 数据不管导入成功与否，进度条页面都得关闭
 
     # 关闭分页请求函数
     @pyqtSlot(int)
@@ -229,9 +277,9 @@ class MainWindow(QMainWindow):
         else:
             grade = self.user.grade
 
-        if grade == Grade.Administrator.value: #管理员
+        if grade == Grade.Administrator.value:  # 管理员
             pass
-        elif grade == Grade.Normal_user.value: #普通用户
+        elif grade == Grade.Normal_user.value:  # 普通用户
             self.change_enabled([5], on=False)
 
     # 改变控件使能
@@ -301,6 +349,7 @@ class MainWindow(QMainWindow):
         self.UI.comboBox_type_time.clear()
         self.UI.comboBox_type_time.addItems(period_type)
     '''
+
     # 获取最初的数据模型  huang
     def get_initial_model(self):
         head = list(['充电站数量', '交流充电桩数量', '交流充电桩占比', '直流充电桩数量', '直流充电桩占比'])
@@ -345,10 +394,10 @@ class MainWindow(QMainWindow):
     # 绘制饼状图
     def plot_pie(self, x: list, values: list, type: str, grid=False):
         self.fig_line.axes.pie(values,
-                              labels=x,
-                              autopct='%1.1f%%',
-                              shadow=True,
-                              startangle=150)
+                               labels=x,
+                               autopct='%1.1f%%',
+                               shadow=True,
+                               startangle=150)
 
         self.fig_line.axes.set_title(type + "饼状图")
         if grid:
@@ -356,8 +405,45 @@ class MainWindow(QMainWindow):
         self.fig_line.axes.legend()
         self.fig_line.draw()
 
+    def get_plot_pie_row_and_line(self):
+
+        x, values = self.chargeMapper.find_plot_attr_by_sid_and_main_data()
+        """
+        # todo: 需要根据充电站还有充电桩确定，所以先得到充电站sid，再次得到充电桩pid，然后就是画出该充电桩的数据画图了
+        sid, pid, begin_time, end_time = self.get_plot_sid_and_pid_and_period()
+        if sid == -1:
+            return None, None, None
+        x = None
+        values = None
+        # todo:添加一个字典直接根据type获取SQL语句
+        map = {'安装时长': 'use_freq', '风险等级': 'risk_level', '环境温度': 'Measurement_error'}
+        table_line_attr = map[type_label]
+        if table_line_attr == 'use_freq':
+            x, values = self.chargeMapper.find_plot_attr_by_sid_and_pid_and_period(table_line_attr=table_line_attr,
+                                                                                   sid=sid, pid=pid,
+                                                                                   begin_time=begin_time,
+                                                                                   end_time=end_time)
+        elif table_line_attr == 'Measurement_error':
+            x, values = self.chargeMapper.find_error_by_sid_and_pid_and_period(table_line_attr=table_line_attr, sid=sid,
+                                                                               pid=pid) 
+        """
+        return x, values
+
+    def Save_list(self, list1, filename):
+        #file2 = open(filename + '.txt', 'w')
+        file2 = open(filename, 'w')  # 在保存对话框中选择保存在.txt格式
+        ################# 在写入列表元素 ################
+        for i in range(len(list1)):
+            for j in range(len(list1[i])):
+                file2.write(str(list1[i][j]))  # write函数不能写int类型的参数，所以使用str()转化
+                file2.write('\t')  # 相当于Tab一下，换一个单元格
+            file2.write('\n')  # 写完一行立马换行
+        file2.close()
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     win = MainWindow()
     win.show()
     sys.exit(app.exec_())
+#  表格 矩形图调字体；判断没有选择文件夹的时候下载数据有问题；下载数据的时候excel表格导出；字体整体变大；下载按钮放到状态栏；参数设置放到中间（放大）
+# （裴攀）判断方程是否唯一解 若多解直接丢掉数据（？丢不丢）；柱形图的问题；Q范围问题，都超出范围

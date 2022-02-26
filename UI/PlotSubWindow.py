@@ -42,14 +42,3 @@ class Ui_PlotSubWindow(object):
     def retranslateUi(self, PlotSubWindow):
         _translate = QtCore.QCoreApplication.translate
         PlotSubWindow.setWindowTitle(_translate("PlotSubWindow", "MainWindow"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    PlotSubWindow = QtWidgets.QMainWindow()
-    ui = Ui_PlotSubWindow()
-    ui.setupUi(PlotSubWindow)
-    PlotSubWindow.show()
-    sys.exit(app.exec_())
-

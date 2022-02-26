@@ -38,9 +38,13 @@ class Ui_ManageWindow(object):
 "\n"
 "padding:5px;\n"
 "min-height:20px;\n"
-"border-radius:15px;")
+"border-radius:15px;\n"
+"\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_save.setObjectName("btn_save")
         self.horizontalLayout.addWidget(self.btn_save)
+        spacerItem = QtWidgets.QSpacerItem(60, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
         self.btn_delete = QtWidgets.QPushButton(self.layoutWidget)
         self.btn_delete.setMinimumSize(QtCore.QSize(0, 32))
         self.btn_delete.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
@@ -49,20 +53,12 @@ class Ui_ManageWindow(object):
 "\n"
 "padding:5px;\n"
 "min-height:20px;\n"
-"border-radius:15px;")
+"border-radius:15px;\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_delete.setObjectName("btn_delete")
         self.horizontalLayout.addWidget(self.btn_delete)
-        self.btn_reset = QtWidgets.QPushButton(self.layoutWidget)
-        self.btn_reset.setMinimumSize(QtCore.QSize(0, 32))
-        self.btn_reset.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
-"border-style:none;\n"
-"border:1px solid #3f3f3f; \n"
-"\n"
-"padding:5px;\n"
-"min-height:20px;\n"
-"border-radius:15px;")
-        self.btn_reset.setObjectName("btn_reset")
-        self.horizontalLayout.addWidget(self.btn_reset)
+        spacerItem1 = QtWidgets.QSpacerItem(60, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem1)
         self.btn_quit = QtWidgets.QPushButton(self.layoutWidget)
         self.btn_quit.setMinimumSize(QtCore.QSize(0, 32))
         self.btn_quit.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
@@ -71,19 +67,20 @@ class Ui_ManageWindow(object):
 "\n"
 "padding:5px;\n"
 "min-height:20px;\n"
-"border-radius:15px;")
+"border-radius:15px;\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_quit.setObjectName("btn_quit")
         self.horizontalLayout.addWidget(self.btn_quit)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.tableView = QtWidgets.QTableView(self.layoutWidget)
-        #self.tableView.setStyleSheet("background-image: url(:/image/back.jpg);")
+        self.tableView.setStyleSheet("background-image: url(:/image/back.jpg);")
         self.tableView.setObjectName("tableView")
         self.verticalLayout.addWidget(self.tableView)
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.SpanningRole, self.splitter)
         self.label_8 = QtWidgets.QLabel(self.centralwidget)
         self.label_8.setMinimumSize(QtCore.QSize(0, 85))
-        self.label_8.setMaximumSize(QtCore.QSize(16777215, 100))
-        self.label_8.setPixmap(QtGui.QPixmap("UI/image/edge(user).png"))
+        self.label_8.setMaximumSize(QtCore.QSize(16777215, 85))
+        self.label_8.setStyleSheet("background-image: url(:/image/edge.jpeg);")
         self.label_8.setAlignment(QtCore.Qt.AlignCenter)
         self.label_8.setObjectName("label_8")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.label_8)
@@ -100,10 +97,10 @@ class Ui_ManageWindow(object):
         ManageWindow.setWindowTitle(_translate("ManageWindow", "MainWindow"))
         self.btn_save.setText(_translate("ManageWindow", "保存"))
         self.btn_delete.setText(_translate("ManageWindow", "删除"))
-        self.btn_reset.setText(_translate("ManageWindow", "重置"))
         self.btn_quit.setText(_translate("ManageWindow", "退出"))
         #self.label_8.setText(_translate("ManageWindow", "<html><head/><body><p><span style=\" font-size:40px; font-weight:600; color:#ffffff; background-color:transparent;\">北京市计量检测科学研究院用户管理</span></p></body></html>"))
 import main_rc
+
 
 if __name__ == "__main__":
     import sys
