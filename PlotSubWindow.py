@@ -1,10 +1,21 @@
+from Common import get_plot_type, get_db_connection, close_db, get_logger, show_information_message, execute_inquiry, \
+    get_row_model, init_tableview
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QGridLayout
+from PyQt5.QtWidgets import QMainWindow, QApplication, QGridLayout, QHeaderView
+
 from matplotlib.backends.backend_qt5 import NavigationToolbar2QT as NavigationToolbar
 
-from UI.Ui_PlotSubWindow import Ui_PlotSubWindow
-from Util.Plot import Myplot2D
+import seaborn as sns
 
+import pandas as pd
+
+from PyQt5.QtCore import pyqtSlot, QItemSelectionModel, QModelIndex
+
+from PyQt5.QtGui import QStandardItem, QStandardItemModel
+
+from UI.Ui_PlotSubWindow import Ui_PlotSubWindow
+
+from Util.Plot import Myplot2D
 
 #这块需要信号的方式传递横纵坐标，还有折线图与饼状图的选择#
 
@@ -24,17 +35,33 @@ class PlotSubWindow(QMainWindow):
         #self.plot_type = None
 
         self.init_plot_frame()
+        self.plt_multi_colums()
+        #self.plot_line_or_pie(plot_type, row, line, type_label)
 
-        self.plot_line_or_pie(plot_type, row, line, type_label)
+        ##################################加tableView功能######################
+        self.init_model = None
+        init_tableview(self.UI.tableView, hor_size=50, ver_size=50)
+        self.get_initial_model()
+        data_model = self.init_model
+        selection_model = QItemSelectionModel(data_model)
+
+        self.UI.tableView.setModel(data_model)
+        self.UI.tableView.setSelectionModel(selection_model)
+        # 设置表格充满这个布局QHeaderView
+        self.UI.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # 所有列自动拉伸，充满界面
+
+        #####################################################################
 
     # 初始化画图区域
+
     def init_plot_frame(self):
         self.fig_line = Myplot2D()
-        tool = NavigationToolbar(self.fig_line, self.UI.frame_2)
+        tool = NavigationToolbar(self.fig_line, self.UI.frame_5)
         layout = QGridLayout()
         layout.addWidget(self.fig_line)
         layout.addWidget(tool)
         self.UI.frame_5.setLayout(layout)
+
 
     #根据横纵列表以及画图种类进行画图
     def plot_line_or_pie(self, plot_type: int, row: list, line: list, type_label: str):
@@ -107,6 +134,31 @@ class PlotSubWindow(QMainWindow):
         self.fig_line.axes.legend()
         self.fig_line.draw()
 
+    # 绘制柱状图，画出那种高、中、低效果 主要
+    def plt_multi_colums(self, row=None, line=None):
+        episode = [1, 2, 3]
+        reward = [5, 8, 5]
+        reward2 = [4, 6, 6]
+        reward3 = [6, 4, 7]
+
+        RL1_date = pd.DataFrame({'iteration': episode, 'reward': reward, 'algo': 'DRL1', 'palette': 'r'})
+        RL2_data = pd.DataFrame({'iteration': episode, 'reward': reward2, 'algo': 'DRL2', 'palette': 'b'})
+        RL3_data = pd.DataFrame({'iteration': episode, 'reward': reward3, 'algo': 'DRL3', 'palette': 'g'})
+        frames = [RL1_date, RL2_data, RL3_data]
+        #pd.concat(frames).plot(kind="bar", x="iteration", y="reward", ax=self.fig_line.axes)
+        dataset = pd.concat(frames)
+
+        #  palette：调色板
+        ax = sns.catplot(x="iteration", y="reward", palette=['r', 'b', 'g'], hue="algo", ci="sd", kind="bar", ax=self.fig_line.axes,
+                         data=dataset, legend=True)
+
+        sns.despine(top=False, right=False, left=False, bottom=False)
+        ax.set(xlabel='Iteration', ylabel='Cumulative reward')
+
+        self.fig_line.axes.legend(title='{$\it{ρ}$1, $\it{ρ}$2}', loc='lower right', labels=["1, -0.8", "1, -1", "1, -1.3"])
+        #plt.show()
+        self.fig_line.draw_idle()
+
     # 绘制饼状图
     def plot_pie(self, x: list, values: list, type: str, grid=False):
         self.fig_line.axes.pie(values,
@@ -120,6 +172,33 @@ class PlotSubWindow(QMainWindow):
             self.fig_line.axes.grid(True)
         self.fig_line.axes.legend()
         self.fig_line.draw()
+
+    # 添加表格到tableView区 2022/2/27
+
+    # 获取最初的数据模型
+    def get_initial_model(self):
+        head = list(['安装时长', '最高（风险等级指数）', '平均（...）', '最低（...）'])
+        model = get_row_model(2, header=head)
+        #all_name, all_pid = self.chargeMapper.find_chargeName_and_pidCount()
+        row = list([])
+        line = list([])
+        data = [row, line]
+        '''
+        for i in range(0, len(all_name)):
+            data[i].append(all_name[i])
+            data[i].append(all_pid[i])
+        '''
+        self.init_model = self.add_data(model, data)
+
+    # 向模型添加数据
+    def add_data(self, model: QStandardItemModel, data) -> QStandardItemModel:
+        for i in data:
+            row = []
+            for j in range(len(i)):
+                item = QStandardItem(str(i[j]))
+                row.append(item)
+            model.appendRow(row)
+        return model
 
 
 if __name__ == "__main__":

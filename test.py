@@ -1,9 +1,74 @@
-if __name__== '__main__':
-    data = (('d', 3), ('b', 3), ('c', 3))
-    values = list([])
-    x = list([])
-    for i in range(0, len(data)):
-        x.append(data[i][0])
-        # x.append(str(data[i][1]) + "-" + str(data[i][2])) #这样写法 横坐标填满了，不好看
-        values.append(data[i][1])  # 需要把x变成充电区域名称
-    print(x, values)
+from PyQt5 import QtGui, QtCore
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
+from PyQt5.QtWidgets import QMainWindow, QApplication, QGridLayout, QWidget, QSizePolicy, QComboBox, QLabel
+import sys
+import seaborn as sns
+
+tips = sns.load_dataset("tips")
+
+class MainWindow(QMainWindow):
+    send_fig = QtCore.pyqtSignal(str)
+
+    def __init__(self):
+        super(MainWindow, self).__init__()
+
+        self.main_widget = QWidget(self)
+
+        self.fig = Figure()
+        self.ax1 = self.fig.add_subplot(121)
+        self.ax2 = self.fig.add_subplot(122, sharex=self.ax1, sharey=self.ax1)
+        self.axes=[self.ax1, self.ax2]
+        self.canvas = FigureCanvas(self.fig)
+
+        self.canvas.setSizePolicy(QSizePolicy.Expanding,
+                                  QSizePolicy.Expanding)
+        self.canvas.updateGeometry()
+
+        self.dropdown1 = QComboBox()
+        self.dropdown1.addItems(["sex", "time", "smoker"])
+        self.dropdown2 = QComboBox()
+        self.dropdown2.addItems(["sex", "time", "smoker", "day"])
+        self.dropdown2.setCurrentIndex(2)
+
+        self.dropdown1.currentIndexChanged.connect(self.update)
+        self.dropdown2.currentIndexChanged.connect(self.update)
+        self.label = QLabel("A plot:")
+
+        self.layout = QGridLayout(self.main_widget)
+        self.layout.addWidget(QLabel("Select category for subplots"))
+        self.layout.addWidget(self.dropdown1)
+        self.layout.addWidget(QLabel("Select category for markers"))
+        self.layout.addWidget(self.dropdown2)
+
+        self.layout.addWidget(self.canvas)
+
+        self.setCentralWidget(self.main_widget)
+        self.show()
+        self.update()
+
+    def update(self):
+
+        colors=["b", "r", "g", "y", "k", "c"]
+        self.ax1.clear()
+        self.ax2.clear()
+        cat1 = self.dropdown1.currentText()
+        cat2 = self.dropdown2.currentText()
+        #print cat1, cat2
+
+        for i, value in enumerate(tips[cat1].unique().get_values()):
+            #print "value ", value
+            df = tips.loc[tips[cat1] == value]
+            self.axes[i].set_title(cat1 + ": " + value)
+            for j, value2 in enumerate(df[cat2].unique().get_values()):
+                #print "value2 ", value2
+                df.loc[ tips[cat2] == value2 ].plot(kind="scatter", x="total_bill", y="tip",
+                                                ax=self.axes[i], c=colors[j], label=value2)
+        self.axes[i].legend()
+        self.fig.canvas.draw_idle()
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    win = MainWindow()
+    sys.exit(app.exec_())

@@ -188,7 +188,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
             self.connection.commit()
         except Exception as e:
             self.connection.rollback()
-            print("这是一个" + e + "错误!")
+            print("这是一个" + str(e) + "错误!")
         finally:
             # 关闭数据库连接和钩子
             close_db(self.connection, self.cursor)
