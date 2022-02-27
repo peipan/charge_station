@@ -22,8 +22,8 @@ class Ui_LogInWindow(object):
         self.gridLayout.setObjectName("gridLayout")
         self.label = QtWidgets.QLabel(LogInWindow)
         self.label.setMaximumSize(QtCore.QSize(16777215, 100))
-        self.label.setObjectName("label")
         self.label.setPixmap(QtGui.QPixmap("UI/image/edge(login).png"))
+        self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 2, 0, 1, 1)
         spacerItem = QtWidgets.QSpacerItem(18, 31, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.gridLayout.addItem(spacerItem, 5, 0, 1, 1)
@@ -36,7 +36,8 @@ class Ui_LogInWindow(object):
 "\n"
 "padding:5px;\n"
 "min-height:20px;\n"
-"border-radius:15px;")
+"border-radius:15px;\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_confirm.setObjectName("btn_confirm")
         self.horizontalLayout.addWidget(self.btn_confirm)
         self.btn_register = QtWidgets.QPushButton(LogInWindow)
@@ -46,7 +47,8 @@ class Ui_LogInWindow(object):
 "\n"
 "padding:5px;\n"
 "min-height:20px;\n"
-"border-radius:15px;")
+"border-radius:15px;\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_register.setObjectName("btn_register")
         self.horizontalLayout.addWidget(self.btn_register)
         self.btn_cancel = QtWidgets.QPushButton(LogInWindow)
@@ -56,7 +58,8 @@ class Ui_LogInWindow(object):
 "\n"
 "padding:5px;\n"
 "min-height:20px;\n"
-"border-radius:15px;")
+"border-radius:15px;\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_cancel.setObjectName("btn_cancel")
         self.horizontalLayout.addWidget(self.btn_cancel)
         self.gridLayout.addLayout(self.horizontalLayout, 6, 0, 1, 1)
@@ -65,8 +68,6 @@ class Ui_LogInWindow(object):
         self.label_9 = QtWidgets.QLabel(LogInWindow)
         self.label_9.setMinimumSize(QtCore.QSize(75, 75))
         self.label_9.setMaximumSize(QtCore.QSize(75, 75))
-        self.label_9.setStyleSheet("")
-        self.label_9.setText("")
         self.label_9.setPixmap(QtGui.QPixmap("UI/image/main_title.jpg"))
         self.label_9.setObjectName("label_9")
         self.horizontalLayout_4.addWidget(self.label_9)
@@ -78,12 +79,14 @@ class Ui_LogInWindow(object):
         self.label_2 = QtWidgets.QLabel(LogInWindow)
         self.label_2.setMinimumSize(QtCore.QSize(60, 35))
         self.label_2.setMaximumSize(QtCore.QSize(60, 16777215))
+        self.label_2.setStyleSheet("font: 75 12pt \"微软雅黑\";")
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_2.addWidget(self.label_2)
         self.user_name_lineEdit = QtWidgets.QLineEdit(LogInWindow)
         self.user_name_lineEdit.setMinimumSize(QtCore.QSize(400, 35))
         self.user_name_lineEdit.setMaximumSize(QtCore.QSize(400, 35))
-        self.user_name_lineEdit.setStyleSheet("border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));")
+        self.user_name_lineEdit.setStyleSheet("border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"font: 75 12pt \"微软雅黑\";")
         self.user_name_lineEdit.setAlignment(QtCore.Qt.AlignCenter)
         self.user_name_lineEdit.setClearButtonEnabled(True)
         self.user_name_lineEdit.setObjectName("user_name_lineEdit")
@@ -94,6 +97,7 @@ class Ui_LogInWindow(object):
         self.label_3 = QtWidgets.QLabel(LogInWindow)
         self.label_3.setMinimumSize(QtCore.QSize(60, 35))
         self.label_3.setMaximumSize(QtCore.QSize(60, 16777215))
+        self.label_3.setStyleSheet("font: 75 12pt \"微软雅黑\";")
         self.label_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_3.addWidget(self.label_3)
@@ -101,6 +105,7 @@ class Ui_LogInWindow(object):
         self.user_password_lineEdit.setMinimumSize(QtCore.QSize(400, 35))
         self.user_password_lineEdit.setMaximumSize(QtCore.QSize(400, 35))
         self.user_password_lineEdit.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.user_password_lineEdit.setStyleSheet("font: 75 12pt \"微软雅黑\";")
         self.user_password_lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
         self.user_password_lineEdit.setAlignment(QtCore.Qt.AlignCenter)
         self.user_password_lineEdit.setClearButtonEnabled(True)
@@ -120,7 +125,7 @@ class Ui_LogInWindow(object):
     def retranslateUi(self, LogInWindow):
         _translate = QtCore.QCoreApplication.translate
         LogInWindow.setWindowTitle(_translate("LogInWindow", "登录"))
-
+        #self.label.setText(_translate("LogInWindow", "<html><head/><body><p><img src=\":/image/edge(login).png\"/></p></body></html>"))
         self.btn_confirm.setText(_translate("LogInWindow", "确认"))
         self.btn_register.setText(_translate("LogInWindow", "注册用户"))
         self.btn_cancel.setText(_translate("LogInWindow", "取消"))
