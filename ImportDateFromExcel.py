@@ -21,11 +21,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
         self.import_data_from_excel(self.data_df)
 
     def import_data_from_excel(self, data_df):
-        #connection, cursor = get_db_connection()
         data = []
-        station_name = ''
-        begin_time = '' #本次测量开始时间
-        end_time = '' #本次测量结束时间
         i = 0
         # 开启事务
         self.connection.begin()
@@ -119,6 +115,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
 
                     carrieroperator = str(record[12])  # 运营商
                     start_time = str(record[0])  # 开始时间
+                    record_begin_time = str(record[0]) # 开始时间
                     sql = "insert into table_charge_pile (sid, pid, model_type, factory_num, nomial_level, install_time_span, carrieroperator, manufacturer, start_time) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
                     self.cursor.execute(sql, list([sid, pid_count, model_type, factory_num, nomial_level, install_time_span, carrieroperator, manufacturer, start_time]))
                 else:
@@ -179,12 +176,13 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
         try:
             self.connection.begin()
             #todo: 根据测量误差，计算出风险等级指数，然后一起推送至数据库
-            pid = 0 # 给每个充电桩推送测量误差，
+            pid = 1 # 给每个充电桩推送测量误差，
             for measure_error in list(result):
                 measure_error_str = str(round(measure_error, 2))  # 只保留两位小数
                 # insert不能插入一个属性， 必须插入多个属性， 用update语句更新一个属性的值 代表插入
-                sql = "update table_charge_pile set measurement_error = %s where begin_time = %s and sid = %s and pid = %s"
+                sql = "update table_charge_pile set measurement_error = %s where start_time = %s and sid = %s and pid = %s"
                 self.cursor.execute(sql, [measure_error_str, record_begin_time, sid, pid])
+                pid = pid + 1
             self.connection.commit()
         except Exception as e:
             self.connection.rollback()

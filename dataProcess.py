@@ -44,17 +44,12 @@ class DataProcess():
         :param end_time: 字符串类型，指定终止时间    end_time - start_time = 时间段
         :return: 充电站中所有充电桩的电能计量数据  数组格式[[E11, E12, ..., E1n],[E21, E22, ..., E2n], ...]
         '''
-
-
-        #打开数据库连接
-        #connection, cursor = get_db_connection()
         '''
         start_time = start_time.split("\r")[0]  # '2021-10-11 20:30:10\r\n' 一般字符串正确输出就是这个形式，所以需要对‘\r’进行分割取第一块0
         end_time = end_time.split("\r")[0]
         dt_start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
         dt_end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
         '''
-
         ######################求list_B#############################
         #根据充电站名称查询sid
         sid = self.chargeMapper.find_sid_by_charge_name(station_name)
@@ -117,29 +112,48 @@ class DataProcess():
         #list = np.linalg.solve(A, B)
         return list, True
 
+
+
     #计算充电桩n的风险评估量化数据，将整体计量性能分为“高、较高、较低、低“四种风险等级
     #weight_values：代表[k1, k2, k3,..., km]
-    def compute_risk_level(self, sid, pid, weight_values):
+    #返回：每个充电桩的风险等级指数，返回一个列表
+    def compute_risk_level(self, sid, weight_values=None):
         #根据pid和sid从数据库中查找误差数据、充电桩安装时长、使用频率、环境温度、环境湿度、运营商维护次数等等
-        data = self.chargeMapper.find_risk_factors_by_pid_and_sid(sid, pid)
+        data = self.chargeMapper.find_risk_factors_by_pid_and_sid(sid)
+        if data is None:
+            return
         Q = 0
-        for i in range(0, len(data)):
-            Q = data[i] * weight_values[i]
-        return Q
+        list_Q = list([])
+        if weight_values is None:
+            for i in range(0, len(data)):
+                error = float(data[i][0])
+                level = data[i][1]
+                install_time = data[i][2]
+                use_freq = float(data[i][3])
+                env_temper = float(data[i][4])
+                Q = (0.9195 * (error / level) * (error / level) + 0.1195) * 0.8 + \
+                    (0.0024 * (install_time * install_time) + 0.0745 * install_time + 0.0203) * 0.04 + \
+                    (0.4348 * (use_freq * use_freq) + 0.0715 * use_freq + 0.0321) * 0.01 + \
+                    (-0.0002 * (env_temper) * (env_temper) + 0.0114 * env_temper + 0.0667)
+                list_Q.append(Q*100)
+        else:  # 这种情况作为手动输入了权值的情况，待做
+            Q = 0
+        return list_Q
 
 if __name__ == "__main__":
     dataProcess = DataProcess()
-    list_A, list_B = dataProcess.compute_energy_matrix("星星充电", "2021-10-02 09:02:02", 7)
+    #list_A, list_B = dataProcess.compute_energy_matrix("星星充电", "2021-10-02 09:02:02", 7)
     #list_V = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    result = dataProcess.compute_matrix(list_A, list_B)
+    #result = dataProcess.compute_matrix(list_A, list_B)
     #print(result)
-
+    result = dataProcess.compute_risk_level(sid=21)
+    print(result)
 
     list_A = [[4, 3], [-5, 9]]
     list_B = [20, 26]
-    result, isOnlyJie = dataProcess.compute_matrix(list_A, list_B)
-    print(result)
-    print(isOnlyJie)
+    #result, isOnlyJie = dataProcess.compute_matrix(list_A, list_B)
+    #print(result)
+    #print(isOnlyJie)
     #print(sum(list_B))
 
 
