@@ -179,12 +179,31 @@ class ChargeMapper():
     ###########################################矩阵计算##############################################
 
 
-    #根据pid和sid从数据库中查找误差数据、充电桩安装时长、使用频率、环境温度、环境湿度、运营商维护次数等等, 返回一个一维数组   注意：目前数据库中差一个环境湿度的列..2021/12/5
-    def find_risk_factors_by_pid_and_sid(self, sid, pid):
-        sql = "select measurement_error, use_freq, env_temper, maintain_freq from table_charge_pile where sid = %s and pid = %s"
+    #根据pid和sid从数据库中查找误差数据、充电桩安装时长、使用频率、环境温度等等, 返回一个多维数组，有多少充电桩，就有多少维 updated
+    def find_risk_factors_by_pid_and_sid(self, sid):
+        sql = """select 
+                    d1.measurement_error, 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid"""
         data = []
-        *_, data = execute_inquiry(sql, [sid, pid], connection=self.connection, cursor=self.cursor)
-        return data[0]
+        *_, data = execute_inquiry(sql, [sid, sid, sid], connection=self.connection, cursor=self.cursor)
+        return data
 
 
     ##########################################图形展示页面与数据库交互的代码 2022/02/21 peipan##################################################
