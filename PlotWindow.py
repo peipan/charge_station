@@ -388,7 +388,7 @@ class PlotWindow(QMainWindow):
 
         self.init_model = self.add_data(model, data)
 
-    # 向模型添加数据
+"""    # 向模型添加数据
     def add_data(self, model: QStandardItemModel, data) -> QStandardItemModel:
         for i in data:
             row = []
@@ -397,17 +397,7 @@ class PlotWindow(QMainWindow):
                 row.append(item)
             model.appendRow(row)
         return model
-
-    # 保存列表到文件中
-    def Save_list(self, list1, filename):
-        # file2 = open(filename + '.txt', 'w')
-        file2 = open(filename, 'w')  # 在保存对话框中选择保存在.txt格式
-        for i in range(len(list1)):
-            for j in range(len(list1[i])):
-                file2.write(str(list1[i][j]))  # write函数不能写int类型的参数，所以使用str()转化
-                file2.write('\t')  # 相当于Tab一下，换一个单元格
-            file2.write('\n')  # 写完一行立马换行
-        file2.close()
+"""
 
 
 if __name__ == "__main__":

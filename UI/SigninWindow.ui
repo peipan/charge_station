@@ -6,44 +6,44 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>707</width>
-    <height>565</height>
+    <width>724</width>
+    <height>539</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" colspan="2">
-    <widget class="QLabel" name="label_8">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>685</width>
-       <height>129</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
+  <layout class="QFormLayout" name="formLayout">
+   <item row="1" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetFixedSize</enum>
+     <property name="leftMargin">
+      <number>22</number>
      </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <spacer name="verticalSpacer_7">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>679</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
      <item>
       <widget class="QSplitter" name="name">
        <property name="orientation">
@@ -52,13 +52,13 @@
        <widget class="QLabel" name="label">
         <property name="minimumSize">
          <size>
-          <width>47</width>
+          <width>0</width>
           <height>19</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>16777215</width>
+          <width>197</width>
           <height>16777215</height>
          </size>
         </property>
@@ -122,7 +122,7 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>20</width>
+         <width>676</width>
          <height>20</height>
         </size>
        </property>
@@ -136,8 +136,14 @@
        <widget class="QLabel" name="label_5">
         <property name="minimumSize">
          <size>
-          <width>47</width>
+          <width>0</width>
           <height>19</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>197</width>
+          <height>16777215</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -156,7 +162,7 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>0</width>
+          <width>300</width>
           <height>0</height>
          </size>
         </property>
@@ -197,7 +203,7 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>20</width>
+         <width>676</width>
          <height>20</height>
         </size>
        </property>
@@ -211,8 +217,14 @@
        <widget class="QLabel" name="label_2">
         <property name="minimumSize">
          <size>
-          <width>47</width>
+          <width>0</width>
           <height>19</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>197</width>
+          <height>16777215</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -231,7 +243,7 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>0</width>
+          <width>300</width>
           <height>0</height>
          </size>
         </property>
@@ -266,7 +278,7 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>20</width>
+         <width>676</width>
          <height>20</height>
         </size>
        </property>
@@ -280,13 +292,13 @@
        <widget class="QLabel" name="label_4">
         <property name="minimumSize">
          <size>
-          <width>0</width>
+          <width>197</width>
           <height>20</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>16777215</width>
+          <width>197</width>
           <height>16777215</height>
          </size>
         </property>
@@ -342,7 +354,7 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>20</width>
+         <width>676</width>
          <height>20</height>
         </size>
        </property>
@@ -356,8 +368,14 @@
        <widget class="QLabel" name="label_7">
         <property name="minimumSize">
          <size>
-          <width>47</width>
+          <width>0</width>
           <height>19</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>197</width>
+          <height>16777215</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -411,7 +429,7 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>20</width>
+         <width>676</width>
          <height>20</height>
         </size>
        </property>
@@ -431,13 +449,13 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>99</width>
+          <width>0</width>
           <height>19</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>16777215</width>
+          <width>197</width>
           <height>16777215</height>
          </size>
         </property>
@@ -492,7 +510,7 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>20</width>
+         <width>676</width>
          <height>20</height>
         </size>
        </property>
@@ -504,6 +522,12 @@
         <enum>Qt::Horizontal</enum>
        </property>
        <widget class="QPushButton" name="btn_confirm_2">
+        <property name="maximumSize">
+         <size>
+          <width>300</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));
 border-style:none;
@@ -519,6 +543,12 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
         </property>
        </widget>
        <widget class="QPushButton" name="btn_cancel">
+        <property name="maximumSize">
+         <size>
+          <width>300</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));
 border-style:none;
@@ -537,43 +567,30 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
      </item>
     </layout>
    </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_9">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label_8">
      <property name="minimumSize">
       <size>
-       <width>75</width>
-       <height>75</height>
+       <width>0</width>
+       <height>0</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>75</width>
-       <height>75</height>
+       <width>685</width>
+       <height>129</height>
       </size>
      </property>
      <property name="styleSheet">
       <string notr="true"/>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <spacer name="verticalSpacer_7">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>

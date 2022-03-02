@@ -75,8 +75,8 @@
          <property name="font">
           <font>
            <family>Adobe 黑体 Std R</family>
-           <pointsize>17</pointsize>
-           <weight>50</weight>
+           <pointsize>12</pointsize>
+           <weight>9</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -85,9 +85,10 @@
           <enum>Qt::LeftToRight</enum>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 17pt &quot;Adobe 黑体 Std R&quot;;
+          <string notr="true">font: 75 12pt &quot;Adobe 黑体 Std R&quot;;
 
-color:#B4CDCD;</string>
+color:#B4CDCD;
+</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -96,7 +97,7 @@ color:#B4CDCD;</string>
           <number>3</number>
          </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; font-style:italic; color:#145b7d;&quot;&gt;-------参量待选状态---------&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic; color:#145b7d;&quot;&gt;-----------参量待选状态-------------&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -121,6 +122,12 @@ color:#B4CDCD;</string>
        </item>
        <item>
         <widget class="QPushButton" name="btn_factory">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -129,8 +136,8 @@ color:#B4CDCD;</string>
          </property>
          <property name="maximumSize">
           <size>
-           <width>16777215</width>
-           <height>25</height>
+           <width>300</width>
+           <height>16777215</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -140,7 +147,9 @@ border:1px solid #3f3f3f;
 
 padding:5px;
 min-height:20px;
-border-radius:15px;</string>
+border-radius:15px;
+
+font: 75 12pt &quot;微软雅黑&quot;;</string>
          </property>
          <property name="text">
           <string>生产厂家</string>
@@ -171,6 +180,12 @@ border-radius:15px;</string>
            <height>32</height>
           </size>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));
 border-style:none;
@@ -178,7 +193,8 @@ border:1px solid #3f3f3f;
 
 padding:5px;
 min-height:20px;
-border-radius:15px;</string>
+border-radius:15px;
+font: 75 12pt &quot;微软雅黑&quot;;</string>
          </property>
          <property name="text">
           <string>使用频率</string>
@@ -203,6 +219,12 @@ border-radius:15px;</string>
        </item>
        <item>
         <widget class="QPushButton" name="btn_tem">
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));
 border-style:none;
@@ -210,7 +232,8 @@ border:1px solid #3f3f3f;
 
 padding:5px;
 min-height:20px;
-border-radius:15px;</string>
+border-radius:15px;
+font: 75 12pt &quot;微软雅黑&quot;;</string>
          </property>
          <property name="text">
           <string>环境温度</string>
@@ -235,6 +258,12 @@ border-radius:15px;</string>
        </item>
        <item>
         <widget class="QPushButton" name="btn_temp">
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));
 border-style:none;
@@ -242,7 +271,8 @@ border:1px solid #3f3f3f;
 
 padding:5px;
 min-height:20px;
-border-radius:15px;</string>
+border-radius:15px;
+font: 75 12pt &quot;微软雅黑&quot;;</string>
          </property>
          <property name="text">
           <string>运营商</string>
@@ -267,6 +297,12 @@ border-radius:15px;</string>
        </item>
        <item>
         <widget class="QPushButton" name="btn_time">
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));
 border-style:none;
@@ -274,7 +310,8 @@ border:1px solid #3f3f3f;
 
 padding:5px;
 min-height:20px;
-border-radius:15px;</string>
+border-radius:15px;
+font: 75 12pt &quot;微软雅黑&quot;;</string>
          </property>
          <property name="text">
           <string>安装时长</string>
@@ -299,6 +336,12 @@ border-radius:15px;</string>
        </item>
        <item>
         <widget class="QPushButton" name="btn_other">
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));
 border-style:none;
@@ -306,7 +349,8 @@ border:1px solid #3f3f3f;
 
 padding:5px;
 min-height:20px;
-border-radius:15px;</string>
+border-radius:15px;
+font: 75 12pt &quot;微软雅黑&quot;;</string>
          </property>
          <property name="text">
           <string>其他因素</string>

@@ -48,15 +48,16 @@ class Ui_PlotWindow(object):
         self.label_2.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setFamily("Adobe 黑体 Std R")
-        font.setPointSize(17)
+        font.setPointSize(12)
         font.setBold(False)
         font.setItalic(False)
-        font.setWeight(50)
+        font.setWeight(9)
         self.label_2.setFont(font)
         self.label_2.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_2.setStyleSheet("font: 17pt \"Adobe 黑体 Std R\";\n"
+        self.label_2.setStyleSheet("font: 75 12pt \"Adobe 黑体 Std R\";\n"
 "\n"
-"color:#B4CDCD;")
+"color:#B4CDCD;\n"
+"")
         self.label_2.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.label_2.setLineWidth(3)
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
@@ -65,76 +66,93 @@ class Ui_PlotWindow(object):
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem)
         self.btn_factory = QtWidgets.QPushButton(self.frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_factory.sizePolicy().hasHeightForWidth())
+        self.btn_factory.setSizePolicy(sizePolicy)
         self.btn_factory.setMinimumSize(QtCore.QSize(0, 32))
-        self.btn_factory.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.btn_factory.setMaximumSize(QtCore.QSize(300, 16777215))
         self.btn_factory.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
 "border-style:none;\n"
 "border:1px solid #3f3f3f; \n"
 "\n"
 "padding:5px;\n"
 "min-height:20px;\n"
-"border-radius:15px;")
+"border-radius:15px;\n"
+"\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_factory.setObjectName("btn_factory")
         self.verticalLayout.addWidget(self.btn_factory)
         spacerItem1 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem1)
         self.btn_frequency = QtWidgets.QPushButton(self.frame)
         self.btn_frequency.setMinimumSize(QtCore.QSize(0, 32))
+        self.btn_frequency.setMaximumSize(QtCore.QSize(300, 16777215))
         self.btn_frequency.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
 "border-style:none;\n"
 "border:1px solid #3f3f3f; \n"
 "\n"
 "padding:5px;\n"
 "min-height:20px;\n"
-"border-radius:15px;")
+"border-radius:15px;\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_frequency.setObjectName("btn_frequency")
         self.verticalLayout.addWidget(self.btn_frequency)
         spacerItem2 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem2)
         self.btn_tem = QtWidgets.QPushButton(self.frame)
+        self.btn_tem.setMaximumSize(QtCore.QSize(300, 16777215))
         self.btn_tem.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
 "border-style:none;\n"
 "border:1px solid #3f3f3f; \n"
 "\n"
 "padding:5px;\n"
 "min-height:20px;\n"
-"border-radius:15px;")
+"border-radius:15px;\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_tem.setObjectName("btn_tem")
         self.verticalLayout.addWidget(self.btn_tem)
         spacerItem3 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem3)
         self.btn_temp = QtWidgets.QPushButton(self.frame)
+        self.btn_temp.setMaximumSize(QtCore.QSize(300, 16777215))
         self.btn_temp.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
 "border-style:none;\n"
 "border:1px solid #3f3f3f; \n"
 "\n"
 "padding:5px;\n"
 "min-height:20px;\n"
-"border-radius:15px;")
+"border-radius:15px;\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_temp.setObjectName("btn_temp")
         self.verticalLayout.addWidget(self.btn_temp)
         spacerItem4 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem4)
         self.btn_time = QtWidgets.QPushButton(self.frame)
+        self.btn_time.setMaximumSize(QtCore.QSize(300, 16777215))
         self.btn_time.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
 "border-style:none;\n"
 "border:1px solid #3f3f3f; \n"
 "\n"
 "padding:5px;\n"
 "min-height:20px;\n"
-"border-radius:15px;")
+"border-radius:15px;\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_time.setObjectName("btn_time")
         self.verticalLayout.addWidget(self.btn_time)
         spacerItem5 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem5)
         self.btn_other = QtWidgets.QPushButton(self.frame)
+        self.btn_other.setMaximumSize(QtCore.QSize(300, 16777215))
         self.btn_other.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
 "border-style:none;\n"
 "border:1px solid #3f3f3f; \n"
 "\n"
 "padding:5px;\n"
 "min-height:20px;\n"
-"border-radius:15px;")
+"border-radius:15px;\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_other.setObjectName("btn_other")
         self.verticalLayout.addWidget(self.btn_other)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -192,7 +210,7 @@ class Ui_PlotWindow(object):
     def retranslateUi(self, PlotWindow):
         _translate = QtCore.QCoreApplication.translate
         PlotWindow.setWindowTitle(_translate("PlotWindow", "MainWindow"))
-        self.label_2.setText(_translate("PlotWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; font-weight:600; font-style:italic; color:#145b7d;\">-------参量待选状态---------</span></p></body></html>"))
+        self.label_2.setText(_translate("PlotWindow", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600; font-style:italic; color:#145b7d;\">-----------参量待选状态-------------</span></p></body></html>"))
         self.btn_factory.setText(_translate("PlotWindow", "生产厂家"))
         self.btn_frequency.setText(_translate("PlotWindow", "使用频率"))
         self.btn_tem.setText(_translate("PlotWindow", "环境温度"))
