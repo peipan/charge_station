@@ -1,5 +1,6 @@
 
 import matplotlib.pyplot as plt
+from matplotlib import cbook
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 

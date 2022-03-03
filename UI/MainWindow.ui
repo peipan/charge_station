@@ -50,7 +50,7 @@
           </property>
           <property name="maximumSize">
            <size>
-            <width>300</width>
+            <width>16777215</width>
             <height>16777215</height>
            </size>
           </property>
@@ -73,7 +73,7 @@
           </property>
           <property name="minimumSize">
            <size>
-            <width>420</width>
+            <width>650</width>
             <height>0</height>
            </size>
           </property>
@@ -84,7 +84,7 @@
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
           </property>
          </widget>
         </item>
@@ -362,7 +362,7 @@ QToolBar{spacing:160px;}</string>
   </action>
   <action name="act_output">
    <property name="icon">
-    <iconset theme="act_output" resource="main.qrc">
+    <iconset resource="main.qrc">
      <normaloff>:/image/数据导出.png</normaloff>:/image/数据导出.png</iconset>
    </property>
    <property name="text">

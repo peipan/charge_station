@@ -31,6 +31,8 @@ from mapper.ChargeMapper import ChargeMapper
 
 from ImportDateFromExcel import Thread_import_data_from_excel, ShowInfo
 
+from ImportDatatoExcel import ImportDatatoExcel
+
 from call_mainbar import ProgressBar
 
 from mapper.ChargeMapper import ChargeMapper
@@ -83,6 +85,7 @@ class MainWindow(QMainWindow):
         self.chargeMapper_test = ChargeMapper_test()  # 注入操作数据库类
         self.logger = get_logger("plot")
 
+        self.importdatatoexcel = ImportDatatoExcel()  # 注入操作数据库类
         ##################################hyd  加tableView功能  huang######################
         self.init_model = None
         init_tableview(self.UI.tableView, hor_size=50, ver_size=50)
@@ -95,17 +98,15 @@ class MainWindow(QMainWindow):
         # 设置表格充满这个布局QHeaderView
         self.UI.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # 所有列自动拉伸，充满界面
         self.UI.tableView.selectionModel().currentRowChanged.connect(self.do_cur_row_change)
-        ###########################huangdiandian##########################################
-        # 设置主页面的饼状图显示
-
+        ###########################hyd 设置主页面的饼状图显示##########################################
         self.fig_line = None
         self.fig_pie = None
         self.plot_type = None
         self.init_plot_frame()
         # x = ['a', 'b', 'c']
         # values = [20, 30, 50]
-        #x, values = self.get_plot_pie_row_and_line()
-        #self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
+        x, values = self.get_plot_pie_row_and_line()
+        self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
         #############################################################
         # 启用登录窗口
         self.on_act_login_triggered()
@@ -155,6 +156,7 @@ class MainWindow(QMainWindow):
         thread.exec()  # 保护子线程，否则主线程调用函数结束的时候子线程也被迫退出 一定得添加 不然就会报错，调试都调不出来的错误
 
 
+
     # 单击【数据可视化】按钮
     @pyqtSlot()
     def on_act_show_triggered(self):
@@ -174,16 +176,19 @@ class MainWindow(QMainWindow):
         self.UI.tabWidget.setCurrentIndex(curindex)
         self.UI.tabWidget.setVisible(True)
 
-    # 下载导出高风险等级充电桩的数据文件 .txt (huang)
+    # 下载导出高风险等级充电桩的数据文件 .txt (hyd)
     @pyqtSlot()
     def on_act_output_triggered(self):
-        file_path = []
-        file_path = QFileDialog.getSaveFileName(self, "保存文件", "E:/", '', "Txt files(*.txt)")  # 这里的file_name是tuple型
-        lists = [[1, 2, 3, 4], [45, 23, 456, 23, 54, 23], [12, 23, 23, 345, 23, 12]]
-        if file_path[0] == "":
-             pass
+
+        file_path = QFileDialog.getSaveFileName(self, "save file", "E:/", "excel Files (*.xls)")  # 这里的file_name是tuple型
+        #self.importdatatoexcel.export_to_excel('table_charge_station', file_path[0])
+        # lists = [[1, 2, 3, 4], [45, 23, 456, 23, 54, 23], [12, 23, 23, 345, 23, 12]]
+        if file_path[0] == '':
+             return
         else:
-            self.Save_list(lists, file_path[0])# 取tuple第一个元素即为地址
+            # self.Save_list(lists, file_path[0])
+            # 取tuple第一个元素即为地址
+            self.importdatatoexcel.export_to_excel('table_charge_station', file_path[0])
 
     # 地图风险等级展示按钮
     @pyqtSlot()
@@ -246,18 +251,14 @@ class MainWindow(QMainWindow):
         elif showInfo.info == 0:
             message = "全部插入成功!!!"
             show_information_message(self, message)
-
             x, values = self.get_plot_pie_row_and_line()
             self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
         else:
             message = str(showInfo.info) + "行数据插入失败！请检查，然后重新导入"
             show_information_message(self, message)
 
-            x, values = self.get_plot_pie_row_and_line()
-            if x is None:
-                return
-            self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
-        self.pb.close()  # 数据不管导入成功与否，进度条页面都得关闭
+        self.pb.close()  # 数据不管导入成功与否，进度条页面都得关
+
 
     # 关闭分页请求函数
     @pyqtSlot(int)
@@ -352,23 +353,46 @@ class MainWindow(QMainWindow):
 
     # 获取最初的数据模型  huang
     def get_initial_model(self):
-        head = list(['充电站数量', '交流充电桩数量', '交流充电桩占比', '直流充电桩数量', '直流充电桩占比'])
+        head = list(['所属充电桩数量', '交流充电桩数量', '交流充电桩占比', '直流充电桩数量', '直流充电桩占比'])
         model = get_row_model(5, header=head)
         # all_name, all_pid = self.chargeMapper.find_chargeName_and_pidCount()
-        all_pid = list([50, 60, 70, 30])
-        all_pid_j = list([10, 20, 35, 15])
-        all_pid_j_per = list(['25%', '30%', '50%', '50%'])
-        all_pid_z = list([40, 40, 35, 15])
-        all_pid_z_per = list(['75%', '70%', '50%', '50%'])
+        #all_pid = list([50, 60, 70, 30])  # 充电站数量
+        all_pid = self.chargeMapper_test.find_table_pile_of_station_sum()
 
+        if all_pid is None:
+            all_pid = list([])
         data = [list([]) for x in range(len(all_pid))]  # 预设进去多少行数据
+
+        all_pid_j = self.chargeMapper_test.find_table_jiaoliu_num_of_station_sum()  # 交流充电桩数量
+        #if all_pid_j is None:
+            #all_pid_j = list([])
+
+        per1 = list([])
+        all_pid_j_per = [list([]) for x in range(len(all_pid))]
+        for i in range(0, len(data)):
+            x = (all_pid_j[i]/all_pid[i]) * 100
+            all_pid_j_per[i].append('{:.0f}%'.format(x))
+        for j in range(0, len(all_pid_j_per)):
+            per1.append(all_pid_j_per[j][0])
+
+        all_pid_z = self.chargeMapper_test.find_table_zhiliu_num_of_station_sum()  # 直流充电桩数量
+        #if all_pid_z is None:
+            #all_pid_z = list([])
+
+        per2 = list([])
+        all_pid_z_per = [list([]) for x in range(len(all_pid))]
+        for i in range(0, len(data)):
+            y = (all_pid_z[i]/all_pid[i]) * 100
+            all_pid_z_per[i].append('{:.0f}%'.format(y))
+        for j in range(0, len(all_pid_z_per)):
+            per2.append(all_pid_z_per[j][0])
 
         for i in range(0, len(data)):
             data[i].append(all_pid[i])
             data[i].append(all_pid_j[i])
-            data[i].append(all_pid_j_per[i])
+            data[i].append(per1[i])
             data[i].append(all_pid_z[i])
-            data[i].append(all_pid_z_per[i])
+            data[i].append(per2[i])
 
         self.init_model = self.add_data(model, data)
 
@@ -382,7 +406,7 @@ class MainWindow(QMainWindow):
             model.appendRow(row)
         return model
 
-    # 初始化画图区域 没直接用plotsubwindow的是因为这里是frame 那个是frame_5 改了会影响数据可视化页面
+    # 初始化画图区域 没直接用plotsubwindow的是因为这里是frame 那个是frame_5 改了会影响数据可视化页面 hyd
     def init_plot_frame(self):
         self.fig_line = Myplot2D()
         tool = NavigationToolbar(self.fig_line, self.UI.frame)
@@ -393,6 +417,7 @@ class MainWindow(QMainWindow):
 
     # 绘制饼状图
     def plot_pie(self, x: list, values: list, type: str, grid=False):
+        self.fig_line.axes.clear()
         self.fig_line.axes.pie(values,
                                labels=x,
                                autopct='%1.1f%%',
@@ -402,34 +427,15 @@ class MainWindow(QMainWindow):
         self.fig_line.axes.set_title(type + "饼状图")
         if grid:
             self.fig_line.axes.grid(True)
-        self.fig_line.axes.legend()
+        #self.fig_line.axes.legend() #有图例总是无法覆盖 暂时先去掉 加上新数据后再看
         self.fig_line.draw()
 
     def get_plot_pie_row_and_line(self):
 
-        x, values = self.chargeMapper.find_plot_attr_by_sid_and_main_data()
-        """
-        # todo: 需要根据充电站还有充电桩确定，所以先得到充电站sid，再次得到充电桩pid，然后就是画出该充电桩的数据画图了
-        sid, pid, begin_time, end_time = self.get_plot_sid_and_pid_and_period()
-        if sid == -1:
-            return None, None, None
-        x = None
-        values = None
-        # todo:添加一个字典直接根据type获取SQL语句
-        map = {'安装时长': 'use_freq', '风险等级': 'risk_level', '环境温度': 'Measurement_error'}
-        table_line_attr = map[type_label]
-        if table_line_attr == 'use_freq':
-            x, values = self.chargeMapper.find_plot_attr_by_sid_and_pid_and_period(table_line_attr=table_line_attr,
-                                                                                   sid=sid, pid=pid,
-                                                                                   begin_time=begin_time,
-                                                                                   end_time=end_time)
-        elif table_line_attr == 'Measurement_error':
-            x, values = self.chargeMapper.find_error_by_sid_and_pid_and_period(table_line_attr=table_line_attr, sid=sid,
-                                                                               pid=pid) 
-        """
+        x, values = self.chargeMapper_test.find_plot_attr_by_sid_and_main_data()
         return x, values
 
-    def Save_list(self, list1, filename):
+    """def Save_list(self, list1, filename):
         #file2 = open(filename + '.txt', 'w')
         file2 = open(filename, 'w')  # 在保存对话框中选择保存在.txt格式
         ################# 在写入列表元素 ################
@@ -438,7 +444,7 @@ class MainWindow(QMainWindow):
                 file2.write(str(list1[i][j]))  # write函数不能写int类型的参数，所以使用str()转化
                 file2.write('\t')  # 相当于Tab一下，换一个单元格
             file2.write('\n')  # 写完一行立马换行
-        file2.close()
+        file2.close()"""
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -89,18 +89,56 @@ class ChargeMapper_test():
         sql = " select s_local, s_num from table_charge_station where 1=1"
         *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
         if data is None:
-            show_information_message(self, "查询结果为空")
-            return
+            #show_information_message(self, "查询结果为空")
+            return None, None
         #数据处理，直接返回，横轴坐标，统一在这边处理
         values = list([])  # 纵轴
         x = list([])  # 横轴
         for i in range(0, len(data)):
             x.append(data[i][0])
-            #x.append(str(data[i][1]) + "-" + str(data[i][2])) #这样写法 横坐标填满了，不好看
-            #x.append(str(i))  # 需要把x变成充电区域名称
             values.append(data[i][1])
 
         return x, values
+
+    #######插入首页表格##############
+    # 查询table_charge_pile中的某个充电站下的充电桩数据  hyd
+    def find_table_pile_of_station_sum(self):
+        sql = " select s_num from table_charge_station"
+        *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
+        x = list([])
+        if data is None:
+            #show_information_message(self, "查询结果为空")
+            return None
+        else:
+            for i in range(0, len(data)):
+                x.append(data[i][0])
+            return x
+
+    # 查询table_charge_pile中的某个充电站下的交流充电桩数据  hyd
+    def find_table_jiaoliu_num_of_station_sum(self):
+        sql = " select s_jiaoliu_num from table_charge_station"
+        *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
+        x = list([])
+        if data is None:
+            # show_information_message(self, "查询结果为空")
+            return None
+        else:
+            for i in range(0, len(data)):
+                x.append(data[i][0])
+            return x
+
+    # 查询table_charge_pile中的某个充电站下的交流充电桩数据  hyd
+    def find_table_zhiliu_num_of_station_sum(self):
+        sql = " select s_zhiliu_num from table_charge_station"
+        *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
+        x = list([])
+        if data is None:
+            # show_information_message(self, "查询结果为空")
+            return None
+        else:
+            for i in range(0, len(data)):
+                x.append(data[i][0])
+            return x
 
     # 根据sid，pid查询表table_pile_display_info中列（该列为变量）数据 ,将data数据获取，处理成横纵坐标就留给其他地方处理  纵坐标为 error 横坐标为 次数吧 （显示时间段太难看）
     def find_error_by_sid_and_pid_and_period(self, table_line_attr: str, sid: int, pid: int):
