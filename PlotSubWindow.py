@@ -21,7 +21,7 @@ from Util.Plot import Myplot2D
 
 class PlotSubWindow(QMainWindow):
 
-    def __init__(self, plot_type=-1, row = None, line = None, type_label = None, parent=None):
+    def __init__(self, plot_type=-1, row = None, line = None, data = None, type_label = None, parent=None):
         super(PlotSubWindow, self).__init__(parent)
         self.UI = Ui_PlotSubWindow()
         self.UI.setupUi(self)
@@ -35,13 +35,13 @@ class PlotSubWindow(QMainWindow):
         #self.plot_type = None
 
         self.init_plot_frame()
-        self.plt_multi_colums()
+        self.plt_multi_colums(row, line)
         #self.plot_line_or_pie(plot_type, row, line, type_label)
 
         ##################################加tableView功能######################
         self.init_model = None
         init_tableview(self.UI.tableView, hor_size=50, ver_size=50)
-        self.get_initial_model()
+        self.get_initial_model(data)
         data_model = self.init_model
         selection_model = QItemSelectionModel(data_model)
 
@@ -136,10 +136,16 @@ class PlotSubWindow(QMainWindow):
 
     # 绘制柱状图，画出那种高、中、低效果 主要
     def plt_multi_colums(self, row=None, line=None):
+        '''
         episode = [1, 2, 3]
         reward = [5, 8, 5]
         reward2 = [4, 6, 6]
         reward3 = [6, 4, 7]
+        '''
+        episode = row
+        reward = line[0]
+        reward2 = line[1]
+        reward3 = line[2]
 
         RL1_date = pd.DataFrame({'iteration': episode, 'reward': reward, 'algo': 'DRL1', 'palette': 'r'})
         RL2_data = pd.DataFrame({'iteration': episode, 'reward': reward2, 'algo': 'DRL2', 'palette': 'b'})
@@ -176,13 +182,11 @@ class PlotSubWindow(QMainWindow):
     # 添加表格到tableView区 2022/2/27
 
     # 获取最初的数据模型
-    def get_initial_model(self):
-        head = list(['安装时长', '最高（风险等级指数）', '平均（...）', '最低（...）'])
+    def get_initial_model(self, data):
+        head = list(['生产厂家', '最高（风险等级指数）', '平均（...）', '最低（...）'])
         model = get_row_model(2, header=head)
         #all_name, all_pid = self.chargeMapper.find_chargeName_and_pidCount()
-        row = list([])
-        line = list([])
-        data = [row, line]
+        #data = [row, line[0], line[1], line[2]]
         '''
         for i in range(0, len(all_name)):
             data[i].append(all_name[i])

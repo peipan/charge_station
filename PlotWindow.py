@@ -102,17 +102,25 @@ class PlotWindow(QMainWindow):
     # 生产厂家展示按钮
     @pyqtSlot()
     def on_btn_factory_clicked(self):
-        new_sid = 0  #todo： 这个得取出来，也就是先取最新的sid数据，还得判断s刚插入的sid是否矩阵运算有唯一值，如果没有唯一值 就显示不了呀，或者就显示前一次的数据，这种直接在表中加一个标记位就可以
+        new_sid = self.chargeMapper.find_newest_sid() #todo： 这个得取出来，也就是先取最新的sid数据，还得判断s刚插入的sid是否矩阵运算有唯一值，如果没有唯一值 就显示不了呀，或者就显示前一次的数据，这种直接在表中加一个标记位就可以
         # todo: 从数据库取出生产厂家与风险等级标量的关系
-        '''
-        row, line1, line2, line3 = self.chargeMapper.find_manufacturer_and_risk_index(sid = new_sid)  # row：表示横坐标，line1-2-3：列坐标，分别表示高中低
+        data = self.chargeMapper.find_manufacturer_and_risk_index(sid = new_sid)  # row：表示横坐标，line1-2-3：列坐标，分别表示高中低
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
         line = list([])
+        row = list([])
+        line1 = list([])
+        line2 = list([])
+        line3 = list([])
+        for i in range(0, len(data)):
+            row.append(data[i][0])
+            line1.append(data[i][1])
+            line2.append(data[i][2])
+            line3.append(data[i][3])
+
         line.append(line1)
         line.append(line2)
         line.append(line3)
-        '''
-        row = None
+
         plot_type = 0  # 0代表是折线图 1代表柱状图
         type_label = "生产厂家"
         window = None
@@ -120,7 +128,7 @@ class PlotWindow(QMainWindow):
             window = PlotSubWindow()
             curindex = self.UI.tabWidget.addTab(window, "没有数据404")
         else:
-            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, data = data, type_label=type_label)
             curindex = self.UI.tabWidget.addTab(window, type_label)
         window.setAttribute(Qt.WA_DeleteOnClose)
         self.UI.tabWidget.setCurrentIndex(curindex)

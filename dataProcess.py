@@ -117,7 +117,7 @@ class DataProcess():
     #计算充电桩n的风险评估量化数据，将整体计量性能分为“高、较高、较低、低“四种风险等级
     #weight_values：代表[k1, k2, k3,..., km]
     #返回：每个充电桩的风险等级指数，返回一个列表
-    def compute_risk_level(self, sid, weight_values=None):
+    def compute_risk_level(self, sid, error_list, weight_values=None):
         #根据pid和sid从数据库中查找误差数据、充电桩安装时长、使用频率、环境温度、环境湿度、运营商维护次数等等
         data = self.chargeMapper.find_risk_factors_by_pid_and_sid(sid)
         if data is None:
@@ -126,11 +126,11 @@ class DataProcess():
         list_Q = list([])
         if weight_values is None:
             for i in range(0, len(data)):
-                error = float(data[i][0])
-                level = data[i][1]
-                install_time = data[i][2]
-                use_freq = float(data[i][3])
-                env_temper = float(data[i][4])
+                error = round(error_list[i], 3)
+                level = data[i][0]
+                install_time = data[i][1]
+                use_freq = float(data[i][2])
+                env_temper = float(data[i][3])
                 Q = (0.9195 * (error / level) * (error / level) + 0.1195) * 0.8 + \
                     (0.0024 * (install_time * install_time) + 0.0745 * install_time + 0.0203) * 0.04 + \
                     (0.4348 * (use_freq * use_freq) + 0.0715 * use_freq + 0.0321) * 0.01 + \

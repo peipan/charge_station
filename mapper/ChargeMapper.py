@@ -182,7 +182,6 @@ class ChargeMapper():
     #根据pid和sid从数据库中查找误差数据、充电桩安装时长、使用频率、环境温度等等, 返回一个多维数组，有多少充电桩，就有多少维 updated
     def find_risk_factors_by_pid_and_sid(self, sid):
         sql = """select 
-                    d1.measurement_error, 
                     d1.nomial_level,
                     d1.install_time_span, 
                     avg(d2.use_freq), 
@@ -207,26 +206,33 @@ class ChargeMapper():
 
 
     ##########################################图形展示页面与数据库交互的代码 2022/02/21 peipan##################################################
+    #查找最新的sid
+    def find_newest_sid(self):
+        sql = "select max(sid) from table_charge_station where 1 = 1"
+        data = []
+        *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
+        return data[0][0]
+
     #安装时长与风险等级指数的关系，返回x轴参数、最低指数、平均指数、最高指数
     def find_install_span_and_risk_index(self, sid: int):
         sql = "select install_time_span, min(risk_level), avg(risk_level), max(risk_level) from table_charge_pile where sid = %s group by install_time_span"
         data = []
         *_, data = execute_inquiry(sql, sid, connection=self.connection, cursor=self.cursor)
-        return data[0], data[1], data[2], data[3]
+        return data
 
     #运营商与风险等级指数的关系，返回x轴参数、最低指数、平均指数、最高指数
     def find_carrieroperator_and_risk_index(self, sid: int):
         sql = "select carrieroperator, min(risk_level), avg(risk_level), max(risk_level) from table_charge_pile where sid = %s group by carrieroperator"
         data = []
         *_, data = execute_inquiry(sql, sid, connection=self.connection, cursor=self.cursor)
-        return data[0], data[1], data[2], data[3]
+        return data
 
     #生产厂家与风险等级指数的关系，返回x轴参数、最低指数、平均指数、最高指数
     def find_manufacturer_and_risk_index(self, sid: int):
         sql = "select manufacturer, min(risk_level), avg(risk_level), max(risk_level) from table_charge_pile where sid = %s group by manufacturer"
         data = []
         *_, data = execute_inquiry(sql, sid, connection=self.connection, cursor=self.cursor)
-        return data[0], data[1], data[2], data[3]
+        return data
 
     #使用频率与风险等级指数的关系，返回x轴参数、最低指数、平均指数、最高指数
     def find_use_freq_and_risk_index(self, sid: int):

@@ -170,9 +170,11 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
         dataProcess = DataProcess()
         list_A, list_B, sid = dataProcess.compute_energy_matrix(station_name, record_begin_time, period_count)
         result, isOnlyJie = dataProcess.compute_matrix(list_A, list_B)  # 充电桩计量误差数据，该数据需要被插入至 数据库table_pile_display_info表中  result为列表类型, isOnlyJie代表矩阵是否唯一解
+
         if not isOnlyJie:
             self.send_info(-2)  # 代表矩阵不是唯一解 发送给主页展示
             return
+        risk_level = dataProcess.compute_risk_level(sid, result)
         try:
             self.connection.begin()
             #todo: 根据测量误差，计算出风险等级指数，然后一起推送至数据库
@@ -180,8 +182,8 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
             for measure_error in list(result):
                 measure_error_str = str(round(measure_error, 2))  # 只保留两位小数
                 # insert不能插入一个属性， 必须插入多个属性， 用update语句更新一个属性的值 代表插入
-                sql = "update table_charge_pile set measurement_error = %s where start_time = %s and sid = %s and pid = %s"
-                self.cursor.execute(sql, [measure_error_str, record_begin_time, sid, pid])
+                sql = "update table_charge_pile set measurement_error = %s, risk_level = %s where start_time = %s and sid = %s and pid = %s"
+                self.cursor.execute(sql, [measure_error_str, risk_level[pid - 1], record_begin_time, sid, pid])
                 pid = pid + 1
             self.connection.commit()
         except Exception as e:
