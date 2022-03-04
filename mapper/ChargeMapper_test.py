@@ -86,7 +86,7 @@ class ChargeMapper_test():
         data = []
         #[sid, pile_all_num] = []
         #sql = "select sid, count(*) as pile_all_num from table_charge_pile group by sid"  # 验证过了可以正常按照充电站名称分组并计算其下充电桩总数值
-        sql = " select s_local, s_num from table_charge_station where 1=1"
+        sql = "select s_local, s_num from table_charge_station where 1=1"
         *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
         if data is None:
             #show_information_message(self, "查询结果为空")

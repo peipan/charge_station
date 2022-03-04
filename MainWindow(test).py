@@ -86,6 +86,10 @@ class MainWindow(QMainWindow):
         self.logger = get_logger("plot")
 
         self.importdatatoexcel = ImportDatatoExcel()  # 注入操作数据库类
+
+        # 启用登录窗口
+        self.on_act_login_triggered()
+
         ##################################hyd  加tableView功能  huang######################
         self.init_model = None
         init_tableview(self.UI.tableView, hor_size=50, ver_size=50)
@@ -108,8 +112,6 @@ class MainWindow(QMainWindow):
         x, values = self.get_plot_pie_row_and_line()
         self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
         #############################################################
-        # 启用登录窗口
-        self.on_act_login_triggered()
 
     # 单击【登录】按钮
     @pyqtSlot()
@@ -417,7 +419,9 @@ class MainWindow(QMainWindow):
 
     # 绘制饼状图
     def plot_pie(self, x: list, values: list, type: str, grid=False):
-        self.fig_line.axes.clear()
+        if x is None:  #没有数据的时候的判断
+            return
+        #self.fig_line.axes.clear()
         self.fig_line.axes.pie(values,
                                labels=x,
                                autopct='%1.1f%%',
@@ -431,7 +435,6 @@ class MainWindow(QMainWindow):
         self.fig_line.draw()
 
     def get_plot_pie_row_and_line(self):
-
         x, values = self.chargeMapper_test.find_plot_attr_by_sid_and_main_data()
         return x, values
 

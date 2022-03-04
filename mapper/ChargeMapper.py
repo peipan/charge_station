@@ -261,7 +261,7 @@ class ChargeMapper():
                 """
         data = []
         *_, data = execute_inquiry(sql, sid, connection=self.connection, cursor=self.cursor)
-        return data[0], data[1], data[2], data[3]
+        return data
 
     # 环境温度与风险等级指数的关系，返回x轴参数、最低指数、平均指数、最高指数
     def find_env_temper_and_risk_index(self, sid: int):
