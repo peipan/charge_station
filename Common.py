@@ -213,7 +213,7 @@ def execute_inquiry(sql: str, arg, **kwargs):
             res = cursor.execute(sql)
         else:
             res = cursor.execute(sql, arg)
-
+        connection.commit()  #新加的，解决首页上传数据然后查不到问题 2022/03/05
         flg = True
 
     except Exception as e:

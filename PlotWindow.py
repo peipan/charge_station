@@ -121,7 +121,7 @@ class PlotWindow(QMainWindow):
         line.append(line2)
         line.append(line3)
 
-        plot_type = 0  # 0代表是折线图 1代表柱状图
+        plot_type = 0  # 1代表是折线图 0代表柱状图
         type_label = "生产厂家"
         window = None
         if row is None:
@@ -166,7 +166,7 @@ class PlotWindow(QMainWindow):
             window = PlotSubWindow()
             curindex = self.UI.tabWidget.addTab(window, "没有数据404")
         else:
-            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, data=data, type_label=type_label)
             curindex = self.UI.tabWidget.addTab(window, type_label)
         window.setAttribute(Qt.WA_DeleteOnClose)
 
@@ -217,7 +217,7 @@ class PlotWindow(QMainWindow):
         # todo: 从数据库取出生产厂家与风险等级标量的关系
         data = self.chargeMapper.find_carrieroperator_and_risk_index(new_sid)
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
-        plot_type = 1
+        plot_type = 0
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
         line = list([])
         row = list([])
@@ -253,7 +253,7 @@ class PlotWindow(QMainWindow):
         # todo: 从数据库取出安装时长与风险等级标量的关系
         data = self.chargeMapper.find_install_span_and_risk_index(new_sid)
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
-        plot_type = 0
+        plot_type = 1
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
         line = list([])
         row = list([])

@@ -50,7 +50,6 @@ import sys
 
 
 class MainWindow(QMainWindow):
-    sense_station_change = pyqtSignal(str)
 
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -83,12 +82,9 @@ class MainWindow(QMainWindow):
 
         self.chargeMapper = ChargeMapper()  # 注入操作数据库类
         self.chargeMapper_test = ChargeMapper_test()  # 注入操作数据库类
-        self.logger = get_logger("plot")
 
-        self.importdatatoexcel = ImportDatatoExcel()  # 注入操作数据库类
 
-        # 启用登录窗口
-        self.on_act_login_triggered()
+
 
         ##################################hyd  加tableView功能  huang######################
         self.init_model = None
@@ -104,6 +100,7 @@ class MainWindow(QMainWindow):
 
         self.UI.tableView.horizontalHeader().setStyleSheet("QHeaderView::section{border-color: #142c58};")
         self.UI.tableView.verticalHeader().setStyleSheet("QHeaderView::section{border-color: #142c58};")
+
         self.UI.tableView.selectionModel().currentRowChanged.connect(self.do_cur_row_change)
         ###########################hyd 设置主页面的饼状图显示##########################################
         self.fig_line = None
@@ -115,6 +112,9 @@ class MainWindow(QMainWindow):
         x, values = self.get_plot_pie_row_and_line()
         self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
         #############################################################
+
+        # 启用登录窗口
+        self.on_act_login_triggered()
 
     # 单击【登录】按钮
     @pyqtSlot()
@@ -260,6 +260,9 @@ class MainWindow(QMainWindow):
             show_information_message(self, message)
             x, values = self.get_plot_pie_row_and_line()
             self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
+        elif showInfo.info == -2:
+            message = "数据无效（无法计算出唯一解）！！！"
+            show_information_message(self, message)
         else:
             message = str(showInfo.info) + "行数据插入失败！请检查，然后重新导入"
             show_information_message(self, message)
@@ -433,7 +436,7 @@ class MainWindow(QMainWindow):
                                shadow=True,
                                startangle=150)
 
-        self.fig_line.axes.set_title(type + "饼状图")
+        self.fig_line.axes.set_title(type + "饼状图", fontsize=20)
         if grid:
             self.fig_line.axes.grid(True)
         #self.fig_line.axes.legend() #有图例总是无法覆盖 暂时先去掉 加上新数据后再看

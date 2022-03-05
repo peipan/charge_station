@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import QSizePolicy
 
 # 画图类
 class Myplot2D(FigureCanvas):
-    def __init__(self, parent=None, width=15, height=10, dpi=100):
+    def __init__(self, parent=None, width=25, height=15, dpi=100):
         plt.rcParams['font.sans-serif'] = ['SimHei']  # 设置支持中文
         plt.rcParams['axes.unicode_minus'] = False  # 设置-号
 
