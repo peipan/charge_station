@@ -175,6 +175,22 @@ class ChargeMapper_test():
         for i in range(0, len(data)):
             res[data[i][0]] = data[i][1]
         return res
+    #地图充电站经纬度与风险等级从数据库中取数据 hyd
+    def fine_longitude_latitude_risk(self):
+        sql = "select longitude,latitude,risk_level from table_charge_station, table_charge_pile where 1=1;"
+        data = []
+        *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
+        for i in range(0, len(data)):
+            if data[i][2] is None:
+                return None
+        res1 = list([])
+        res2 = list([])
+        res3 = list([])
+        for i in range(0, len(data)):
+            res1.append(data[i][0])
+            res2.append(data[i][1])
+            res3.append(data[i][2])
+            return res1, res2, res3
 
     ###########################################矩阵计算##############################################
     #根据根据数据库sid,begin_time,end_time查找“北工大充电桩”的pid的总数  待完善 ->已完善
