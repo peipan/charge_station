@@ -163,7 +163,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
 
         ##################################插入计算的计量误差与风险等级######################################
         # todo:加载数据之后开始计算测量误差和风险等级(尚未做)等参数并插入至数据库
-        #self.update_risk_level(station_name, record_begin_time, period_count)
+        self.update_risk_level(station_name, record_begin_time, period_count)
 
 
     def update_risk_level(self, station_name, record_begin_time, period_count):

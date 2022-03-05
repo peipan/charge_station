@@ -7,7 +7,7 @@ from Common import show_information_message, show_error_message, init_tableview,
 
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QHeaderView, QGridLayout
 
-from PyQt5.QtGui import QPainter, QPaintEvent, QPixmap, QStandardItem, QStandardItemModel
+from PyQt5.QtGui import QPainter, QPaintEvent, QPixmap, QStandardItem, QStandardItemModel, QBrush, QColor
 
 from UI.Ui_MainWindow import Ui_MainWindow
 
@@ -97,6 +97,9 @@ class MainWindow(QMainWindow):
         self.UI.tableView.setSelectionModel(selection_model)
         # 设置表格充满这个布局QHeaderView
         self.UI.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # 所有列自动拉伸，充满界面
+
+        self.UI.tableView.horizontalHeader().setStyleSheet("QHeaderView::section{border-color: #142c58};")
+        self.UI.tableView.verticalHeader().setStyleSheet("QHeaderView::section{border-color: #142c58};")
         self.UI.tableView.selectionModel().currentRowChanged.connect(self.do_cur_row_change)
         ###########################hyd 设置主页面的饼状图显示##########################################
         self.fig_line = None
@@ -201,11 +204,13 @@ class MainWindow(QMainWindow):
         #获取该充电站下的pid以及对应的风险等级数据，返回一个字典类型
         pid_and_risk_level_dict = self.chargeMapper.find_pid_risk_level_by_sid(sid)
         '''
-        # todo:外弹框 显示地图就ok，我需要把经纬度数据填入
+        # todo:外弹框 显示地图就ok，我需要把经纬度数据填
 
         add = [[39.873079, 116.481913], [39.913904, 116.39728], [39.885987, 116.480132]]
         level = [[10, 30, 50, 70, 90], [10, 10, 10, 10, 10], [90, 90, 90, 90, 90]]
-        data = visual_all(add, *level)
+        add = self.chargeMapper_test.fine_longitude_latitude_risk()
+        data = visual_all(add)
+        #data = visual_all(add, *level) # list输入位置与风险等级
 
         # mapDisplay = MapDisplay(data)
         self.mapDisplay.trans_data(data)
