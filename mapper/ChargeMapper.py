@@ -239,9 +239,9 @@ class ChargeMapper():
         # 联表查询，已验证，语句正确无误
         sql = """SELECT
                     table_use_freq.freq,
-                    MIN(table_charge_pile.`risk_level`),
-                    AVG(table_charge_pile.`risk_level`),
-                    MAX(table_charge_pile.`risk_level`)
+                    MIN(table_charge_pile.risk_level),
+                    AVG(table_charge_pile.risk_level),
+                    MAX(table_charge_pile.risk_level)
                 FROM
                     table_charge_pile,
                     (SELECT 
@@ -249,7 +249,7 @@ class ChargeMapper():
                     FROM 
                         table_pile_period
                     WHERE 
-                        sid = 6
+                        sid = %s
                     GROUP BY
                         pid) table_use_freq   
                 WHERE 

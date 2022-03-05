@@ -137,10 +137,30 @@ class PlotWindow(QMainWindow):
     # 使用频率展示按钮
     @pyqtSlot()
     def on_btn_frequency_clicked(self):
+        new_sid = self.chargeMapper.find_newest_sid()
         # todo: 从数据库取出使用频率与风险等级标量的关系
+        data = self.chargeMapper.find_use_freq_and_risk_index(new_sid)
+        # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
+        plot_type = 0
 
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
-        plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
+        line = list([])
+        row = list([])
+        line1 = list([])
+        line2 = list([])
+        line3 = list([])
+        for i in range(0, len(data)):
+            row.append(data[i][0])
+            line1.append(data[i][1])
+            line2.append(data[i][2])
+            line3.append(data[i][3])
+
+        line.append(line1)
+        line.append(line2)
+        line.append(line3)
+
+        type_label = "使用频率"
+
         window = None
         if row is None:
             window = PlotSubWindow()
@@ -156,16 +176,34 @@ class PlotWindow(QMainWindow):
     # 环境温度展示按钮
     @pyqtSlot()
     def on_btn_tem_clicked(self):
+        new_sid = self.chargeMapper.find_newest_sid()  # todo： 这个得取出来，也就是先取最新的sid数据，还得判断s刚插入的sid是否矩阵运算有唯一值，如果没有唯一值 就显示不了呀，或者就显示前一次的数据，这种直接在表中加一个标记位就可以
         # todo: 从数据库取出生产厂家与风险等级标量的关系
-
+        data = self.chargeMapper.find_carrieroperator_and_risk_index(new_sid)
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
-        plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
+        plot_type = 1
+        # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
+        line = list([])
+        row = list([])
+        line1 = list([])
+        line2 = list([])
+        line3 = list([])
+        for i in range(0, len(data)):
+            row.append(data[i][0])
+            line1.append(data[i][1])
+            line2.append(data[i][2])
+            line3.append(data[i][3])
+
+        line.append(line1)
+        line.append(line2)
+        line.append(line3)
+
+        type_label = "运营商"
         window = None
         if row is None:
             window = PlotSubWindow()
             curindex = self.UI.tabWidget.addTab(window, "没有数据404")
         else:
-            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, data=data, type_label=type_label)
             curindex = self.UI.tabWidget.addTab(window, type_label)
         window.setAttribute(Qt.WA_DeleteOnClose)
 
@@ -175,15 +213,33 @@ class PlotWindow(QMainWindow):
     # 运营商展示按钮
     @pyqtSlot()
     def on_btn_temp_clicked(self):
+        new_sid = self.chargeMapper.find_newest_sid()  # todo： 这个得取出来，也就是先取最新的sid数据，还得判断s刚插入的sid是否矩阵运算有唯一值，如果没有唯一值 就显示不了呀，或者就显示前一次的数据，这种直接在表中加一个标记位就可以
         # todo: 从数据库取出生产厂家与风险等级标量的关系
+        data = self.chargeMapper.find_carrieroperator_and_risk_index(new_sid)
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
-        plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
+        plot_type = 1
+        # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
+        line = list([])
+        row = list([])
+        line1 = list([])
+        line2 = list([])
+        line3 = list([])
+        for i in range(0, len(data)):
+            row.append(data[i][0])
+            line1.append(data[i][1])
+            line2.append(data[i][2])
+            line3.append(data[i][3])
+
+        line.append(line1)
+        line.append(line2)
+        line.append(line3)
+        type_label = "运营商"
         window = None
         if row is None:
             window = PlotSubWindow()
             curindex = self.UI.tabWidget.addTab(window, "没有数据404")
         else:
-            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, data=data, type_label=type_label)
             curindex = self.UI.tabWidget.addTab(window, type_label)
         window.setAttribute(Qt.WA_DeleteOnClose)
 
@@ -193,15 +249,34 @@ class PlotWindow(QMainWindow):
     # 安装时长展示按钮
     @pyqtSlot()
     def on_btn_time_clicked(self):
-        # todo: 从数据库取出生产厂家与风险等级标量的关系
+        new_sid = self.chargeMapper.find_newest_sid()  # todo： 这个得取出来，也就是先取最新的sid数据，还得判断s刚插入的sid是否矩阵运算有唯一值，如果没有唯一值 就显示不了呀，或者就显示前一次的数据，这种直接在表中加一个标记位就可以
+        # todo: 从数据库取出安装时长与风险等级标量的关系
+        data = self.chargeMapper.find_install_span_and_risk_index(new_sid)
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
-        plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
+        plot_type = 0
+        # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
+        line = list([])
+        row = list([])
+        line1 = list([])
+        line2 = list([])
+        line3 = list([])
+        for i in range(0, len(data)):
+            row.append(data[i][0])
+            line1.append(data[i][1])
+            line2.append(data[i][2])
+            line3.append(data[i][3])
+
+        line.append(line1)
+        line.append(line2)
+        line.append(line3)
+
+        type_label = "安装时长"
         window = None
         if row is None:
             window = PlotSubWindow()
             curindex = self.UI.tabWidget.addTab(window, "没有数据404")
         else:
-            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, data=data, type_label=type_label)
             curindex = self.UI.tabWidget.addTab(window, type_label)
         window.setAttribute(Qt.WA_DeleteOnClose)
 
@@ -219,7 +294,7 @@ class PlotWindow(QMainWindow):
             window = PlotSubWindow()
             curindex = self.UI.tabWidget.addTab(window, "没有数据404")
         else:
-            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, data=data, type_label=type_label)
             curindex = self.UI.tabWidget.addTab(window, type_label)
         window.setAttribute(Qt.WA_DeleteOnClose)
 
