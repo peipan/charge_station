@@ -123,6 +123,16 @@ class PlotWindow(QMainWindow):
 
         plot_type = 0  # 1代表是折线图 0代表柱状图
         type_label = "生产厂家"
+
+        ret_data = self.chargeMapper.find_manufacturer_and_nums(sid= new_sid)
+        data0 = list([])
+        for i in range(0, len(ret_data)):
+            temp = list([])
+            temp.append(ret_data[i][0])
+            risk_index = ret_data[i][1]
+            highest = 0
+            temp.append(ret_data[i][1])
+
         window = None
         if row is None:
             window = PlotSubWindow()
@@ -141,7 +151,7 @@ class PlotWindow(QMainWindow):
         # todo: 从数据库取出使用频率与风险等级标量的关系
         data = self.chargeMapper.find_use_freq_and_risk_index(new_sid)
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
-        plot_type = 0
+        plot_type = 1
 
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
         line = list([])
@@ -197,7 +207,7 @@ class PlotWindow(QMainWindow):
         line.append(line2)
         line.append(line3)
 
-        type_label = "运营商"
+        type_label = "温度"
         window = None
         if row is None:
             window = PlotSubWindow()
@@ -294,7 +304,7 @@ class PlotWindow(QMainWindow):
             window = PlotSubWindow()
             curindex = self.UI.tabWidget.addTab(window, "没有数据404")
         else:
-            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, data=data, type_label=type_label)
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
             curindex = self.UI.tabWidget.addTab(window, type_label)
         window.setAttribute(Qt.WA_DeleteOnClose)
 

@@ -101,7 +101,7 @@ class ChargeMapper_test():
     #######插入首页表格##############
     # 查询table_charge_pile中的某个充电站下的充电桩数据  hyd
     def find_table_pile_of_station_sum(self):
-        sql = " select s_num from table_charge_station"
+        sql = "select station_name from table_charge_station"
         *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
         x = list([])
         if data is None:
