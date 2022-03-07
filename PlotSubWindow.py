@@ -125,8 +125,6 @@ class PlotSubWindow(QMainWindow):
         self.fig_line.draw()
 
     def plt_multi_line(self, row=None, line=None, type_label=None):
-
-        '''
         reward = list([])
         reward2 = list([])
         reward3 = list([])
@@ -143,7 +141,7 @@ class PlotSubWindow(QMainWindow):
         reward = [35]
         reward2 = [34]
         reward3 = [33]
-
+        '''
         RL1_date = pd.DataFrame({'iteration': episode, 'reward': reward, 'algo': '最高指数', 'style': '*'})
         RL2_data = pd.DataFrame({'iteration': episode, 'reward': reward2, 'algo': '平均指数', 'style': 'h'})
         RL3_data = pd.DataFrame({'iteration': episode, 'reward': reward3, 'algo': '最低指数', 'style': 'v'})
