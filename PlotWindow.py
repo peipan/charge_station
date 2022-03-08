@@ -42,7 +42,7 @@ class PlotWindow(QMainWindow):
         #add 利用信号的方式
         self.UI.comboBox_type_station.currentTextChanged.connect(self.setValue)
         self.sense_station_change.connect(self.getValue)
-        #
+        # 
         '''
 
         self.mapDisplay = MapDisplay(self)  # 为什么放在这，这就是解决点击按钮  弹框一下就关了的bug......... https://blog.csdn.net/veloi/article/details/115027549这里面的方法二
@@ -252,7 +252,7 @@ class PlotWindow(QMainWindow):
             window = PlotSubWindow()
             curindex = self.UI.tabWidget.addTab(window, "没有数据404")
         else:
-            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, data=data, type_label=type_label)
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, data=None, type_label=type_label)
             curindex = self.UI.tabWidget.addTab(window, type_label)
         window.setAttribute(Qt.WA_DeleteOnClose)
 

@@ -20,10 +20,10 @@ from UI.Ui_PlotSubWindow import Ui_PlotSubWindow
 from Util.Plot import Myplot2D
 
 #https://seaborn.apachecn.org/#/docs/12   seaborn中文文档
-<<<<<<< HEAD
+
 #这块需要信号的方式传递横纵坐标，还有折线图与饼状图的选择#
-=======
->>>>>>> a29789c3445634ffd1bbeb7790600a9c9396421f
+
+
 
 class PlotSubWindow(QMainWindow):
 
@@ -42,28 +42,24 @@ class PlotSubWindow(QMainWindow):
 
         self.init_plot_frame()
         if plot_type == 0:  # 柱状图
-<<<<<<< HEAD
-            self.plt_multi_colums(row, line)
-        elif plot_type == 1:
-            self.plt_multi_line(row, line)
-=======
             self.plt_multi_colums(row, line, type_label)
         elif plot_type == 1:
             self.plt_multi_line(row, line, type_label)
->>>>>>> a29789c3445634ffd1bbeb7790600a9c9396421f
+
         #self.plot_line_or_pie(plot_type, row, line, type_label)
 
         ##################################加tableView功能######################
-        self.init_model = None
-        init_tableview(self.UI.tableView, hor_size=50, ver_size=50)
-        self.get_initial_model(data, type_label)
-        data_model = self.init_model
-        selection_model = QItemSelectionModel(data_model)
+        if data is not None:
+            self.init_model = None
+            init_tableview(self.UI.tableView, hor_size=50, ver_size=50)
+            self.get_initial_model(data, type_label)
+            data_model = self.init_model
+            selection_model = QItemSelectionModel(data_model)
 
-        self.UI.tableView.setModel(data_model)
-        self.UI.tableView.setSelectionModel(selection_model)
-        # 设置表格充满这个布局QHeaderView
-        self.UI.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # 所有列自动拉伸，充满界面
+            self.UI.tableView.setModel(data_model)
+            self.UI.tableView.setSelectionModel(selection_model)
+            # 设置表格充满这个布局QHeaderView
+            self.UI.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # 所有列自动拉伸，充满界面
 
         #####################################################################
 
@@ -134,14 +130,14 @@ class PlotSubWindow(QMainWindow):
         self.fig_line.axes.legend()
         self.fig_line.draw()
 
-<<<<<<< HEAD
+    '''
     def plt_multi_line(self, row=None, line=None, type=None):
-        '''
+        
         episode = row
         reward = line[0]
         reward2 = line[1]
         reward3 = line[2]
-        '''
+        
         episode = [1, 2, 3]
         reward = [5, 8, 5]
         reward2 = [4, 6, 6]
@@ -149,7 +145,8 @@ class PlotSubWindow(QMainWindow):
         RL1_date = pd.DataFrame({'iteration': episode, 'reward': reward, 'algo': 'DRL1', 'style': '*'})
         RL2_data = pd.DataFrame({'iteration': episode, 'reward': reward2, 'algo': 'DRL2', 'style': 'h'})
         RL3_data = pd.DataFrame({'iteration': episode, 'reward': reward3, 'algo': 'DRL3', 'style': 'v'})
-=======
+    '''
+
     def plt_multi_line(self, row=None, line=None, type_label=None):
         reward = list([])
         reward2 = list([])
@@ -171,7 +168,7 @@ class PlotSubWindow(QMainWindow):
         RL1_date = pd.DataFrame({'iteration': episode, 'reward': reward, 'algo': '最高指数', 'style': '*'})
         RL2_data = pd.DataFrame({'iteration': episode, 'reward': reward2, 'algo': '平均指数', 'style': 'h'})
         RL3_data = pd.DataFrame({'iteration': episode, 'reward': reward3, 'algo': '最低指数', 'style': 'v'})
->>>>>>> a29789c3445634ffd1bbeb7790600a9c9396421f
+
         frames = [RL1_date, RL2_data, RL3_data]
         # pd.concat(frames).plot(kind="bar", x="iteration", y="reward", ax=self.fig_line.axes)
         dataset = pd.concat(frames)
@@ -182,20 +179,9 @@ class PlotSubWindow(QMainWindow):
         #  palette：调色板
         ax = sns.relplot(x="iteration", y="reward", ax=self.fig_line.axes, palette=['r', 'b', 'g'], hue="algo", ci="5",
                          kind="line", markers=True, style='style',
-<<<<<<< HEAD
                          data=dataset, legend='brief')
 
         x_ticks = None
-        if type == '温度':  # 温度规定，温度范围从-20℃~50℃，以2℃间隔段为一个点。
-            x_ticks = np.arange(-20, 50, 2.0)
-        else:
-            x_ticks = np.arange(1, 4, 1)
-        self.fig_line.axes.set_xticks(x_ticks)
-        self.fig_line.axes.set_ylabel("风险等级指数", fontsize=15)
-        self.fig_line.axes.set_xlabel("温度（℃）", fontsize=15)
-=======
-                         data=dataset, legend='full')
-
 
         if type_label == '温度':  # 温度规定，温度范围从-20℃~50℃，以2℃间隔段为一个点。
             x_ticks = np.arange(-20, 50, 2.0)
@@ -211,7 +197,6 @@ class PlotSubWindow(QMainWindow):
 
         self.fig_line.axes.set_ylabel("风险等级指数", fontsize=13)
 
->>>>>>> a29789c3445634ffd1bbeb7790600a9c9396421f
         self.fig_line.axes.legend(title='', loc='lower right', labels=["最高指数", "平均指数", "最低指数"])
 
 
@@ -228,33 +213,21 @@ class PlotSubWindow(QMainWindow):
         reward2 = line[1]
         reward3 = line[2]
 
-<<<<<<< HEAD
-        RL1_date = pd.DataFrame({'iteration': episode, '风险等级指数': reward, 'algo': 'DRL1', 'palette': 'r'})
-        RL2_data = pd.DataFrame({'iteration': episode, '风险等级指数': reward2, 'algo': 'DRL2', 'palette': 'b'})
-        RL3_data = pd.DataFrame({'iteration': episode, '风险等级指数': reward3, 'algo': 'DRL3', 'palette': 'g'})
-=======
         RL1_date = pd.DataFrame({'iteration': episode, 'reward': reward, '等级指数': '最高指数', 'palette': 'r'})
         RL2_data = pd.DataFrame({'iteration': episode, 'reward': reward2, '等级指数': '平均指数', 'palette': 'b'})
         RL3_data = pd.DataFrame({'iteration': episode, 'reward': reward3, '等级指数': '最低指数', 'palette': 'g'})
->>>>>>> a29789c3445634ffd1bbeb7790600a9c9396421f
+
         frames = [RL1_date, RL2_data, RL3_data]
         #pd.concat(frames).plot(kind="bar", x="iteration", y="reward", ax=self.fig_line.axes)
         dataset = pd.concat(frames)
 
         #  palette：调色板
-<<<<<<< HEAD
-        ax = sns.catplot(x="iteration", y="风险等级指数", ax=self.fig_line.axes, palette=['r', 'b', 'g'], hue="algo", ci="sd", kind="bar",
-=======
-        ax = sns.catplot(x="iteration", y="reward", ax=self.fig_line.axes, palette=['r', 'b', 'g'], hue="等级指数", ci="sd", kind="bar",
->>>>>>> a29789c3445634ffd1bbeb7790600a9c9396421f
-                         data=dataset, legend=True)
+
+        ax = sns.catplot(x="iteration", y="reward", ax=self.fig_line.axes, palette=['r', 'b', 'g'], hue="等级指数", ci="sd", kind="bar", data=dataset, legend=True)
 
         sns.despine(top=False, right=False, left=False, bottom=False)
         #ax.set(xlabel='Iteration', ylabel='风险等级指数')
-<<<<<<< HEAD
 
-        self.fig_line.axes.legend(title='', loc='upper right', labels=["最高指数", "平均指数", "最低指数"])
-=======
         self.fig_line.axes.set_ylabel("风险等级指数", fontsize=13)
         if type_label == '生产厂家':
             self.fig_line.axes.set_xlabel("生产厂家", fontsize=13)
@@ -263,7 +236,6 @@ class PlotSubWindow(QMainWindow):
         elif type_label == '使用频率':
             self.fig_line.axes.set_xlabel("使用频率", fontsize=13)
         #self.fig_line.axes.legend(title='', loc='upper right', labels=["最高指数", "平均指数", "最低指数"])
->>>>>>> a29789c3445634ffd1bbeb7790600a9c9396421f
         #plt.show()
         self.fig_line.draw_idle()
 

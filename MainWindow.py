@@ -84,6 +84,8 @@ class MainWindow(QMainWindow):
         self.backgroundPix = QPixmap("Icon/000.png")
         self.pb = None #进度条窗口
 
+        self.head = list(['所属充电站', '总数', '交流桩数量', '交流桩占比', '直流桩数量', '直流桩占比'])
+        self.model = get_row_model(6, header=self.head)
         ###########################################################
 
         # add 利用信号的方式 （tableView的设置）
@@ -95,8 +97,6 @@ class MainWindow(QMainWindow):
         self.chargeMapper = ChargeMapper()  # 注入操作数据库类
         self.chargeMapper_test = ChargeMapper_test()  # 注入操作数据库类
         ##########################################################
-
-
 
         ##################################hyd  加tableView功能  huang######################
         self.init_model = None
@@ -237,6 +237,11 @@ class MainWindow(QMainWindow):
             show_information_message(self, message)
             x, values = self.get_plot_pie_row_and_line()
             self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
+            self.get_initial_model()
+            data_model = self.init_model
+            selection_model = QItemSelectionModel(data_model)
+            self.UI.tableView.setModel(data_model)
+            self.UI.tableView.setSelectionModel(selection_model)
         elif showInfo.info == -2:
             message = "数据无效（无法计算出唯一解）！！！"
             show_information_message(self, message)
@@ -372,50 +377,6 @@ class MainWindow(QMainWindow):
 
     # 获取最初的数据模型  huang
     def get_initial_model(self):
-
-        head = list(['所属充电站', '交流充电桩数量', '交流充电桩占比', '直流充电桩数量', '直流充电桩占比'])
-        model = get_row_model(5, header=head)
-        # all_name, all_pid = self.chargeMapper.find_chargeName_and_pidCount()
-        #all_pid = list([50, 60, 70, 30])  # 充电站数量
-        all_pid = self.chargeMapper_test.find_table_pile_of_station_sum()
-
-        if all_pid is None:
-            all_pid = list([])
-        data = [list([]) for x in range(len(all_pid))]  # 预设进去多少行数据
-
-        all_pid_j = self.chargeMapper_test.find_table_jiaoliu_num_of_station_sum()  # 交流充电桩数量
-        #if all_pid_j is None:
-            #all_pid_j = list([])
-
-        per1 = list([])
-        all_pid_j_per = [list([]) for x in range(len(all_pid))]
-        for i in range(0, len(data)):
-            x = (all_pid_j[i]/all_pid[i]) * 100
-            all_pid_j_per[i].append('{:.0f}%'.format(x))
-        for j in range(0, len(all_pid_j_per)):
-            per1.append(all_pid_j_per[j][0])
-
-        all_pid_z = self.chargeMapper_test.find_table_zhiliu_num_of_station_sum()  # 直流充电桩数量
-        #if all_pid_z is None:
-            #all_pid_z = list([])
-
-        per2 = list([])
-        all_pid_z_per = [list([]) for x in range(len(all_pid))]
-        for i in range(0, len(data)):
-            y = (all_pid_z[i]/all_pid[i]) * 100
-            all_pid_z_per[i].append('{:.0f}%'.format(y))
-        for j in range(0, len(all_pid_z_per)):
-            per2.append(all_pid_z_per[j][0])
-
-        for i in range(0, len(data)):
-            data[i].append(all_pid[i])
-            data[i].append(all_pid_j[i])
-            data[i].append(per1[i])
-            data[i].append(all_pid_z[i])
-            data[i].append(per2[i])
-
-        head = list(['所属充电站', '总数', '交流桩数量', '交流桩占比', '直流桩数量', '直流桩占比'])
-        model = get_row_model(6, header=head)
         ret_data = self.chargeMapper.find_first_page_table()
         if ret_data is None:
             return list([])
@@ -430,9 +391,7 @@ class MainWindow(QMainWindow):
             temp.append(ret_data[i][2])  # 直流数量
             temp.append('{:.0f}%'.format(ret_data[i][2] / sum * 100))  # 直流数量占比
             data.append(temp)
-
-
-        self.init_model = self.add_data(model, data)
+        self.init_model = self.add_data(self.model, data)
 
     # 向模型添加数据
     def add_data(self, model: QStandardItemModel, data) -> QStandardItemModel:
@@ -446,38 +405,12 @@ class MainWindow(QMainWindow):
 
     # 初始化画图区域 没直接用plotsubwindow的是因为这里是frame 那个是frame_5 改了会影响数据可视化页面 hyd
     def init_plot_frame(self):
-
-        self.fig_line = Myplot2D()
-        tool = NavigationToolbar(self.fig_line, self.UI.frame)
-        layout = QGridLayout()
-        layout.addWidget(self.fig_line)
-        layout.addWidget(tool)
-        self.UI.frame.setLayout(layout)
-
-    # 绘制饼状图
-    def plot_pie(self, x: list, values: list, type: str, grid=False):
-        if x is None:  #没有数据的时候的判断
-            return
-        #self.fig_line.axes.clear()
-        # 一种不被覆盖的思路：设置一个全局变量，然后将self.fig_line.axes.pie()这个对象引入，如果每次更新的时候，直接判断这个对象是否为空，如果不为空，直接清除，然后再加入新的饼状图
-        self.fig_line.axes.pie(values,
-                               labels=x,
-                               autopct='%1.1f%%',
-                               shadow=True,
-                               startangle=150)
-
-        self.fig_line.axes.set_title(type + "饼状图", fontsize=20)
-        if grid:
-            self.fig_line.axes.grid(True)
-        #self.fig_line.axes.legend() #有图例总是无法覆盖 暂时先去掉 加上新数据后再看
-
-        self.fig_line = Myplot2D(plt0=13)
+        self.fig_line = Myplot2D(plt0=15)
         #tool = NavigationToolbar(self.fig_line, self.UI.frame)
         layout = QGridLayout()
         layout.addWidget(self.fig_line)
         #layout.addWidget(tool)
         self.UI.frame.setLayout(layout)
-
 
     # 一个autopct指向的函数，lambda可以指向
     def func(self, pct, allvals):
@@ -500,7 +433,6 @@ class MainWindow(QMainWindow):
         self.fig_line.axes.legend()
         self.fig_line.axes.set_title(type + "饼状图", fontsize=20)
         self.fig_line.axes.axis('equal')
-
         self.fig_line.draw()
 
     def get_plot_pie_row_and_line(self):
