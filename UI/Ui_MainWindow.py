@@ -15,7 +15,11 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1192, 810)
+<<<<<<< HEAD
         #MainWindow.setStyleSheet("background-color: rgb(51, 102, 153);")
+=======
+        MainWindow.setStyleSheet("background-color: rgb(51, 102, 153);")
+>>>>>>> a29789c3445634ffd1bbeb7790600a9c9396421f
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
@@ -26,8 +30,13 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
         self.tabWidget.setSizePolicy(sizePolicy)
+<<<<<<< HEAD
         #self.tabWidget.setStyleSheet("background-color: rgb(51, 102, 153);\n"
 #"border-bottom:1px solid #20478b;")
+=======
+        self.tabWidget.setStyleSheet("background-color: rgb(51, 102, 153);\n"
+"border-bottom:1px solid #20478b;")
+>>>>>>> a29789c3445634ffd1bbeb7790600a9c9396421f
         self.tabWidget.setUsesScrollButtons(True)
         self.tabWidget.setTabsClosable(True)
         self.tabWidget.setObjectName("tabWidget")
@@ -52,14 +61,23 @@ class Ui_MainWindow(object):
         self.tableView.setMinimumSize(QtCore.QSize(650, 0))
         self.tableView.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.tableView.setStyleSheet("font: 75 12pt \"微软雅黑\";\n"
+<<<<<<< HEAD
                                      #"background-color:rgb(109, 163, 163);\n"
+=======
+                                     "background-color:#142c58;\n"
+>>>>>>> a29789c3445634ffd1bbeb7790600a9c9396421f
 "border-bottom:1px solid #20478b;")
         self.tableView.gridStyle()
         self.tableView.setObjectName("tableView")
         self.gridLayout.addWidget(self.tableView, 1, 0, 1, 1)
         self.frame = QtWidgets.QFrame(self.tab)
+<<<<<<< HEAD
         #self.frame.setStyleSheet("background-color: rgb(61, 110, 153);\n"
 #"border-bottom:1px solid #20478b;")
+=======
+        self.frame.setStyleSheet("background-color: rgb(61, 110, 153);\n"
+"border-bottom:1px solid #20478b;")
+>>>>>>> a29789c3445634ffd1bbeb7790600a9c9396421f
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")

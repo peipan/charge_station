@@ -90,7 +90,11 @@ background-color: rgb(51, 102, 153);
           </property>
           <property name="styleSheet">
            <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;
+<<<<<<< HEAD
 background-color: rgb(109, 163, 163);
+=======
+background-color: rgb(20, 44, 88);
+>>>>>>> a29789c3445634ffd1bbeb7790600a9c9396421f
 border-bottom:1px solid #20478b;</string>
           </property>
          </widget>

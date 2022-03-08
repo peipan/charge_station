@@ -49,6 +49,8 @@ import numpy as np
 
 import sys
 
+import numpy as np
+
 
 # Administrator_grade = 1
 
@@ -86,7 +88,9 @@ class MainWindow(QMainWindow):
 
         self.chargeMapper = ChargeMapper()  # 注入操作数据库类
         self.chargeMapper_test = ChargeMapper_test()  # 注入操作数据库类
+
         self.importdatatoexcel = ImportDatatoExcel()
+
         ##################################hyd  加tableView功能  huang######################
         self.init_model = None
         init_tableview(self.UI.tableView, hor_size=50, ver_size=50)
@@ -207,6 +211,7 @@ class MainWindow(QMainWindow):
         '''
         # todo:外弹框 显示地图就ok，我需要把经纬度数据填
 
+
         #add = [[39.873079, 116.481913], [39.913904, 116.39728], [39.885987, 116.480132]]
         #level = [[10, 30, 50, 70, 90], [10, 10, 10, 10, 10], [90, 90, 90, 90, 90]]
         location = self.chargeMapper_test.find_longitude_latitude_risk()
@@ -242,6 +247,14 @@ class MainWindow(QMainWindow):
                     a = a + 1
 
         data = visual_all(list3, *level)  # list输入位置与风险等级
+
+        add = [[39.873079, 116.481913], [39.913904, 116.39728], [39.885987, 116.480132]]
+        level = [[10, 30, 50, 70, 90], [10, 10, 10, 10, 10], [90, 90, 90, 90, 90]]
+        add = self.chargeMapper_test.fine_longitude_latitude_risk()
+        data = visual_all(add)
+        #data = visual_all(add, *level) # list输入位置与风险等级
+
+
         # mapDisplay = MapDisplay(data)
         self.mapDisplay.trans_data(data)
         # self.mapDisplay.setAttribute(Qt.WA_DeleteOnClose)  # 设置关闭删除实例  应该是这句话一直出现了bug
@@ -288,7 +301,9 @@ class MainWindow(QMainWindow):
             show_information_message(self, message)
             x, values = self.get_plot_pie_row_and_line()
             self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
+
             self.get_initial_model()
+
         elif showInfo.info == -2:
             message = "数据无效（无法计算出唯一解）！！！"
             show_information_message(self, message)
@@ -446,28 +461,48 @@ class MainWindow(QMainWindow):
 
     # 初始化画图区域 没直接用plotsubwindow的是因为这里是frame 那个是frame_5 改了会影响数据可视化页面 hyd
     def init_plot_frame(self):
-        self.fig_line = Myplot2D()
-        tool = NavigationToolbar(self.fig_line, self.UI.frame)
+        self.fig_line = Myplot2D(plt0=13)
+        #tool = NavigationToolbar(self.fig_line, self.UI.frame)
         layout = QGridLayout()
         layout.addWidget(self.fig_line)
-        layout.addWidget(tool)
+        #layout.addWidget(tool)
         self.UI.frame.setLayout(layout)
+
+    # 一个autopct指向的函数，lambda可以指向
+    def func(self, pct, allvals):
+        absolute = int(pct / 100. * np.sum(allvals))
+        return "{:.1f}%\n({:d} 台)".format(pct, absolute)
 
     # 绘制饼状图
     def plot_pie(self, x: list, values: list, type: str, grid=False):
         if x is None:  # 没有数据的时候的判断
             return
+
         # self.fig_line.axes.clear()
+
+        self.fig_line.axes.clear()
+
+
         self.fig_line.axes.pie(values,
                                labels=x,
-                               autopct='%1.1f%%',
-                               shadow=True,
+                               autopct=lambda pct: self.func(pct, values),
+                               shadow=False,
+                               colors=['y', 'g', 'b', 'r', 'w'],
                                startangle=150)
+
 
         self.fig_line.axes.set_title(type + "饼状图", fontsize=20)
         if grid:
             self.fig_line.axes.grid(True)
         # self.fig_line.axes.legend() #有图例总是无法覆盖 暂时先去掉 加上新数据后再看
+
+        self.fig_line.axes.legend(x, title="充电站所属市/区", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))  # 有图例总是无法覆盖 暂时先去掉 加上新数据后再看
+        self.fig_line.axes.set_title(type + "饼状图", fontsize=20)
+        self.fig_line.axes.axis('equal')
+        if grid:
+            self.fig_line.axes.grid(True)
+
+
         self.fig_line.draw()
 
     def get_plot_pie_row_and_line(self):
