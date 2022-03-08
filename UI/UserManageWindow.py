@@ -73,7 +73,7 @@ class Ui_ManageWindow(object):
         self.horizontalLayout.addWidget(self.btn_quit)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.tableView = QtWidgets.QTableView(self.layoutWidget)
-        self.tableView.setStyleSheet("background-image: url(:/image/back.jpg);")
+        self.tableView.setStyleSheet("background-color:rgb(61, 110, 153);")
         self.tableView.setObjectName("tableView")
         self.verticalLayout.addWidget(self.tableView)
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.SpanningRole, self.splitter)

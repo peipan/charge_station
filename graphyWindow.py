@@ -91,8 +91,8 @@ def visual_all(add, *level):
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     # risk_level = [10, 30, 50, 70, 90]
-    add = [[39.873079, 116.481913], [39.913904, 116.39728], [39.885987, 116.480132]]
-    level = [[10, 30, 50, 70, 90], [10, 10, 10, 10, 10], [90, 90, 90, 90, 90]]
+    add = [[39.984871, 116.411498], [39.827266, 116.559404]]
+    level = [[33, 34, 33, 33, 34, 33], [33, 34, 33, 33, 34, 33]]
     data = visual_all(add, *level)
     w = QtWebEngineWidgets.QWebEngineView()
     w.setHtml(data.getvalue().decode())

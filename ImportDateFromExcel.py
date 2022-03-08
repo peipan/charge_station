@@ -26,8 +26,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
         # 开启事务
         self.connection.begin()
         index = 0  # 记录索引 判断是哪一行出错 提示用户！！！
-        # recode1 = ["北工大充电站", str(1111.121212), str(1221.122121)]
-#  ...
+        # recode1 = ["北工大充电站", str(1111.121212), str(1221.122121)
         ################导入充电站名称与经纬度#######################
         try:
             record = data_df.values[0]
@@ -164,7 +163,9 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
         ##################################插入计算的计量误差与风险等级######################################
         # todo:加载数据之后开始计算测量误差和风险等级(尚未做)等参数并插入至数据库
         self.update_risk_level(station_name, record_begin_time, period_count)
+
         self.send_info(0)  # 发射信号,这个信号就代表数据插入成功！
+
 
 
     def update_risk_level(self, station_name, record_begin_time, period_count):

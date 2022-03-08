@@ -9,12 +9,12 @@ from PyQt5.QtWidgets import QSizePolicy
 
 # 画图类
 class Myplot2D(FigureCanvas):
-    def __init__(self, parent=None, width=15, height=10, dpi=100):
+    def __init__(self, parent=None, width=25, height=15, dpi=100):
         plt.rcParams['font.sans-serif'] = ['SimHei']  # 设置支持中文
         plt.rcParams['axes.unicode_minus'] = False  # 设置-号
 
         self.fig = plt.figure(figsize=(width, height), dpi=dpi)  # 创建一个新的图框
-
+        #self.fig = plt.figure(facecolor='#3d6e99')  # 改变图框底色 hyd
         #########################解决一个bug: {AttributeError}'Myplot2D' object has no attribute '_draw_pending'############################
         self._draw_pending = None
         self._is_drawing = None

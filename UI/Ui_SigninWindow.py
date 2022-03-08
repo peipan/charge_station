@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_SigninDialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(724, 539)
+        Dialog.resize(731, 539)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -118,7 +118,7 @@ class Ui_SigninDialog(object):
         self.check_password_lineEdit.setMinimumSize(QtCore.QSize(300, 0))
         self.check_password_lineEdit.setMaximumSize(QtCore.QSize(300, 16777215))
         self.check_password_lineEdit.setStyleSheet("color: #000000\n"
-                                                   "")
+"")
         self.check_password_lineEdit.setEchoMode(QtWidgets.QLineEdit.PasswordEchoOnEdit)
         self.check_password_lineEdit.setClearButtonEnabled(True)
         self.check_password_lineEdit.setObjectName("check_password_lineEdit")
@@ -181,33 +181,36 @@ class Ui_SigninDialog(object):
         self.btn.setObjectName("btn")
         self.btn_confirm_2 = QtWidgets.QPushButton(self.btn)
         self.btn_confirm_2.setMaximumSize(QtCore.QSize(300, 16777215))
-        self.btn_confirm_2.setStyleSheet(
-            "background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
-            "border-style:none;\n"
-            "border:1px solid #3f3f3f; \n"
-            "\n"
-            "padding:5px;\n"
-            "min-height:20px;\n"
-            "border-radius:15px;\n"
-            "font: 75 12pt \"微软雅黑\";")
+        self.btn_confirm_2.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"border-style:none;\n"
+"border:1px solid #3f3f3f; \n"
+"\n"
+"padding:5px;\n"
+"min-height:20px;\n"
+"border-radius:15px;\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_confirm_2.setObjectName("btn_confirm_2")
         self.btn_cancel = QtWidgets.QPushButton(self.btn)
         self.btn_cancel.setMaximumSize(QtCore.QSize(300, 16777215))
-        self.btn_cancel.setStyleSheet(
-            "background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
-            "border-style:none;\n"
-            "border:1px solid #3f3f3f; \n"
-            "\n"
-            "padding:5px;\n"
-            "min-height:20px;\n"
-            "border-radius:15px;\n"
-            "font: 75 12pt \"微软雅黑\";")
+        self.btn_cancel.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"border-style:none;\n"
+"border:1px solid #3f3f3f; \n"
+"\n"
+"padding:5px;\n"
+"min-height:20px;\n"
+"border-radius:15px;\n"
+"font: 75 12pt \"微软雅黑\";")
         self.btn_cancel.setObjectName("btn_cancel")
         self.verticalLayout.addWidget(self.btn)
         self.formLayout.setLayout(1, QtWidgets.QFormLayout.LabelRole, self.verticalLayout)
         self.label_8 = QtWidgets.QLabel(Dialog)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_8.sizePolicy().hasHeightForWidth())
+        self.label_8.setSizePolicy(sizePolicy)
         self.label_8.setMinimumSize(QtCore.QSize(0, 0))
-        self.label_8.setMaximumSize(QtCore.QSize(685, 129))
+        self.label_8.setMaximumSize(QtCore.QSize(731, 115))
         self.label_8.setPixmap(QtGui.QPixmap("UI/image/edge(sign).png"))
         self.label_8.setAlignment(QtCore.Qt.AlignCenter)
         self.label_8.setObjectName("label_8")

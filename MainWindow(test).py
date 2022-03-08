@@ -7,7 +7,7 @@ from Common import show_information_message, show_error_message, init_tableview,
 
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QHeaderView, QGridLayout
 
-from PyQt5.QtGui import QPainter, QPaintEvent, QPixmap, QStandardItem, QStandardItemModel
+from PyQt5.QtGui import QPainter, QPaintEvent, QPixmap, QStandardItem, QStandardItemModel, QBrush, QColor
 
 from UI.Ui_MainWindow import Ui_MainWindow
 
@@ -43,6 +43,10 @@ from matplotlib.backends.backend_qt5 import NavigationToolbar2QT as NavigationTo
 
 from Util.Plot import Myplot2D
 
+from decimal import Decimal
+
+import numpy as np
+
 import sys
 
 
@@ -50,7 +54,6 @@ import sys
 
 
 class MainWindow(QMainWindow):
-    sense_station_change = pyqtSignal(str)
 
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -69,7 +72,7 @@ class MainWindow(QMainWindow):
         self.setAutoFillBackground(False)  # 自动绘制背景
         self.setMinimumSize(1680, 1000)
 
-        self.backgroundPix = QPixmap("Icon/000.png")
+        # self.backgroundPix = QPixmap("Icon/000.png")
         self.pb = None  # 进度条窗口
 
         ###########################################################
@@ -83,13 +86,7 @@ class MainWindow(QMainWindow):
 
         self.chargeMapper = ChargeMapper()  # 注入操作数据库类
         self.chargeMapper_test = ChargeMapper_test()  # 注入操作数据库类
-        self.logger = get_logger("plot")
-
-        self.importdatatoexcel = ImportDatatoExcel()  # 注入操作数据库类
-
-        # 启用登录窗口
-        self.on_act_login_triggered()
-
+        self.importdatatoexcel = ImportDatatoExcel()
         ##################################hyd  加tableView功能  huang######################
         self.init_model = None
         init_tableview(self.UI.tableView, hor_size=50, ver_size=50)
@@ -101,6 +98,10 @@ class MainWindow(QMainWindow):
         self.UI.tableView.setSelectionModel(selection_model)
         # 设置表格充满这个布局QHeaderView
         self.UI.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # 所有列自动拉伸，充满界面
+
+        self.UI.tableView.horizontalHeader().setStyleSheet("QHeaderView::section{border-color: #142c58};")
+        self.UI.tableView.verticalHeader().setStyleSheet("QHeaderView::section{border-color: #142c58};")
+
         self.UI.tableView.selectionModel().currentRowChanged.connect(self.do_cur_row_change)
         ###########################hyd 设置主页面的饼状图显示##########################################
         self.fig_line = None
@@ -112,6 +113,9 @@ class MainWindow(QMainWindow):
         x, values = self.get_plot_pie_row_and_line()
         self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
         #############################################################
+
+        # 启用登录窗口
+        self.on_act_login_triggered()
 
     # 单击【登录】按钮
     @pyqtSlot()
@@ -157,8 +161,6 @@ class MainWindow(QMainWindow):
 
         thread.exec()  # 保护子线程，否则主线程调用函数结束的时候子线程也被迫退出 一定得添加 不然就会报错，调试都调不出来的错误
 
-
-
     # 单击【数据可视化】按钮
     @pyqtSlot()
     def on_act_show_triggered(self):
@@ -183,14 +185,14 @@ class MainWindow(QMainWindow):
     def on_act_output_triggered(self):
 
         file_path = QFileDialog.getSaveFileName(self, "save file", "E:/", "excel Files (*.xls)")  # 这里的file_name是tuple型
-        #self.importdatatoexcel.export_to_excel('table_charge_station', file_path[0])
+        # self.importdatatoexcel.export_to_excel('table_charge_station', file_path[0])
         # lists = [[1, 2, 3, 4], [45, 23, 456, 23, 54, 23], [12, 23, 23, 345, 23, 12]]
         if file_path[0] == '':
-             return
+            return
         else:
             # self.Save_list(lists, file_path[0])
             # 取tuple第一个元素即为地址
-            self.importdatatoexcel.export_to_excel('table_charge_station', file_path[0])
+            self.importdatatoexcel.export_to_excel("table_charge_pile", file_path[0])
 
     # 地图风险等级展示按钮
     @pyqtSlot()
@@ -203,12 +205,43 @@ class MainWindow(QMainWindow):
         #获取该充电站下的pid以及对应的风险等级数据，返回一个字典类型
         pid_and_risk_level_dict = self.chargeMapper.find_pid_risk_level_by_sid(sid)
         '''
-        # todo:外弹框 显示地图就ok，我需要把经纬度数据填入
+        # todo:外弹框 显示地图就ok，我需要把经纬度数据填
 
-        add = [[39.873079, 116.481913], [39.913904, 116.39728], [39.885987, 116.480132]]
-        level = [[10, 30, 50, 70, 90], [10, 10, 10, 10, 10], [90, 90, 90, 90, 90]]
-        data = visual_all(add, *level)
+        #add = [[39.873079, 116.481913], [39.913904, 116.39728], [39.885987, 116.480132]]
+        #level = [[10, 30, 50, 70, 90], [10, 10, 10, 10, 10], [90, 90, 90, 90, 90]]
+        location = self.chargeMapper_test.find_longitude_latitude_risk()
 
+        location1 = list([])  # 现在location是列表 需要把i i+1单独存成元组
+        location2 = list([])
+
+        for i in range(0, len(location)):
+            location1.append(location[i][0])
+            location2.append(location[i][1])
+            # level.append(location[i][2])
+        for k in range(0, len(location1)):
+            location1[k] = float(Decimal(location1[k]))
+            location2[k] = float(Decimal(location2[k]))
+        local_real = [list(l) for l in zip(location2, location1)]
+
+        a = 0
+        list3 = np.array(list(set([tuple(t) for t in local_real])), dtype='float').tolist()  # The truth value of an array
+        # with more than one element is ambiguous. Use a.any() or a.all() 但显示在folium.Icon这块
+
+        level = [[] for x in range(len(list3))]
+        for k in range(0, len(list3)):
+            if a == len(location):
+                break
+            for i in range(0, len(location)):
+                if location2[i] == list3[k][0]:
+                    # list1.append(location[i][2])  # 要把风险等级存入二维列表
+                    level[k].append(location[i][2])
+                    a = a + 1
+                else:
+                    j = k + 1
+                    level[j].append(location[i][2])
+                    a = a + 1
+
+        data = visual_all(list3, *level)  # list输入位置与风险等级
         # mapDisplay = MapDisplay(data)
         self.mapDisplay.trans_data(data)
         # self.mapDisplay.setAttribute(Qt.WA_DeleteOnClose)  # 设置关闭删除实例  应该是这句话一直出现了bug
@@ -255,12 +288,15 @@ class MainWindow(QMainWindow):
             show_information_message(self, message)
             x, values = self.get_plot_pie_row_and_line()
             self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
+            self.get_initial_model()
+        elif showInfo.info == -2:
+            message = "数据无效（无法计算出唯一解）！！！"
+            show_information_message(self, message)
         else:
             message = str(showInfo.info) + "行数据插入失败！请检查，然后重新导入"
             show_information_message(self, message)
 
         self.pb.close()  # 数据不管导入成功与否，进度条页面都得关
-
 
     # 关闭分页请求函数
     @pyqtSlot(int)
@@ -326,7 +362,7 @@ class MainWindow(QMainWindow):
         width = self.width()
         # 绘制的图片高度
         height = self.height() - self.statusBar().height() - self.UI.menubar.height() - self.UI.toolBar.height()
-        painter.drawPixmap(pointx, pointy, width, height, self.backgroundPix)  # 绘制背景图片
+        # painter.drawPixmap(pointx, pointy, width, height, self.backgroundPix)  # 绘制背景图片
         super(MainWindow, self).paintEvent(event)  # 向上传递QPaintEvent
 
     @pyqtSlot(QModelIndex, QModelIndex)
@@ -355,10 +391,10 @@ class MainWindow(QMainWindow):
 
     # 获取最初的数据模型  huang
     def get_initial_model(self):
-        head = list(['所属充电桩数量', '交流充电桩数量', '交流充电桩占比', '直流充电桩数量', '直流充电桩占比'])
+        head = list(['充电桩数量', '交流桩数量', '交流桩占比', '直流桩数量', '直流桩占比'])
         model = get_row_model(5, header=head)
         # all_name, all_pid = self.chargeMapper.find_chargeName_and_pidCount()
-        #all_pid = list([50, 60, 70, 30])  # 充电站数量
+        # all_pid = list([50, 60, 70, 30])  # 充电站数量
         all_pid = self.chargeMapper_test.find_table_pile_of_station_sum()
 
         if all_pid is None:
@@ -366,25 +402,25 @@ class MainWindow(QMainWindow):
         data = [list([]) for x in range(len(all_pid))]  # 预设进去多少行数据
 
         all_pid_j = self.chargeMapper_test.find_table_jiaoliu_num_of_station_sum()  # 交流充电桩数量
-        #if all_pid_j is None:
-            #all_pid_j = list([])
+        # if all_pid_j is None:
+        # all_pid_j = list([])
 
         per1 = list([])
         all_pid_j_per = [list([]) for x in range(len(all_pid))]
         for i in range(0, len(data)):
-            x = (all_pid_j[i]/all_pid[i]) * 100
+            x = (all_pid_j[i] / all_pid[i]) * 100
             all_pid_j_per[i].append('{:.0f}%'.format(x))
         for j in range(0, len(all_pid_j_per)):
             per1.append(all_pid_j_per[j][0])
 
         all_pid_z = self.chargeMapper_test.find_table_zhiliu_num_of_station_sum()  # 直流充电桩数量
-        #if all_pid_z is None:
-            #all_pid_z = list([])
+        # if all_pid_z is None:
+        # all_pid_z = list([])
 
         per2 = list([])
         all_pid_z_per = [list([]) for x in range(len(all_pid))]
         for i in range(0, len(data)):
-            y = (all_pid_z[i]/all_pid[i]) * 100
+            y = (all_pid_z[i] / all_pid[i]) * 100
             all_pid_z_per[i].append('{:.0f}%'.format(y))
         for j in range(0, len(all_pid_z_per)):
             per2.append(all_pid_z_per[j][0])
@@ -419,19 +455,19 @@ class MainWindow(QMainWindow):
 
     # 绘制饼状图
     def plot_pie(self, x: list, values: list, type: str, grid=False):
-        if x is None:  #没有数据的时候的判断
+        if x is None:  # 没有数据的时候的判断
             return
-        #self.fig_line.axes.clear()
+        # self.fig_line.axes.clear()
         self.fig_line.axes.pie(values,
                                labels=x,
                                autopct='%1.1f%%',
                                shadow=True,
                                startangle=150)
 
-        self.fig_line.axes.set_title(type + "饼状图")
+        self.fig_line.axes.set_title(type + "饼状图", fontsize=20)
         if grid:
             self.fig_line.axes.grid(True)
-        #self.fig_line.axes.legend() #有图例总是无法覆盖 暂时先去掉 加上新数据后再看
+        # self.fig_line.axes.legend() #有图例总是无法覆盖 暂时先去掉 加上新数据后再看
         self.fig_line.draw()
 
     def get_plot_pie_row_and_line(self):
@@ -448,6 +484,7 @@ class MainWindow(QMainWindow):
                 file2.write('\t')  # 相当于Tab一下，换一个单元格
             file2.write('\n')  # 写完一行立马换行
         file2.close()"""
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -298,7 +298,7 @@ class Ui_ParametersWindow(object):
     def retranslateUi(self, ParametersWindow):
         _translate = QtCore.QCoreApplication.translate
         ParametersWindow.setWindowTitle(_translate("ParametersWindow", "MainWindow"))
-        self.label_28.setText(_translate("ParametersWindow", "<html><head/><body><p><span style=\" font-family:\'华文隶书\'; font-size:18pt; font-weight:600; color:#2684cb;\">参数选择设置________________________________________________________________________________________________________________</span></p></body></html>"))
+        self.label_28.setText(_translate("ParametersWindow", "<html><head/><body><p><span style=\" font-family:\'华文隶书\'; font-size:18pt; font-weight:600; color:#ffffff;\">参数选择设置________________________________________________________________________________________________________________</span></p></body></html>"))
         self.checkBox_3.setText(_translate("ParametersWindow", "运营商"))
         self.checkBox_4.setText(_translate("ParametersWindow", "环境温度"))
         self.checkBox_6.setText(_translate("ParametersWindow", "使用频率"))
@@ -306,7 +306,7 @@ class Ui_ParametersWindow(object):
         self.checkBox_5.setText(_translate("ParametersWindow", "安装时长"))
         self.checkBox_2.setText(_translate("ParametersWindow", "其他因素"))
         self.btn_confirm_choose.setText(_translate("ParametersWindow", "确定"))
-        self.label_23.setText(_translate("ParametersWindow", "<html><head/><body><p><span style=\" font-family:\'华文隶书\'; font-size:18pt; font-weight:600; color:#2684cb;\">参数权重设置________________________________________________________________________________________________________________</span></p></body></html>"))
+        self.label_23.setText(_translate("ParametersWindow", "<html><head/><body><p><span style=\" font-family:\'华文隶书\'; font-size:18pt; font-weight:600; color:#ffffff;\">参数权重设置________________________________________________________________________________________________________________</span></p></body></html>"))
         self.label_16.setText(_translate("ParametersWindow", "<html><head/><body><p>安装时长权重</p></body></html>"))
         self.install_time_weight_lineEdit.setPlaceholderText(_translate("ParametersWindow", "0"))
         self.label_15.setText(_translate("ParametersWindow", "误差数据权重"))
@@ -320,7 +320,7 @@ class Ui_ParametersWindow(object):
         self.label_20.setText(_translate("ParametersWindow", "维护频次权重"))
         self.maintain_freq_weight_lineEdit.setPlaceholderText(_translate("ParametersWindow", "0"))
         self.btn_confirm_weight.setText(_translate("ParametersWindow", "确定"))
-        self.label_24.setText(_translate("ParametersWindow", "<html><head/><body><p><span style=\" font-family:\'华文隶书\'; font-size:18pt; font-weight:600; color:#2684cb;\">风险范围设置__________________________________________________________________________________________________________________</span></p></body></html>"))
+        self.label_24.setText(_translate("ParametersWindow", "<html><head/><body><p><span style=\" font-family:\'华文隶书\'; font-size:18pt; font-weight:600; color:#ffffff;\">风险范围设置__________________________________________________________________________________________________________________</span></p></body></html>"))
         self.label.setText(_translate("ParametersWindow", "电桩整体性能："))
         self.label_3.setText(_translate("ParametersWindow", "较低"))
         self.littlelowlineEdit.setPlaceholderText(_translate("ParametersWindow", "格式：nn-nn"))
@@ -331,7 +331,7 @@ class Ui_ParametersWindow(object):
         self.label_5.setText(_translate("ParametersWindow", "高"))
         self.highlineEdit.setPlaceholderText(_translate("ParametersWindow", "格式：nn-nn"))
         self.btn_confirm_range.setText(_translate("ParametersWindow", "确定"))
-        self.label_12.setText(_translate("ParametersWindow", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600; color:#3e94c9;\">----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span></p></body></html>"))
-        self.label_13.setText(_translate("ParametersWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#2684cb;\">注：所有权重相加不得超过一！</span></p></body></html>"))
+        self.label_12.setText(_translate("ParametersWindow", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600; color:#ffffff;\">----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span></p></body></html>"))
+        self.label_13.setText(_translate("ParametersWindow", "<html><head/><body><p><span style=\" color:#ffffff;\">注：所有权重相加不得超过一！</span></p></body></html>"))
         self.label_8.setText(_translate("ParametersWindow", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
 import main_rc

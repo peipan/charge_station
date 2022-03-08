@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(724, 539)
+        Dialog.resize(731, 539)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -204,8 +204,13 @@ class Ui_Dialog(object):
         self.verticalLayout.addWidget(self.btn)
         self.formLayout.setLayout(1, QtWidgets.QFormLayout.LabelRole, self.verticalLayout)
         self.label_8 = QtWidgets.QLabel(Dialog)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_8.sizePolicy().hasHeightForWidth())
+        self.label_8.setSizePolicy(sizePolicy)
         self.label_8.setMinimumSize(QtCore.QSize(0, 0))
-        self.label_8.setMaximumSize(QtCore.QSize(685, 129))
+        self.label_8.setMaximumSize(QtCore.QSize(731, 115))
         self.label_8.setStyleSheet("")
         self.label_8.setText("")
         self.label_8.setAlignment(QtCore.Qt.AlignCenter)

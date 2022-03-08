@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>724</width>
+    <width>731</width>
     <height>539</height>
    </rect>
   </property>
@@ -569,6 +569,12 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
    </item>
    <item row="0" column="0" colspan="2">
     <widget class="QLabel" name="label_8">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="minimumSize">
       <size>
        <width>0</width>
@@ -577,8 +583,8 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
      </property>
      <property name="maximumSize">
       <size>
-       <width>685</width>
-       <height>129</height>
+       <width>731</width>
+       <height>115</height>
       </size>
      </property>
      <property name="styleSheet">

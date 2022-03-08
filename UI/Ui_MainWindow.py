@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1192, 810)
-        MainWindow.setStyleSheet("background-color: rgb(255, 255, 255);")
+        #MainWindow.setStyleSheet("background-color: rgb(51, 102, 153);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
@@ -26,7 +26,9 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
         self.tabWidget.setSizePolicy(sizePolicy)
-        self.tabWidget.setStyleSheet("background-color: rgb(255, 255, 255);")
+        #self.tabWidget.setStyleSheet("background-color: rgb(51, 102, 153);\n"
+#"border-bottom:1px solid #20478b;")
+        self.tabWidget.setUsesScrollButtons(True)
         self.tabWidget.setTabsClosable(True)
         self.tabWidget.setObjectName("tabWidget")
         self.tab = QtWidgets.QWidget()
@@ -35,23 +37,29 @@ class Ui_MainWindow(object):
         self.gridLayout.setObjectName("gridLayout")
         self.label_3 = QtWidgets.QLabel(self.tab)
         self.label_3.setMinimumSize(QtCore.QSize(0, 32))
-        self.label_3.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.label_3.setMaximumSize(QtCore.QSize(16777215, 32))
         self.label_3.setStyleSheet("font: 17pt \"Adobe 黑体 Std R\";\n"
+"background-color: rgb(51, 102, 153);\n"
 "")
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 0, 0, 1, 1)
         self.tableView = QtWidgets.QTableView(self.tab)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tableView.sizePolicy().hasHeightForWidth())
         self.tableView.setSizePolicy(sizePolicy)
-        self.tableView.setMinimumSize(QtCore.QSize(750, 0))
+        self.tableView.setMinimumSize(QtCore.QSize(650, 0))
         self.tableView.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.tableView.setStyleSheet("font: 75 12pt \"微软雅黑\";")
+        self.tableView.setStyleSheet("font: 75 12pt \"微软雅黑\";\n"
+                                     #"background-color:rgb(109, 163, 163);\n"
+"border-bottom:1px solid #20478b;")
+        self.tableView.gridStyle()
         self.tableView.setObjectName("tableView")
         self.gridLayout.addWidget(self.tableView, 1, 0, 1, 1)
         self.frame = QtWidgets.QFrame(self.tab)
+        #self.frame.setStyleSheet("background-color: rgb(61, 110, 153);\n"
+#"border-bottom:1px solid #20478b;")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -194,6 +202,7 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.act_manager)
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.act_quit)
+        self.toolBar.addSeparator()
         self.toolBar_2.addAction(self.actiongraph)
         self.toolBar_2.addSeparator()
         self.toolBar_2.addAction(self.act_import_data)
@@ -212,7 +221,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_3.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; font-weight:600; font-style:italic; color:#145b7d;\">当前充电站统计数据：</span></p></body></html>"))
+        self.label_3.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; font-weight:600; font-style:italic; color:#ffffff;\">当前充电站统计数据：</span></p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "home"))
         self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar"))
         self.toolBar_2.setWindowTitle(_translate("MainWindow", "toolBar_2"))
