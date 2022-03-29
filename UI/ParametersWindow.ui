@@ -32,6 +32,47 @@
    <string>MainWindow</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Preferred</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>60</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_8">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
    <item row="2" column="0">
     <widget class="QSplitter" name="splitter_8">
      <property name="maximumSize">
@@ -54,7 +95,7 @@
        <item>
         <widget class="QLabel" name="label_28">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'华文隶书'; font-size:18pt; font-weight:600; color:#ffffff;&quot;&gt;参数选择设置________________________________________________________________________________________________________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'华文隶书'; font-size:18pt; font-weight:600; color:#336699;&quot;&gt;参数选择设置________________________________________________________________________________________________________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
@@ -79,69 +120,82 @@
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>39</height>
+           <height>16777215</height>
           </size>
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
-         <widget class="QCheckBox" name="checkBox_3">
-          <property name="styleSheet">
-           <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>运营商</string>
-          </property>
-         </widget>
-         <widget class="QCheckBox" name="checkBox_4">
-          <property name="styleSheet">
-           <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>环境温度</string>
-          </property>
-         </widget>
-         <widget class="QCheckBox" name="checkBox_6">
-          <property name="styleSheet">
-           <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>使用频率</string>
-          </property>
-         </widget>
-         <widget class="QCheckBox" name="checkBox">
-          <property name="styleSheet">
-           <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>生产厂家</string>
-          </property>
-         </widget>
-         <widget class="QCheckBox" name="checkBox_5">
-          <property name="styleSheet">
-           <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>安装时长</string>
-          </property>
-         </widget>
-         <widget class="QCheckBox" name="checkBox_2">
-          <property name="styleSheet">
-           <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>其他因素</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="btn_confirm_choose">
+         <widget class="QSplitter" name="splitter_14">
           <property name="maximumSize">
            <size>
-            <width>120</width>
-            <height>39</height>
+            <width>16777215</width>
+            <height>16777215</height>
            </size>
           </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <widget class="QCheckBox" name="check_time">
+           <property name="styleSheet">
+            <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
+           </property>
+           <property name="text">
+            <string>安装时长</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="check_frequency">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
+           </property>
+           <property name="text">
+            <string>使用频率</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="check_temp">
+           <property name="styleSheet">
+            <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
+           </property>
+           <property name="text">
+            <string>环境温度</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="check_humi">
+           <property name="styleSheet">
+            <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
+           </property>
+           <property name="text">
+            <string>环境湿度</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="check_protect">
+           <property name="styleSheet">
+            <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
+           </property>
+           <property name="text">
+            <string>维护频次</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="check_other">
+           <property name="text">
+            <string>其他因素</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton">
+           <property name="maximumSize">
+            <size>
+             <width>120</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));
 border-style:none;
 border:1px solid #3f3f3f; 
 
@@ -149,10 +203,11 @@ padding:5px;
 min-height:20px;
 border-radius:15px;
 font: 75 12pt &quot;微软雅黑&quot;;</string>
-          </property>
-          <property name="text">
-           <string>确定</string>
-          </property>
+           </property>
+           <property name="text">
+            <string>确定</string>
+           </property>
+          </widget>
          </widget>
         </widget>
        </item>
@@ -175,7 +230,7 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
        <item>
         <widget class="QLabel" name="label_23">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'华文隶书'; font-size:18pt; font-weight:600; color:#ffffff;&quot;&gt;参数权重设置________________________________________________________________________________________________________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'华文隶书'; font-size:18pt; font-weight:600; color:#336699;&quot;&gt;参数权重设置________________________________________________________________________________________________________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
@@ -242,10 +297,10 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
             <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
            </property>
            <property name="text">
-            <string>误差数据权重</string>
+            <string>环境温度权重</string>
            </property>
           </widget>
-          <widget class="QLineEdit" name="error_weight_lineEdit">
+          <widget class="QLineEdit" name="temper_weight_lineEdit">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -269,10 +324,10 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
             <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
            </property>
            <property name="text">
-            <string>环境温度权重</string>
+            <string>维护频次权重</string>
            </property>
           </widget>
-          <widget class="QLineEdit" name="temper_weight_lineEdit">
+          <widget class="QLineEdit" name="maintain_freq_weight_lineEdit">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -300,7 +355,7 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>10</height>
+           <height>13</height>
           </size>
          </property>
         </spacer>
@@ -381,10 +436,10 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
            <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
           </property>
           <property name="text">
-           <string>维护频次权重</string>
+           <string>其他因素权重</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="maintain_freq_weight_lineEdit">
+         <widget class="QLineEdit" name="other_weight_lineEdit">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -497,7 +552,7 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
        <item>
         <widget class="QLabel" name="label_24">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'华文隶书'; font-size:18pt; font-weight:600; color:#ffffff;&quot;&gt;风险范围设置__________________________________________________________________________________________________________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'华文隶书'; font-size:18pt; font-weight:600; color:#336699;&quot;&gt;风险范围设置__________________________________________________________________________________________________________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
@@ -733,7 +788,7 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
        <item>
         <widget class="QLabel" name="label_12">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600; color:#ffffff;&quot;&gt;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600; color:#336699;&quot;&gt;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
@@ -743,54 +798,13 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
           <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
          </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;注：所有权重相加不得超过一！&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#336699;&quot;&gt;注：所有权重相加不得超过一！&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
     </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label_8">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>100</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>100</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <spacer name="verticalSpacer_3">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Preferred</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>60</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>

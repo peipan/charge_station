@@ -179,9 +179,9 @@ class Ui_SigninDialog(object):
         self.btn = QtWidgets.QSplitter(Dialog)
         self.btn.setOrientation(QtCore.Qt.Horizontal)
         self.btn.setObjectName("btn")
-        self.btn_confirm_2 = QtWidgets.QPushButton(self.btn)
-        self.btn_confirm_2.setMaximumSize(QtCore.QSize(300, 16777215))
-        self.btn_confirm_2.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
+        self.btn_confirm = QtWidgets.QPushButton(self.btn)
+        self.btn_confirm.setMaximumSize(QtCore.QSize(300, 16777215))
+        self.btn_confirm.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
 "border-style:none;\n"
 "border:1px solid #3f3f3f; \n"
 "\n"
@@ -189,7 +189,7 @@ class Ui_SigninDialog(object):
 "min-height:20px;\n"
 "border-radius:15px;\n"
 "font: 75 12pt \"微软雅黑\";")
-        self.btn_confirm_2.setObjectName("btn_confirm_2")
+        self.btn_confirm.setObjectName("btn_confirm")
         self.btn_cancel = QtWidgets.QPushButton(self.btn)
         self.btn_cancel.setMaximumSize(QtCore.QSize(300, 16777215))
         self.btn_cancel.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
@@ -234,7 +234,7 @@ class Ui_SigninDialog(object):
         self.department_lineEdit.setPlaceholderText(_translate("Dialog", "部门"))
         self.label_6.setText(_translate("Dialog", "               电话："))
         self.telephone_lineEdit.setPlaceholderText(_translate("Dialog", "电话"))
-        self.btn_confirm_2.setText(_translate("Dialog", "确认"))
+        self.btn_confirm.setText(_translate("Dialog", "确认"))
         self.btn_cancel.setText(_translate("Dialog", "取消"))
 
 

@@ -143,18 +143,6 @@ class Ui_PlotWindow(object):
         self.verticalLayout.addWidget(self.btn_time)
         spacerItem5 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem5)
-        self.btn_other = QtWidgets.QPushButton(self.frame)
-        self.btn_other.setMaximumSize(QtCore.QSize(300, 16777215))
-        self.btn_other.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));\n"
-"border-style:none;\n"
-"border:1px solid #3f3f3f; \n"
-"\n"
-"padding:5px;\n"
-"min-height:20px;\n"
-"border-radius:15px;\n"
-"font: 75 12pt \"微软雅黑\";")
-        self.btn_other.setObjectName("btn_other")
-        self.verticalLayout.addWidget(self.btn_other)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
@@ -216,7 +204,6 @@ class Ui_PlotWindow(object):
         self.btn_tem.setText(_translate("PlotWindow", "环境温度"))
         self.btn_temp.setText(_translate("PlotWindow", "运营商"))
         self.btn_time.setText(_translate("PlotWindow", "安装时长"))
-        self.btn_other.setText(_translate("PlotWindow", "其他因素"))
         self.label_3.setText(_translate("PlotWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; font-weight:600; font-style:italic; color:#145b7d;\">----------------------------------------------</span></p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("PlotWindow", "Tab 1"))
 import main_rc

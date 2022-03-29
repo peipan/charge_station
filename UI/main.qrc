@@ -20,5 +20,6 @@
         <file>image/edge(plot).png</file>
         <file>image/数据导出.png</file>
         <file>image/地图.png</file>
+        <file>image/模板下载.png</file>
     </qresource>
 </RCC>

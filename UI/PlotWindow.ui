@@ -335,29 +335,6 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="btn_other">
-         <property name="maximumSize">
-          <size>
-           <width>300</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));
-border-style:none;
-border:1px solid #3f3f3f; 
-
-padding:5px;
-min-height:20px;
-border-radius:15px;
-font: 75 12pt &quot;微软雅黑&quot;;</string>
-         </property>
-         <property name="text">
-          <string>其他因素</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <spacer name="horizontalSpacer">

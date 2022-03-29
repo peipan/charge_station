@@ -15,11 +15,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1192, 810)
-
-        #MainWindow.setStyleSheet("background-color: rgb(51, 102, 153);")
-
-        MainWindow.setStyleSheet("background-color: rgb(51, 102, 153);")
-
+        MainWindow.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
@@ -30,13 +26,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
         self.tabWidget.setSizePolicy(sizePolicy)
-
-        #self.tabWidget.setStyleSheet("background-color: rgb(51, 102, 153);\n"
-#"border-bottom:1px solid #20478b;")
-
-        self.tabWidget.setStyleSheet("background-color: rgb(51, 102, 153);\n"
-"border-bottom:1px solid #20478b;")
-
+        self.tabWidget.setStyleSheet("")
         self.tabWidget.setUsesScrollButtons(True)
         self.tabWidget.setTabsClosable(True)
         self.tabWidget.setObjectName("tabWidget")
@@ -58,26 +48,14 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tableView.sizePolicy().hasHeightForWidth())
         self.tableView.setSizePolicy(sizePolicy)
-        self.tableView.setMinimumSize(QtCore.QSize(650, 0))
+        self.tableView.setMinimumSize(QtCore.QSize(600, 0))
         self.tableView.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.tableView.setStyleSheet("font: 75 12pt \"微软雅黑\";\n"
-
-                                     #"background-color:rgb(109, 163, 163);\n"
-
-                                     "background-color:#142c58;\n"
-
 "border-bottom:1px solid #20478b;")
-        self.tableView.gridStyle()
         self.tableView.setObjectName("tableView")
         self.gridLayout.addWidget(self.tableView, 1, 0, 1, 1)
         self.frame = QtWidgets.QFrame(self.tab)
-
-        #self.frame.setStyleSheet("background-color: rgb(61, 110, 153);\n"
-#"border-bottom:1px solid #20478b;")
-
-        self.frame.setStyleSheet("background-color: rgb(61, 110, 153);\n"
-"border-bottom:1px solid #20478b;")
-
+        self.frame.setStyleSheet("border-bottom:1px solid #20478b;")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -210,6 +188,14 @@ class Ui_MainWindow(object):
         font.setPointSize(13)
         self.act_map.setFont(font)
         self.act_map.setObjectName("act_map")
+        self.actionact_formwork = QtWidgets.QAction(MainWindow)
+        icon11 = QtGui.QIcon()
+        icon11.addPixmap(QtGui.QPixmap("UI/image/模板下载.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionact_formwork.setIcon(icon11)
+        font = QtGui.QFont()
+        font.setPointSize(13)
+        self.actionact_formwork.setFont(font)
+        self.actionact_formwork.setObjectName("actionact_formwork")
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.act_login)
         self.toolBar.addSeparator()
@@ -230,6 +216,8 @@ class Ui_MainWindow(object):
         self.toolBar_2.addAction(self.act_map)
         self.toolBar_2.addSeparator()
         self.toolBar_2.addAction(self.act_output)
+        self.toolBar_2.addSeparator()
+        self.toolBar_2.addAction(self.actionact_formwork)
         self.toolBar_2.addSeparator()
 
         self.retranslateUi(MainWindow)
@@ -264,9 +252,10 @@ class Ui_MainWindow(object):
         self.act_output.setToolTip(_translate("MainWindow", "数据导出"))
         self.act_map.setText(_translate("MainWindow", "地图展示"))
         self.act_map.setToolTip(_translate("MainWindow", "地图展示"))
+        self.actionact_formwork.setText(_translate("MainWindow", "下载模板"))
+        self.actionact_formwork.setToolTip(_translate("MainWindow", "下载模板"))
 import main_rc
 import qss_rc
-
 
 if __name__ == "__main__":
     import sys

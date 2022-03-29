@@ -16,7 +16,7 @@ class Myplot2D(FigureCanvas):
         plt.rcParams['font.size'] = plt0
 
         self.fig = plt.figure(figsize=(width, height), dpi=dpi)  # 创建一个新的图框
-        self.fig = plt.figure(facecolor='#3d6e99')  # 改变图框底色 hyd
+        #self.fig = plt.figure(facecolor='#3d6e99')  # 改变图框底色 hyd
         #########################解决一个bug: {AttributeError}'Myplot2D' object has no attribute '_draw_pending'############################
         self._draw_pending = None
         self._is_drawing = None

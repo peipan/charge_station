@@ -81,10 +81,10 @@ class MainWindow(QMainWindow):
         self.setAutoFillBackground(False)  # 自动绘制背景
         self.setMinimumSize(1680, 1000)
 
-        self.backgroundPix = QPixmap("Icon/000.png")
+        self.backgroundPix = QPixmap("Icon/00.png")
         self.pb = None #进度条窗口
 
-        self.head = list(['所属充电站', '总数', '交流桩数量', '交流桩占比', '直流桩数量', '直流桩占比'])
+        self.head = list(['充电站', '总数', '交流桩', '占比', '直流桩', '占比'])
         self.model = get_row_model(6, header=self.head)
         ###########################################################
 
@@ -333,7 +333,7 @@ class MainWindow(QMainWindow):
             self.importdatatoexcel.export_to_excel('table_charge_station', file_path[0])
 
 
-    # 地图风险等级展示按钮
+    # 地图风险等级展示按钮  author：hyd
     @pyqtSlot()
     def on_act_map_triggered(self):
         '''
@@ -393,7 +393,7 @@ class MainWindow(QMainWindow):
 
     # 初始化画图区域 没直接用plotsubwindow的是因为这里是frame 那个是frame_5 改了会影响数据可视化页面 hyd
     def init_plot_frame(self):
-        self.fig_line = Myplot2D(plt0=15)
+        self.fig_line = Myplot2D(plt0=10)
         #tool = NavigationToolbar(self.fig_line, self.UI.frame)
         layout = QGridLayout()
         layout.addWidget(self.fig_line)
@@ -415,7 +415,7 @@ class MainWindow(QMainWindow):
                                 labels=x,
                                 autopct=lambda pct: self.func(pct, values),
                                 shadow=True,
-                                colors=['y', 'g', 'b', 'r', 'w'],
+                                #colors=['y', 'g', 'b', 'r', 'w'],
                                 startangle=100)
         #self.fig_line.axes.legend(x, title="", loc='center left', fontsize=10, bbox_to_anchor=(1, 0, 0.5, 1))  # 有图例总是无法覆盖 暂时先去掉 加上新数据后再看
         self.fig_line.axes.legend()

@@ -521,7 +521,7 @@
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <widget class="QPushButton" name="btn_confirm_2">
+       <widget class="QPushButton" name="btn_confirm">
         <property name="maximumSize">
          <size>
           <width>300</width>
