@@ -42,6 +42,7 @@ from mapper.ChargeMapper import ChargeMapper
 from mapper.ChargeMapper_test import ChargeMapper_test
 
 from ImportDateFromExcel import Thread_import_data_from_excel, ShowInfo
+from ImportDatatoExcel import ImportDatatoExcel
 
 from Util.Grade import Grade
 from Util.Plot import Myplot2D
@@ -51,6 +52,7 @@ from graphyWindow import visual_all
 from loginWindow import LoginWindow, User
 from mapper.ChargeMapper import ChargeMapper
 from mapper.ChargeMapper_test import ChargeMapper_test
+from decimal import Decimal
 
 
 from matplotlib.backends.backend_qt5 import NavigationToolbar2QT as NavigationToolbar
@@ -97,6 +99,8 @@ class MainWindow(QMainWindow):
         self.chargeMapper = ChargeMapper()  # 注入操作数据库类
         self.chargeMapper_test = ChargeMapper_test()  # 注入操作数据库类
         ##########################################################
+
+        self.importdatatoexcel = ImportDatatoExcel()
 
         ##################################hyd  加tableView功能  huang######################
         self.init_model = None
@@ -346,11 +350,40 @@ class MainWindow(QMainWindow):
         '''
         # todo:外弹框 显示地图就ok，我需要把经纬度数据填
 
-        add = [[39.873079, 116.481913], [39.913904, 116.39728], [39.885987, 116.480132]]
-        level = [[10, 30, 50, 70, 90], [10, 10, 10, 10, 10], [90, 90, 90, 90, 90]]
-        add = self.chargeMapper_test.fine_longitude_latitude_risk()
-        data = visual_all(add)
-        #data = visual_all(add, *level) # list输入位置与风险等级
+        location = self.chargeMapper_test.find_longitude_latitude_risk()
+
+        location1 = list([])  # 现在location是列表 需要把i i+1单独存成元组
+        location2 = list([])
+
+        for i in range(0, len(location)):
+            location1.append(location[i][0])
+            location2.append(location[i][1])
+            # level.append(location[i][2])
+        for k in range(0, len(location1)):
+            location1[k] = float(Decimal(location1[k]))
+            location2[k] = float(Decimal(location2[k]))
+        local_real = [list(l) for l in zip(location2, location1)]
+
+        a = 0
+        list3 = np.array(list(set([tuple(t) for t in local_real])),
+                         dtype='float').tolist()  # The truth value of an array
+        # with more than one element is ambiguous. Use a.any() or a.all() 但显示在folium.Icon这块
+
+        level = [[] for x in range(len(list3))]
+        for k in range(0, len(list3)):
+            if a == len(location):
+                break
+            for i in range(0, len(location)):
+                if location2[i] == list3[k][0]:
+                    # list1.append(location[i][2])  # 要把风险等级存入二维列表
+                    level[k].append(location[i][2])
+                    a = a + 1
+                else:
+                    j = k + 1
+                    level[j].append(location[i][2])
+                    a = a + 1
+
+        data = visual_all(list3, *level)  # list输入位置与风险等级
 
         # mapDisplay = MapDisplay(data)
         self.mapDisplay.trans_data(data)
