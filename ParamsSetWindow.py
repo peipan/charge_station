@@ -1,23 +1,22 @@
 
 from Ui_ParametersWindow import Ui_ParametersWindow
 
-from matplotlib.backends.backend_qt5 import NavigationToolbar2QT as NavigationToolbar
-
 from PyQt5.QtWidgets import QMainWindow, QApplication, QGridLayout, QDialog
 
 from PyQt5.QtCore import pyqtSlot, QCoreApplication
 
 from Common import show_error_message, show_information_message, get_validator
 
-from Util.Plot import Myplot2D
-
-from PyQt5.QtCore import Qt, pyqtSignal
+from mapper.ChargeMapper import ChargeMapper
 
 class ParamsSetWindow(QDialog):
+
     def __init__(self):
         super(ParamsSetWindow, self).__init__()
         self.__UI = Ui_ParametersWindow()
         self.__UI.setupUi(self)
+
+        self.chargeMapper = ChargeMapper()
 
         ##  ================================================================ #
         #self.setAutoFillBackground(True)  # 设置自动填充背景
@@ -42,10 +41,23 @@ class ParamsSetWindow(QDialog):
         humi_weight = self.str_to_float(self.__UI.humi_weight_lineEdit.text())  # 获取湿度权重
         maintain_freq_weight = self.str_to_float(self.__UI.maintain_freq_weight_lineEdit.text())  # 获取维护频次权重
         sum = (temper_weight + error_weight + install_time_weight + use_freq_weight + humi_weight + maintain_freq_weight)
+        weights = list([])
+        weights.append(error_weight)
+        weights.append(install_time_weight)
+        weights.append(use_freq_weight)
+        weights.append(humi_weight)
         if sum > 1 or sum < 1:
             #提示错误信息
             message = "所有权重不加不等于一！！！"
             show_error_message(self, message)
+        else:
+            data = self.chargeMapper.find_weights_param()
+            if data == None:
+                self.chargeMapper.insert_weights_param(weights=weights)
+            else:
+                self.chargeMapper.update_weight_param(weights=weights)
+
+
 
     def str_to_float(self, s: str):
         if s == '':
@@ -59,6 +71,8 @@ class ParamsSetWindow(QDialog):
             div *= 10
         sum = float(int(s2) / div)
         return sum
+
+
 
 
 if __name__ == "__main__":

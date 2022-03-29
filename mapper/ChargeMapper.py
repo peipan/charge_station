@@ -1,5 +1,5 @@
 #该文件主要用与与充电站表（table_charge_station）进行数据交互作用
-from Common import get_db_connection, execute_inquiry, show_information_message
+from Common import get_db_connection, execute_inquiry, show_information_message, execute_sql
 
 class ChargeMapper():
     def __init__(self):
@@ -295,4 +295,24 @@ class ChargeMapper():
         data = []
         *_, data = execute_inquiry(sql, sid, connection=self.connection, cursor=self.cursor)
         return data
+    ####################################################################################################################
+
+    ########################################权值参数设置##################################################################
+    def find_weights_param(self):
+        sql = "select error_weight, install_time_weight, use_freq_weight, humi_weight from table_weight_values where wid = 1"
+        data = []
+        *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
+        return data
+
+    def insert_weights_param(self, weights: list):
+        sql = "insert into table_weight_values (wid, error_weight, install_time_weight, use_freq_weight, humi_weight) values(%s, %s, %s, %s, %s)"
+        data = []
+        flg = execute_sql(sql, [1, weights[0], weights[1], weights[2], weights[3]], connection=self.connection, cursor=self.cursor)
+        return flg
+
+    def update_weight_param(self, weights: list):
+        sql = "update table_weight_values set error_weight = %s, install_time_weight = %s, use_freq_weight = %s, humi_weight = %s where wid = 1"
+        data = []
+        flg = execute_sql(sql, weights, connection=self.connection, cursor=self.cursor)
+        return flg
     ####################################################################################################################

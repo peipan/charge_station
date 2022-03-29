@@ -225,9 +225,8 @@ class PlotSubWindow(QMainWindow):
 
         ax = sns.catplot(x="iteration", y="reward", ax=self.fig_line.axes, palette=['r', 'b', 'g'], hue="等级指数", ci="sd", kind="bar", data=dataset, legend=True)
 
-        sns.despine(top=False, right=False, left=False, bottom=False)
+        #sns.despine(top=False, right=False, left=False, bottom=False)
         #ax.set(xlabel='Iteration', ylabel='风险等级指数')
-
         self.fig_line.axes.set_ylabel("风险等级指数", fontsize=13)
         if type_label == '生产厂家':
             self.fig_line.axes.set_xlabel("生产厂家", fontsize=13)
@@ -237,7 +236,7 @@ class PlotSubWindow(QMainWindow):
             self.fig_line.axes.set_xlabel("使用频率", fontsize=13)
         #self.fig_line.axes.legend(title='', loc='upper right', labels=["最高指数", "平均指数", "最低指数"])
         #plt.show()
-        self.fig_line.draw_idle()
+        #self.fig_line.draw_idle()
 
     # 绘制饼状图
     def plot_pie(self, x: list, values: list, type: str, grid=False):

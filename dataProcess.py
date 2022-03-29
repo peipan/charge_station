@@ -4,9 +4,16 @@ from mapper.ChargeMapper import ChargeMapper
 import numpy as np
 import numpy.linalg as la
 
+from PyQt5.QtCore import pyqtSlot
+
+from ParamsSetWindow import ParamsSetWindow
+
 class DataProcess():
     def __init__(self):
         self.chargeMapper = ChargeMapper() #注入数据库交互文件
+        self.paramsSetWindow = ParamsSetWindow()
+        #self.paramsSetWindow.sig.connect(self.do_receive_config)  # 注意这个类不是pyqt的带有窗口的类，我估计就实现不了信号接收的功能！！！  故改变思路 保存到数据库把
+        #self.weight_values = None  # 权值数组  记录的
 
     #根据时间段至数据库取出某个充电站中所有充电桩电能计量数据#
     def compute_energy(self, station_name, start_time, end_time):
@@ -113,18 +120,18 @@ class DataProcess():
         return list, True
 
 
-
     #计算充电桩n的风险评估量化数据，将整体计量性能分为“高、较高、较低、低“四种风险等级
     #weight_values：代表[k1, k2, k3,..., km]
     #返回：每个充电桩的风险等级指数，返回一个列表
-    def compute_risk_level(self, sid, error_list, weight_values=None):
+    def compute_risk_level(self, sid, error_list):
         #根据pid和sid从数据库中查找误差数据、充电桩安装时长、使用频率、环境温度、环境湿度、运营商维护次数等等
         data = self.chargeMapper.find_risk_factors_by_pid_and_sid(sid)
         if data is None:
             return
+        data_weights = self.chargeMapper.find_weights_param()
         Q = 0
         list_Q = list([])
-        if weight_values is None:
+        if data_weights is None:
             for i in range(0, len(data)):
                 error = round(error_list[i], 3)
                 level = data[i][0]
@@ -137,7 +144,21 @@ class DataProcess():
                     (-0.0002 * (env_temper) * (env_temper) + 0.0114 * env_temper + 0.0667)
                 list_Q.append(Q*100)
         else:  # 这种情况作为手动输入了权值的情况，待做
-            Q = 0
+            weight_values = list([])
+            for i in range(0, len(data_weights[0])):     # 将数据库中的权值系数取出
+                weight_values.append(float(data_weights[0][i]))
+
+            for i in range(0, len(data)):
+                error = round(error_list[i], 3)
+                level = data[i][0]
+                install_time = data[i][1]
+                use_freq = float(data[i][2])
+                env_temper = float(data[i][3])
+                Q = (0.9195 * (error / level) * (error / level) + 0.1195) * weight_values[0] + \
+                    (0.0024 * (install_time * install_time) + 0.0745 * install_time + 0.0203) * weight_values[1] + \
+                    (0.4348 * (use_freq * use_freq) + 0.0715 * use_freq + 0.0321) * weight_values[2] + \
+                    (-0.0002 * (env_temper) * (env_temper) + 0.0114 * env_temper + 0.0667 * weight_values[3])
+                list_Q.append(Q * 100)
         return list_Q
 
 if __name__ == "__main__":

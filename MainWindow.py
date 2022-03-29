@@ -333,18 +333,6 @@ class MainWindow(QMainWindow):
             self.importdatatoexcel.export_to_excel('table_charge_station', file_path[0])
 
 
-
-        file_path = QFileDialog.getSaveFileName(self, "save file", "E:/", "excel Files (*.xls)")  # 这里的file_name是tuple型
-        #self.importdatatoexcel.export_to_excel('table_charge_station', file_path[0])
-        # lists = [[1, 2, 3, 4], [45, 23, 456, 23, 54, 23], [12, 23, 23, 345, 23, 12]]
-        if file_path[0] == '':
-             return
-        else:
-            # self.Save_list(lists, file_path[0])
-            # 取tuple第一个元素即为地址
-            self.importdatatoexcel.export_to_excel('table_charge_station', file_path[0])
-
-
     # 地图风险等级展示按钮
     @pyqtSlot()
     def on_act_map_triggered(self):
