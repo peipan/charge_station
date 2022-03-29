@@ -84,7 +84,7 @@ class ChargeMapper_test():
     #根据sid查询table_charge_pile中的数据，通过分组sid求不同区域的充电桩总和，处理成横纵坐标  hyd
     def find_plot_attr_by_sid_and_main_data(self):
         data = []
-        sql = "select s_local, s_num from table_charge_station where 1=1"
+        sql = "select s_local, s_num from table_charge_station where is_validity = 0"
         #短时间内（数据库查询不到刚插入的数据问题）第二次查询不到问题，也就是事务的隔离级别问题，默认是可重复读，所以第二次读依然是上一次的数据，解决方法就是没查询一次数据就直接commit!!!
         *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
         if data is None:

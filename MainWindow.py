@@ -1,7 +1,4 @@
 
-
-from PyQt5.QtCore import pyqtSlot, Qt, QItemSelectionModel, QModelIndex, pyqtSignal
-
 import sys
 import numpy as np
 from PyQt5.QtCore import pyqtSlot, Qt, QItemSelectionModel, QModelIndex
@@ -14,18 +11,6 @@ from Common import show_information_message, show_error_message, init_tableview,
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QHeaderView, QGridLayout
 
 from PyQt5.QtGui import QPainter, QPaintEvent, QPixmap, QStandardItem, QStandardItemModel
-
-from UI.Ui_MainWindow import Ui_MainWindow
-
-from loginWindow import LoginWindow, User
-
-from SigninWindow import SigninWindow
-
-from PlotWindow import PlotWindow
-
-
-from ImportDateFromExcel import Thread_import_data_from_excel, ShowInfo
-from MapDisplay import MapDisplay
 
 from ParamsSetWindow import ParamsSetWindow
 from PlotWindow import PlotWindow

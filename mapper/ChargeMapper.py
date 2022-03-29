@@ -206,7 +206,7 @@ class ChargeMapper():
 
     #########################################################首页##########################################################################
     def find_first_page_table(self):
-        sql = "select station_name, s_jiaoliu_num, s_zhiliu_num from table_charge_station where 1=1"
+        sql = "select station_name, s_jiaoliu_num, s_zhiliu_num from table_charge_station where is_validity = 0"
         data = []
         *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
         return data
@@ -216,7 +216,7 @@ class ChargeMapper():
     ##########################################图形展示页面与数据库交互的代码 2022/02/21 peipan##################################################
     #查找最新的sid
     def find_newest_sid(self):
-        sql = "select max(sid) from table_charge_station where 1 = 1"
+        sql = "select max(sid) from table_charge_station where is_validity = 0"
         data = []
         *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
         return data[0][0]

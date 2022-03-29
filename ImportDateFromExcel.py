@@ -174,6 +174,14 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
         result, isOnlyJie = dataProcess.compute_matrix(list_A, list_B)  # 充电桩计量误差数据，该数据需要被插入至 数据库table_pile_display_info表中  result为列表类型, isOnlyJie代表矩阵是否唯一解
 
         if not isOnlyJie:
+            try:
+                self.connection.begin()
+                sql = "update table_charge_station set is_validity = 1 where sid = %s"
+                self.cursor.execute(sql, [sid])
+                self.connection.commit()
+            except Exception as e:
+                self.connection.rollback()
+                print("这是一个" + str(e) + "错误!")
             self.send_info(-2)  # 代表矩阵不是唯一解 发送给主页展示
             return
         risk_level = dataProcess.compute_risk_level(sid, result)
