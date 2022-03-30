@@ -60,11 +60,11 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
             sid = 0
             if len(data) != 0:
                 sid = data[0][0]
-                sql = "select sid from table_station_period where sid = %s and start_time = %s"
+                sql = "select sid from table_station_period where sid = %s and start_time = %s and is_validity = 0"
                 self.cursor.execute(sql, [sid, record[0]])
                 data = self.cursor.fetchall()
                 if len(data) != 0:
-                    self.send_info(-1)  # 发射信号
+                    self.send_info(-1)  # 发射数据重复新号
                     return
             if sid == 0: #防止充电站名称重复，在数据库里面
                 # 插入一些直接能从excel表中直接获取的（名称，地址，经纬度，起始时间，），需要统计出来的（充电转中充电桩数量、交流充电桩数量、直流充电桩数量）等，就后面统计完再update进去表中
@@ -90,6 +90,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
             tmp_pid = 0
             for record in list(data_df.values):
                 time.sleep(0.05)  # 休眠时间 可调 -> 意思就是该线程放出cpu的时间，越小导入的数据的时长就越短！！！
+                index = index + 1
                 sql = "select sid from table_charge_station where station_name = %s"
                 self.cursor.execute(sql, station_name)
                 data = self.cursor.fetchall()

@@ -219,7 +219,7 @@ class MainWindow(QMainWindow):
             message = "数据无效（无法计算出唯一解）！！！"
             show_information_message(self, message)
         else:
-            message = str(showInfo.info) + "行数据插入失败！请检查，然后重新导入"
+            message = "大约 " + str(showInfo.info) + "行数据插入失败！请检查，然后重新导入"
             show_information_message(self, message)
         self.pb.close() #数据不管导入成功与否，进度条页面都得关闭
 

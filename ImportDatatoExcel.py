@@ -33,9 +33,9 @@ class ImportDatatoExcel:
                 "SELECT pid_name, pid_addr, carrieroperator, risk_level, manufacturer, model_type, factory_num FROM %s WHERE risk_level > 30" % table)
 
         daochu_time = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-
+        temple = self.cursor.fetchone()
         for i in range(row_count):
-            temple = self.cursor.fetchone()
+
             temple = list(temple)
             temple.append(daochu_time)
 
@@ -43,7 +43,7 @@ class ImportDatatoExcel:
                 worksheet.write(i + 1, j, temple[j])
                 workbook.save(file_path)
 
-        close_db(self.connection, self.cursor)
+        #close_db(self.connection, self.cursor)
 
     def export_to_excel_formwork(self, table, file_path):
 
@@ -58,20 +58,23 @@ class ImportDatatoExcel:
         worksheet = workbook.add_sheet("sheet1")
         # 首先向excel表中写入数据表的字段
         column_count = self.cursor.execute("desc %s" % table)
+        temple = self.cursor \
+            .fetchone()
+        #close_db(self.connection, self.cursor)
         for i in range(column_count):
-            temple = self.cursor\
-                .fetchone()
+
             worksheet.write(0, i, temple[0])
         # 向构建好字段的excel表写入所有的数据记录
         row_count = self.cursor.execute(
                 "SELECT * FROM %s" % table)
+        temple = self.cursor.fetchone()
         for i in range(row_count):
-            temple = self.cursor.fetchone()
+
             for j in range(column_count):
                 worksheet.write(i + 1, j, temple[j])
                 workbook.save(file_path)
 
-        close_db(self.connection, self.cursor)
+        #close_db(self.connection, self.cursor)
 
 """
 if __name__ == "__main__":
