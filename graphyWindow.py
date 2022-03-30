@@ -34,10 +34,11 @@ def set_level(*level):
     html_1 = """<table border="0">""" + html1 + """</table>"""
     return html_1
 
-def visual_all(add, *level):
+def visual_all(add,  addr, *level):
     #app = QtWidgets.QApplication(sys.argv)
+
     whm = folium.Map(
-        location=[39.873079, 116.481913],
+        location=addr,  #默认的打开界面显示的坐标
         tiles='http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z={z}',  # bug
         # 高德地图，暂不支持百度地图的底图
         zoom_start=20,  # 默认放大倍数

@@ -90,7 +90,7 @@ class MainWindow(QMainWindow):
         ##################################hyd  加tableView功能  huang######################
         self.init_model = None
         init_tableview(self.UI.tableView, hor_size=50, ver_size=50)
-        self.get_initial_model()
+        self.get_initial_model(shuaxinchaxun=0)
         data_model = self.init_model
         selection_model = QItemSelectionModel(data_model)
 
@@ -226,7 +226,7 @@ class MainWindow(QMainWindow):
             show_information_message(self, message)
             x, values = self.get_plot_pie_row_and_line()
             self.plot_pie(x, values, '北京市各区域充电桩数据及比例显示')
-            self.get_initial_model()
+            self.get_initial_model(shuaxinchaxun=1)
             data_model = self.init_model
             selection_model = QItemSelectionModel(data_model)
             self.UI.tableView.setModel(data_model)
@@ -312,7 +312,8 @@ class MainWindow(QMainWindow):
 
 
         file_path = QFileDialog.getSaveFileName(self, "save file", "E:/", "excel Files (*.xls)")  # 这里的file_name是tuple型
-        #self.importdatatoexcel.export_to_excel('table_charge_station', file_path[0])
+        #self.impo
+        # rtdatatoexcel.export_to_excel('table_charge_station', file_path[0])
         # lists = [[1, 2, 3, 4], [45, 23, 456, 23, 54, 23], [12, 23, 23, 345, 23, 12]]
         if file_path[0] == '':
              return
@@ -321,6 +322,17 @@ class MainWindow(QMainWindow):
             # 取tuple第一个元素即为地址
             self.importdatatoexcel.export_to_excel('table_charge_station', file_path[0])
 
+    # 下载导出模板数据文件 .txt (hyd)
+    @pyqtSlot()
+    def on_actionact_formwork_triggered(self):
+        file_path = QFileDialog.getSaveFileName(self, "save file", "E:/",
+                                                "excel Files (*.xls)")  # 这里的file_name是tuple型
+        if file_path[0] == '':
+            return
+        else:
+        # self.Save_list(lists, file_path[0])
+            # 取tuple第一个元素即为地址
+            self.importdatatoexcel.export_to_excel_formwork('table_formwork', file_path[0])
 
     # 地图风险等级展示按钮  author：hyd
     @pyqtSlot()
@@ -368,7 +380,8 @@ class MainWindow(QMainWindow):
                     level[j].append(location[i][2])
                     a = a + 1
 
-        data = visual_all(list3, *level)  # list输入位置与风险等级
+        addr = local_real[len(local_real)-1]
+        data = visual_all(list3, addr, *level)  # list输入位置与风险等级
 
         # mapDisplay = MapDisplay(data)
         self.mapDisplay.trans_data(data)
@@ -382,8 +395,9 @@ class MainWindow(QMainWindow):
         self.cur_row = cur.row()
 
     # 获取最初的数据模型  huang
-    def get_initial_model(self):
-        ret_data = self.chargeMapper.find_first_page_table()
+    def get_initial_model(self, shuaxinchaxun: int):
+        new_id = self.chargeMapper.find_newest_sid()
+        ret_data = self.chargeMapper.find_first_page_table(new_id, shuaxinchaxun=shuaxinchaxun)
         if ret_data is None:
             return list([])
         data = list([])
@@ -434,7 +448,8 @@ class MainWindow(QMainWindow):
                                 autopct=lambda pct: self.func(pct, values),
                                 shadow=True,
                                 #colors=['y', 'g', 'b', 'r', 'w'],
-                                startangle=100)
+                                startangle=100
+                               )
         #self.fig_line.axes.legend(x, title="", loc='center left', fontsize=10, bbox_to_anchor=(1, 0, 0.5, 1))  # 有图例总是无法覆盖 暂时先去掉 加上新数据后再看
         self.fig_line.axes.legend()
         self.fig_line.axes.set_title(type + "饼状图", fontsize=20)

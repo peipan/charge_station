@@ -48,8 +48,8 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tableView.sizePolicy().hasHeightForWidth())
         self.tableView.setSizePolicy(sizePolicy)
-        self.tableView.setMinimumSize(QtCore.QSize(600, 0))
-        self.tableView.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.tableView.setMinimumSize(QtCore.QSize(650, 0))
+        self.tableView.setMaximumSize(QtCore.QSize(650, 16777215))
         self.tableView.setStyleSheet("font: 75 12pt \"微软雅黑\";\n"
 "border-bottom:1px solid #20478b;")
         self.tableView.setObjectName("tableView")
