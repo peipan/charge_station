@@ -291,7 +291,25 @@ class ChargeMapper():
 
     # 环境温度与风险等级指数的关系，返回x轴参数、最低指数、平均指数、最高指数
     def find_env_temper_and_risk_index(self, sid: int):
-        sql = "select manufacturer, min(risk_level), avg(risk_level), max(risk_level) from table_charge_pile where sid = %s group by manufacturer"
+        sql = """SELECT
+                    table_temper.temper,
+                    MIN(table_charge_pile.risk_level),
+                    AVG(table_charge_pile.risk_level),
+                    MAX(table_charge_pile.risk_level)
+                FROM
+                    table_charge_pile,
+                    (SELECT
+                        sid,
+                        AVG(env_temper) AS temper
+                    FROM
+                        table_station_period
+                    WHERE
+                        sid = %s) table_temper
+                WHERE
+                    table_charge_pile.sid = table_temper.sid
+                GROUP BY
+                    table_temper.temper;
+                """
         data = []
         *_, data = execute_inquiry(sql, sid, connection=self.connection, cursor=self.cursor)
         return data

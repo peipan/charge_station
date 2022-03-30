@@ -130,22 +130,6 @@ class PlotSubWindow(QMainWindow):
         self.fig_line.axes.legend()
         self.fig_line.draw()
 
-    '''
-    def plt_multi_line(self, row=None, line=None, type=None):
-        
-        episode = row
-        reward = line[0]
-        reward2 = line[1]
-        reward3 = line[2]
-        
-        episode = [1, 2, 3]
-        reward = [5, 8, 5]
-        reward2 = [4, 6, 6]
-        reward3 = [6, 4, 7]
-        RL1_date = pd.DataFrame({'iteration': episode, 'reward': reward, 'algo': 'DRL1', 'style': '*'})
-        RL2_data = pd.DataFrame({'iteration': episode, 'reward': reward2, 'algo': 'DRL2', 'style': 'h'})
-        RL3_data = pd.DataFrame({'iteration': episode, 'reward': reward3, 'algo': 'DRL3', 'style': 'v'})
-    '''
 
     def plt_multi_line(self, row=None, line=None, type_label=None):
         reward = list([])

@@ -1,9 +1,6 @@
 
-import sys
 import numpy as np
 from PyQt5.QtCore import pyqtSlot, Qt, QItemSelectionModel, QModelIndex
-from PyQt5.QtGui import QPainter, QPaintEvent, QPixmap, QStandardItem, QStandardItemModel
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QHeaderView, QGridLayout
 
 from Common import show_information_message, show_error_message, init_tableview, get_row_model
 
@@ -18,19 +15,12 @@ from SigninWindow import SigninWindow
 from UI.Ui_MainWindow import Ui_MainWindow
 from UserManageWindow import ManageWindow
 
-from graphyWindow import visual_all
-
 from MapDisplay import MapDisplay
-
-from mapper.ChargeMapper import ChargeMapper
-
-from mapper.ChargeMapper_test import ChargeMapper_test
 
 from ImportDateFromExcel import Thread_import_data_from_excel, ShowInfo
 from ImportDatatoExcel import ImportDatatoExcel
 
 from Util.Grade import Grade
-from Util.Plot import Myplot2D
 
 from call_mainbar import ProgressBar
 from graphyWindow import visual_all
@@ -39,15 +29,9 @@ from mapper.ChargeMapper import ChargeMapper
 from mapper.ChargeMapper_test import ChargeMapper_test
 from decimal import Decimal
 
-
-from matplotlib.backends.backend_qt5 import NavigationToolbar2QT as NavigationToolbar
-
 from Util.Plot import Myplot2D
 
 import sys
-
-
-#Administrator_grade = 1
 
 
 class MainWindow(QMainWindow):

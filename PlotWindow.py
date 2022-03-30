@@ -1,23 +1,13 @@
-from Common import get_plot_type, get_db_connection, close_db, get_logger, show_information_message, execute_inquiry, \
-    get_row_model, init_tableview
-
-from PyQt5.QtWidgets import QMainWindow, QApplication, QGridLayout, QHeaderView, QFileDialog
-
-from PyQt5.QtGui import QStandardItem, QStandardItemModel
-
-from PyQt5.QtCore import pyqtSlot, QItemSelectionModel, QModelIndex
-
-from PlotSubWindow import PlotSubWindow
-
-from UI.Ui_PlotWindow import Ui_PlotWindow
-
-from mapper.ChargeMapper import ChargeMapper
-
-from MapDisplay import MapDisplay
-
-from graphyWindow import visual_all
-
 from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtCore import pyqtSlot, QModelIndex
+from PyQt5.QtWidgets import QMainWindow, QApplication
+
+from Common import get_db_connection, get_logger, show_information_message, execute_inquiry, \
+    get_row_model
+from MapDisplay import MapDisplay
+from PlotSubWindow import PlotSubWindow
+from UI.Ui_PlotWindow import Ui_PlotWindow
+from mapper.ChargeMapper import ChargeMapper
 
 
 class PlotWindow(QMainWindow):
@@ -37,13 +27,6 @@ class PlotWindow(QMainWindow):
         self.UI.tabWidget.setDocumentMode(True)  # 设置文档模式
 
         ###########################################################
-
-        '''
-        #add 利用信号的方式
-        self.UI.comboBox_type_station.currentTextChanged.connect(self.setValue)
-        self.sense_station_change.connect(self.getValue)
-        # 
-        '''
 
         self.mapDisplay = MapDisplay(self)  # 为什么放在这，这就是解决点击按钮  弹框一下就关了的bug......... https://blog.csdn.net/veloi/article/details/115027549这里面的方法二
         self.mapDisplay.close()
@@ -192,7 +175,6 @@ class PlotWindow(QMainWindow):
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
         plot_type = 1
 
-        # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
         line = list([])
         row = list([])
         line1 = list([])
@@ -215,7 +197,7 @@ class PlotWindow(QMainWindow):
             window = PlotSubWindow()
             curindex = self.UI.tabWidget.addTab(window, "没有数据404")
         else:
-            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, data=data, type_label=type_label)
+            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, data=None, type_label=type_label)
             curindex = self.UI.tabWidget.addTab(window, type_label)
         window.setAttribute(Qt.WA_DeleteOnClose)
 
@@ -227,10 +209,10 @@ class PlotWindow(QMainWindow):
     def on_btn_tem_clicked(self):
         new_sid = self.chargeMapper.find_newest_sid()  # todo： 这个得取出来，也就是先取最新的sid数据，还得判断s刚插入的sid是否矩阵运算有唯一值，如果没有唯一值 就显示不了呀，或者就显示前一次的数据，这种直接在表中加一个标记位就可以
         # todo: 从数据库取出生产厂家与风险等级标量的关系
-        data = self.chargeMapper.find_carrieroperator_and_risk_index(new_sid)
+        data = self.chargeMapper.find_env_temper_and_risk_index(new_sid)
         # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
         plot_type = 1
-        # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
+
         line = list([])
         row = list([])
         line1 = list([])
@@ -420,64 +402,8 @@ class PlotWindow(QMainWindow):
         self.UI.tabWidget.setCurrentIndex(curindex)
         self.UI.tabWidget.setVisible(True)
 
-    # 其他因素展示按钮
-    @pyqtSlot()
-    def on_btn_other_clicked(self):
-        # todo: 从数据库取出生产厂家与风险等级标量的关系
-        # 按照之前的做法，已经封装了一个专门的PlotSubWindow,在这里可以传数据进这个类然后在这个Tab内中进行展示
-        plot_type, row, line, type_label = self.get_plot_type_and_row_and_line()
-        window = None
-        if row is None:
-            window = PlotSubWindow()
-            curindex = self.UI.tabWidget.addTab(window, "没有数据404")
-        else:
-            window = PlotSubWindow(plot_type=plot_type, row=row, line=line, type_label=type_label)
-            curindex = self.UI.tabWidget.addTab(window, type_label)
-        window.setAttribute(Qt.WA_DeleteOnClose)
 
-        self.UI.tabWidget.setCurrentIndex(curindex)
-        self.UI.tabWidget.setVisible(True)
 
-    # 下载导出高风险等级充电桩的数据文件 .txt (huang)
-    @pyqtSlot()
-    def on_btn_load_clicked(self):
-        file_path = QFileDialog.getSaveFileName(self, "save file", "E:/", "Txt files(*.txt)")  # 这里的file_name是tuple型
-        # todo: 也就是从数据库取出相应的数据，然后保存至txt文件中
-
-        lists = [[1, 2, 3, 4], [45, 23, 456, 23, 54, 23], [12, 23, 23, 345, 23, 12]]
-        self.Save_list(lists, file_path[0])  # 取tuple第一个元素即为地址
-        print('high_risk')
-
-    # 地图风险等级展示按钮
-    @pyqtSlot()
-    def on_btn_risk_graphy_display_clicked(self):
-        '''
-        charge_name = self.UI.comboBox_type_station.currentText()
-        sid = self.chargeMapper.find_sid_by_charge_name(charge_name)
-        # 先获得经纬度数据,是一个数组类型，可能需要将数据强转float
-        longitude_and_latitude = self.chargeMapper.find_longitude_and_latitude_by_charge_name(sid)
-        #获取该充电站下的pid以及对应的风险等级数据，返回一个字典类型
-        pid_and_risk_level_dict = self.chargeMapper.find_pid_risk_level_by_sid(sid)
-        '''
-        # todo:外弹框 显示地图就ok，我需要把经纬度数据填入
-        add = [[39.873079, 116.481913], [39.913904, 116.39728], [39.885987, 116.480132]]
-        level = [[10, 30, 50, 70, 90], [10, 10, 10, 10, 10], [90, 90, 90, 90, 90]]
-        data = visual_all(add, *level)
-
-        # mapDisplay = MapDisplay(data)
-        self.mapDisplay.trans_data(data)
-        # self.mapDisplay.setAttribute(Qt.WA_DeleteOnClose)  # 设置关闭删除实例  应该是这句话一直出现了bug
-        self.mapDisplay.setWindowFlag(Qt.Window, True)  # 指示该窗口是一个独立的窗口
-        # mapDisplay.exec()  #Qwidths没有模态窗口选项
-        self.mapDisplay.show()
-
-    @pyqtSlot(str)
-    def recive_station_change(self, station_name):
-        pass
-
-    # 获取画图的类型
-    def get_plot_type(self):
-        return self.UI.comboBox_type_pie.currentText()
 
     # 获取画图的类型（折线/柱状， 横纵坐标：row, line）
     def get_plot_type_and_row_and_line(self):
@@ -486,15 +412,6 @@ class PlotWindow(QMainWindow):
 
         return plot_type, row, line, type_label
 
-    # 获得画图的类型 是否是折线图或者是饼状图
-    def get_plot_line_or_pie(self):
-        if self.UI.pieCheckBox.isChecked() is True or self.UI.lineCheckBox_2.isChecked() is False:
-            return 1  # 代表说折线图
-        elif self.UI.pieCheckBox.isChecked() is False or self.UI.lineCheckBox_2.isChecked() is True:
-            return 0  # 代表是饼状图
-        else:
-            # todo: 提示只能选择一项
-            pass
 
     # 获取横纵坐标值返回list类型
     def get_plot_row_and_line(self):
