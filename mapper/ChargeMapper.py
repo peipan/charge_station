@@ -205,10 +205,14 @@ class ChargeMapper():
         return data
 
     #########################################################首页##########################################################################
-    def find_first_page_table(self):
-        sql = "select station_name, s_jiaoliu_num, s_zhiliu_num from table_charge_station where is_validity = 0"
+    def find_first_page_table(self, sid: int, shuaxinchaxun: int):
         data = []
-        *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
+        if shuaxinchaxun == 0:
+            sql = "select station_name, s_jiaoliu_num, s_zhiliu_num from table_charge_station where is_validity = 0"
+            *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
+        else:
+            sql = "select station_name, s_jiaoliu_num, s_zhiliu_num from table_charge_station where is_validity = 0 and sid= %s"
+            *_, data = execute_inquiry(sql, sid, connection=self.connection, cursor=self.cursor)
         return data
     ######################################################################################################################################
 

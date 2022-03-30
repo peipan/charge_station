@@ -164,7 +164,6 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
         # todo:加载数据之后开始计算测量误差和风险等级(尚未做)等参数并插入至数据库
         self.update_risk_level(station_name, record_begin_time, period_count)
 
-        self.send_info(0)  # 发射信号,这个信号就代表数据插入成功！
 
 
 
@@ -196,6 +195,8 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
                 self.cursor.execute(sql, [measure_error_str, risk_level[pid - 1], record_begin_time, sid, pid])
                 pid = pid + 1
             self.connection.commit()
+            self.send_info(0)  # 发射信号,这个信号就代表数据插入成功！
+
         except Exception as e:
             self.connection.rollback()
             print("这是一个" + str(e) + "错误!")

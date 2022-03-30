@@ -176,7 +176,7 @@ class ChargeMapper_test():
     #地图充电站经纬度与风险等级从数据库中取数据 hyd
 
     def find_longitude_latitude_risk(self):
-        sql = "SELECT longitude,latitude,risk_level FROM table_charge_pile, table_charge_station ORDER BY longitude;"
+        sql = "SELECT longitude,latitude,risk_level FROM table_charge_pile d1, table_charge_station d2 where d2.is_validity = 0 and d1.sid = d2.sid order by d1.sid;"
         data = []
         *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
         for i in range(0, len(data)):
@@ -184,22 +184,6 @@ class ChargeMapper_test():
                 return None
 
         return data
-
-    def fine_longitude_latitude_risk(self):
-        sql = "select longitude,latitude,risk_level from table_charge_station, table_charge_pile where 1=1;"
-        data = []
-        *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
-        for i in range(0, len(data)):
-            if data[i][2] is None:
-                return None
-        res1 = list([])
-        res2 = list([])
-        res3 = list([])
-        for i in range(0, len(data)):
-            res1.append(data[i][0])
-            res2.append(data[i][1])
-            res3.append(data[i][2])
-            return res1, res2, res3
 
 
     ###########################################矩阵计算##############################################

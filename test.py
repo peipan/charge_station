@@ -35,4 +35,8 @@ for k in range(0, len(list4)):
             j = k+1
             level[j].append(location[i][2])
             a = a+1
-print(level)
+x = len(local_real)
+addr = local_real[len(local_real)-1]
+print(x)
+print(addr)
+print(local_real)

@@ -120,7 +120,7 @@
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>16777215</height>
+           <height>39</height>
           </size>
          </property>
          <property name="orientation">
@@ -130,7 +130,7 @@
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>16777215</height>
+            <height>39</height>
            </size>
           </property>
           <property name="orientation">
@@ -183,15 +183,33 @@
            </property>
           </widget>
           <widget class="QCheckBox" name="check_other">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>39</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>微软雅黑</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>其他因素</string>
            </property>
           </widget>
           <widget class="QPushButton" name="pushButton">
+           <property name="minimumSize">
+            <size>
+             <width>120</width>
+             <height>32</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
              <width>120</width>
-             <height>16777215</height>
+             <height>39</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -472,6 +490,22 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
         </spacer>
        </item>
        <item>
+        <spacer name="verticalSpacer_8">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>30</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <spacer name="horizontalSpacer_2">
@@ -535,242 +569,6 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
        </item>
        <item>
         <spacer name="verticalSpacer_7">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_24">
-         <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'华文隶书'; font-size:18pt; font-weight:600; color:#336699;&quot;&gt;风险范围设置__________________________________________________________________________________________________________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_8">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>30</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QSplitter" name="splitter_10">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <widget class="QSplitter" name="splitter_9">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <widget class="QLabel" name="label">
-           <property name="styleSheet">
-            <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
-           </property>
-           <property name="text">
-            <string>电桩整体性能：</string>
-           </property>
-          </widget>
-         </widget>
-         <widget class="QSplitter" name="splitter_11">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <widget class="QLabel" name="label_3">
-           <property name="styleSheet">
-            <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
-           </property>
-           <property name="text">
-            <string>较低</string>
-           </property>
-          </widget>
-          <widget class="QLineEdit" name="littlelowlineEdit">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="placeholderText">
-            <string>格式：nn-nn</string>
-           </property>
-          </widget>
-         </widget>
-         <widget class="QSplitter" name="splitter_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <widget class="QLabel" name="label_2">
-           <property name="minimumSize">
-            <size>
-             <width>30</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
-           </property>
-           <property name="text">
-            <string>低</string>
-           </property>
-          </widget>
-          <widget class="QLineEdit" name="lowlineEdit">
-           <property name="minimumSize">
-            <size>
-             <width>123</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="placeholderText">
-            <string>格式：nn-nn</string>
-           </property>
-          </widget>
-         </widget>
-         <widget class="QSplitter" name="splitter_12">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <widget class="QLabel" name="label_4">
-           <property name="styleSheet">
-            <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
-           </property>
-           <property name="text">
-            <string>较高</string>
-           </property>
-          </widget>
-          <widget class="QLineEdit" name="littlehighlineEdit">
-           <property name="placeholderText">
-            <string>格式：nn-nn</string>
-           </property>
-          </widget>
-         </widget>
-         <widget class="QSplitter" name="splitter_13">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <widget class="QLabel" name="label_5">
-           <property name="styleSheet">
-            <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
-           </property>
-           <property name="text">
-            <string>高</string>
-           </property>
-          </widget>
-          <widget class="QLineEdit" name="highlineEdit">
-           <property name="minimumSize">
-            <size>
-             <width>126</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="placeholderText">
-            <string>格式：nn-nn</string>
-           </property>
-          </widget>
-         </widget>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <spacer name="horizontalSpacer_4">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>438</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btn_confirm_range">
-           <property name="minimumSize">
-            <size>
-             <width>120</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>120</width>
-             <height>39</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: qlineargradient(spread:pad, x1:0.541701, y1:1, x2:0.537, y2:0, stop:0.20398 rgba(51, 102, 153, 255), stop:1 rgba(255, 255, 255, 255));
-border-style:none;
-border:1px solid #3f3f3f; 
-
-padding:5px;
-min-height:20px;
-border-radius:15px;
-font: 75 12pt &quot;微软雅黑&quot;;</string>
-           </property>
-           <property name="text">
-            <string>确定</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>478</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_9">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
