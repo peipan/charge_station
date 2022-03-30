@@ -1,5 +1,6 @@
 import io
 import sys
+import time
 
 import folium
 from PyQt5 import QtWidgets, QtWebEngineWidgets
@@ -76,17 +77,6 @@ def visual_all(x, y, **level):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    x = 39.873079
-    y = 116.481913
-    level = {'1': 2, '2': 30, '3': 90, '4': 65}
-    # level = input()
-    # level = level.split(",")  # 输入时利用，分隔 并且转换为int型
-    # level = [int(level[i]) for i in range(len(level))]
-
-    data = visual_all(x, y, **level)  # 输入x y坐标 和多个充电桩电量 的数据
-    w = QtWebEngineWidgets.QWebEngineView()
-    w.setHtml(data.getvalue().decode())
-    w.resize(640, 480)
-    w.show()
-    sys.exit(app.exec_())
+    from datetime import datetime
+    start_time = datetime.now()
+    print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))

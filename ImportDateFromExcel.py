@@ -102,6 +102,10 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
                     manufacturer = str(record[6])  # 生产厂家
                     factory_num = str(record[5])  # 出厂编号
                     model_type = str(record[4])  # 型号
+
+                    pid_name = str(record[3])  # 充电桩名称
+                    pid_addr = str(record[9])  # 充电桩地址
+
                     nomial_level = str(record[28])  # 标称等级
                     install_time_span = str(record[14])  # 安装时长
                     charge_pile_type = str(record[16])  # 充电桩种类
@@ -115,8 +119,8 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
                     carrieroperator = str(record[12])  # 运营商
                     start_time = str(record[0])  # 开始时间
                     record_begin_time = str(record[0]) # 开始时间
-                    sql = "insert into table_charge_pile (sid, pid, model_type, factory_num, nomial_level, install_time_span, carrieroperator, manufacturer, start_time) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                    self.cursor.execute(sql, list([sid, pid_count, model_type, factory_num, nomial_level, install_time_span, carrieroperator, manufacturer, start_time]))
+                    sql = "insert into table_charge_pile (sid, pid, pid_name, pid_addr, model_type, factory_num, nomial_level, install_time_span, carrieroperator, manufacturer, start_time) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                    self.cursor.execute(sql, list([sid, pid_count, pid_name, pid_addr, model_type, factory_num, nomial_level, install_time_span, carrieroperator, manufacturer, start_time]))
                 else:
                     period_count = period_count + 1
 

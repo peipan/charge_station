@@ -1,3 +1,5 @@
+import time
+
 import pymysql
 import xlwt
 from Common import get_db_connection, close_db
@@ -20,17 +22,24 @@ class ImportDatatoExcel:
         workbook = xlwt.Workbook()
         worksheet = workbook.add_sheet("sheet1")
         # 首先向excel表中写入数据表的字段
-        column_count = self.cursor.execute("desc %s" % table)
-        for i in range(column_count):
-            temple = self.cursor\
-                .fetchone()
-            worksheet.write(0, i, temple[0])
+        #column_count = self.cursor.execute("desc %s" % table)
+        #column_count = 8
+
+        for i in range(8):
+            temple = ["充电站名称", "地址", "运营商", "风险等级", "厂家", "型号", "编号识别码", "导出时间"]
+            worksheet.write(0, i, temple[i])
         # 向构建好字段的excel表写入所有的数据记录
         row_count = self.cursor.execute(
-                "SELECT * FROM %s WHERE risk_level > 30" % table)
+                "SELECT pid_name, pid_addr, carrieroperator, risk_level, manufacturer, model_type, factory_num FROM %s WHERE risk_level > 30" % table)
+
+        daochu_time = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+
         for i in range(row_count):
             temple = self.cursor.fetchone()
-            for j in range(column_count):
+            temple = list(temple)
+            temple.append(daochu_time)
+
+            for j in range(8):
                 worksheet.write(i + 1, j, temple[j])
                 workbook.save(file_path)
 

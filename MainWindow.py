@@ -304,7 +304,7 @@ class MainWindow(QMainWindow):
         else:
             # self.Save_list(lists, file_path[0])
             # 取tuple第一个元素即为地址
-            self.importdatatoexcel.export_to_excel('table_charge_station', file_path[0])
+            self.importdatatoexcel.export_to_excel('table_charge_pile', file_path[0])
 
     # 下载导出模板数据文件 .txt (hyd)
     @pyqtSlot()
