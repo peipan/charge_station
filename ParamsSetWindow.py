@@ -35,14 +35,14 @@ class ParamsSetWindow(QDialog):
     @pyqtSlot()
     def on_btn_confirm_weight_clicked(self):
         temper_weight = self.str_to_float(self.__UI.temper_weight_lineEdit.text())  # 获取温度权重
-        #error_weight = self.str_to_float(self.__UI.error_weight_lineEdit.text())   # 获取计量误差权重
-        install_time_weight = self.str_to_float(self.__UI.install_time_weight_lineEdit.text()) # 获取安装时长权重
+        error_weight = self.str_to_float(self.__UI.error_data_weight_lineEdit.text())   # 获取计量误差权重
+        install_time_weight = self.str_to_float(self.__UI.install_time_weight_lineEdit.text())  # 获取安装时长权重
         use_freq_weight = self.str_to_float(self.__UI.use_freq_weight_lineEdit.text())  # 获取使用频率权重
         humi_weight = self.str_to_float(self.__UI.humi_weight_lineEdit.text())  # 获取湿度权重
         maintain_freq_weight = self.str_to_float(self.__UI.maintain_freq_weight_lineEdit.text())  # 获取维护频次权重
-        #sum = (temper_weight + error_weight + install_time_weight + use_freq_weight + humi_weight + maintain_freq_weight)
+        sum = (temper_weight + error_weight + install_time_weight + use_freq_weight + humi_weight + maintain_freq_weight)
         weights = list([])
-        #weights.append(error_weight)
+        weights.append(error_weight)
         weights.append(install_time_weight)
         weights.append(use_freq_weight)
         weights.append(humi_weight)
@@ -56,6 +56,9 @@ class ParamsSetWindow(QDialog):
                 self.chargeMapper.insert_weights_param(weights=weights)
             else:
                 self.chargeMapper.update_weight_param(weights=weights)
+            # 提示错误信息
+            message = "设置成功！OK"
+            show_error_message(self, message)
 
 
 

@@ -32,22 +32,6 @@
    <string>MainWindow</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0">
-    <spacer name="verticalSpacer_3">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Preferred</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>60</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label_8">
      <property name="minimumSize">
@@ -72,6 +56,22 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+   </item>
+   <item row="1" column="0">
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Preferred</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>60</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item row="2" column="0">
     <widget class="QSplitter" name="splitter_8">
@@ -454,10 +454,10 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
            <string notr="true">font: 75 12pt &quot;微软雅黑&quot;;</string>
           </property>
           <property name="text">
-           <string>其他因素权重</string>
+           <string>误差数据权重</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="other_weight_lineEdit">
+         <widget class="QLineEdit" name="error_data_weight_lineEdit">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -484,7 +484,7 @@ font: 75 12pt &quot;微软雅黑&quot;;</string>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>20</height>
+           <height>13</height>
           </size>
          </property>
         </spacer>

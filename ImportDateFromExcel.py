@@ -60,7 +60,7 @@ class Thread_import_data_from_excel(QThread): #导入数据线程
             sid = 0
             if len(data) != 0:
                 sid = data[0][0]
-                sql = "select sid from table_station_period where sid = %s and start_time = %s and is_validity = 0"
+                sql = "select d1.sid from table_station_period d1, table_charge_station d2 where d1.sid = %s and d1.start_time = %s and d2.is_validity = 0"
                 self.cursor.execute(sql, [sid, record[0]])
                 data = self.cursor.fetchall()
                 if len(data) != 0:
