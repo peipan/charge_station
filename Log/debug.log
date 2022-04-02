@@ -1,0 +1,1140 @@
+2022-03-31 15:10:49,964 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:10:49,964 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:10:49,964 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:10:49,964 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:10:49,964 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:10:49,964 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:10:49,964 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:10:49,964 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:10:49,964 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:36:15,914 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:36:15,914 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:36:15,914 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:36:15,914 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:36:15,914 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:36:15,914 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:36:15,914 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:36:15,914 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 15:36:15,914 - WARNING - Dummy-1 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:14,977 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:14,977 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:14,977 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:14,977 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:14,977 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:14,977 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:14,977 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:14,977 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:14,977 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:58,785 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:58,785 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:58,785 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:58,785 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:58,785 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:58,785 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:58,785 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:58,785 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:58,785 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:42:58,785 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:53:00,441 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:53:00,441 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:53:00,441 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:53:00,441 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:53:00,441 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:53:00,441 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:53:00,441 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:53:00,441 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:53:00,441 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:53:00,441 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 19:53:00,441 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 20:06:38,997 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 20:06:38,997 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 20:06:38,997 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 20:06:38,997 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 20:06:38,997 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 20:06:38,997 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 20:06:38,997 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 20:06:38,997 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 20:06:38,997 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 20:06:38,997 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 20:06:38,997 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")
+2022-03-31 20:06:38,997 - WARNING - Dummy-6 - 220 - 执行-->select 
+                    d1.nomial_level,
+                    d1.install_time_span, 
+                    avg(d2.use_freq), 
+                    avg(d3.env_temper) 
+                from 
+                    table_charge_pile d1, 
+                    table_pile_period d2, 
+                    table_station_period d3  
+                where 
+                    d1.sid = %s 
+                and 
+                    d2.sid = %s
+                and
+                    d3.sid = %s 
+                and 
+                    d1.pid = d2.pid
+                group by 
+                    d2.pid<--错误，错误原因是:(1055, "Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'chargingstation.d1.nomial_level' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by")

@@ -179,10 +179,10 @@ class ChargeMapper_test():
         sql = "SELECT longitude,latitude,risk_level FROM table_charge_pile d1, table_charge_station d2 where d2.is_validity = 0 and d1.sid = d2.sid order by d1.sid;"
         data = []
         *_, data = execute_inquiry(sql, None, connection=self.connection, cursor=self.cursor)
-        for i in range(0, len(data)):
-            if data[i] is None:
-                return None
-
+        if data != None:
+            for i in range(0, len(data)):
+                if data[i] is None:
+                    return None
         return data
 
 
