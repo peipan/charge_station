@@ -332,6 +332,10 @@ class MainWindow(QMainWindow):
         # todo:外弹框 显示地图就ok，我需要把经纬度数据填
 
         location = self.chargeMapper_test.find_longitude_latitude_risk()
+        if location is None:        # 修复没有数据的时候点击地图展示报错问题
+            message = "请先插入数据！"
+            show_information_message(self, message)
+            return
 
         location1 = list([])  # 现在location是列表 需要把i i+1单独存成元组
         location2 = list([])
