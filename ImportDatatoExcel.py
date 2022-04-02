@@ -34,6 +34,8 @@ class ImportDatatoExcel:
 
         daochu_time = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
         temple = self.cursor.fetchone()
+        if temple is None: # 修复点击导出excel的时候出现bug问题 2022/3/31
+            return
         for i in range(row_count):
 
             temple = list(temple)
